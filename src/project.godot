@@ -10,42 +10,76 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Code/dialogue/characters/Character.gd"
+}, {
+"base": "Resource",
 "class": "Dialog",
 "language": "GDScript",
 "path": "res://Code/Event Manager/Scripts/dialog.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Entity",
+"base": "Interaction",
+"class": "DialogueAction",
 "language": "GDScript",
-"path": "res://Code/Entity/entity.gd"
+"path": "res://Code/dialogue/DialogueAction.gd"
+}, {
+"base": "Control",
+"class": "DialogueBox",
+"language": "GDScript",
+"path": "res://Code/Interface/GUI/DialogueBox.gd"
+}, {
+"base": "Node",
+"class": "DialoguePlayer",
+"language": "GDScript",
+"path": "res://Code/dialogue/DialoguePlayer.gd"
 }, {
 "base": "Resource",
 "class": "Event",
 "language": "GDScript",
 "path": "res://Code/Event Manager/Scripts/event.gd"
 }, {
+"base": "Area2D",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Code/Interactables/interactable.gd"
+}, {
+"base": "Node",
+"class": "Interaction",
+"language": "GDScript",
+"path": "res://Code/dialogue/MapAction.gd"
+}, {
+"base": "Node",
+"class": "LocalMap",
+"language": "GDScript",
+"path": "res://Code/Maps/LocalMap.gd"
+}, {
 "base": "AnimatedSprite",
 "class": "SmartSprite",
 "language": "GDScript",
 "path": "res://Code/Character Controller/smart_sprite.gd"
-}, {
-"base": "StaticBody2D",
-"class": "StaticEntity",
-"language": "GDScript",
-"path": "res://Code/Entity/static_entity.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "Dialog": "",
-"Entity": "",
+"DialogueAction": "",
+"DialogueBox": "",
+"DialoguePlayer": "",
 "Event": "",
-"SmartSprite": "",
-"StaticEntity": ""
+"Interactable": "",
+"Interaction": "",
+"LocalMap": "",
+"SmartSprite": ""
 }
 
 [application]
 
 config/name="Simple RPG"
 config/icon="res://icon.png"
+
+[autoload]
+
+DialogueDatabase="*res://Code/dialogue/DialogueDatabase.gd"
 
 [layer_names]
 
