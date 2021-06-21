@@ -14,14 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/Event Manager/Scripts/dialog.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Code/Entity/entity.gd"
+}, {
 "base": "Resource",
 "class": "Event",
 "language": "GDScript",
 "path": "res://Code/Event Manager/Scripts/event.gd"
+}, {
+"base": "StaticBody2D",
+"class": "StaticEntity",
+"language": "GDScript",
+"path": "res://Code/Entity/static_entity.gd"
 } ]
 _global_script_class_icons={
 "Dialog": "",
-"Event": ""
+"Entity": "",
+"Event": "",
+"StaticEntity": ""
 }
 
 [application]
