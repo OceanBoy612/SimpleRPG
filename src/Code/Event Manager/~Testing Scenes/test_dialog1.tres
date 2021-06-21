@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Event Manager/Scripts/dialog.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+speech = [ "Hello this is a test", "OMG you got to the second chunk", "truly impressive. The third thingy is an achievement!" ]
+current_index = 0
