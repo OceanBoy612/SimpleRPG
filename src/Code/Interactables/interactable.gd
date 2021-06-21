@@ -8,15 +8,23 @@ signal interaction_finished
 export var auto_start_interaction := false
 export var vanish_on_interaction := false
 
-export(Array) var interactions
+export(Array, Resource) var interactions
 
 
 onready var dialogue_balloon: Sprite = $Balloon
 
 
+var local_map# : LocalMap
+
+
 func _ready():
+	add_to_group("interactable")
 	connect('body_entered', self, '_on_body_entered')
 	connect('body_exited', self, '_on_body_exited')
+
+
+func initialize(_local_map):
+	local_map = _local_map
 
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
@@ -31,16 +39,15 @@ func _on_body_exited(body: PhysicsBody2D) -> void:
 	
 
 func start_interaction() -> void:
-	# Pauses the game and play each action under the $Actions node
-	# Actions that transition to another scene may unpause the game themselves
+	# Pauses the game and play each interaction
+	# Interactions that transition to another scene may unpause the game themselves
 	# Interactable processes even when the game is paused
 	dialogue_balloon.hide()
 	get_tree().paused = true
-	var actions = $Actions.get_children()
-	assert(actions != []) # An Interactable should have some interaction
-	for action in actions:
-		(action as Interaction).interact()
-		yield(action, "finished")
+	assert(interactions.size() > 0)
+	for interaction in interactions:
+		(interaction as Interaction).interact(local_map)
+		yield(interaction, "finished")
 	emit_signal("interaction_finished", self)
 	if vanish_on_interaction:
 		queue_free()
