@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Code/Character Controller/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=2]
@@ -8,11 +8,131 @@
 [ext_resource path="res://Code/Character Controller/Weapon/weapon.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 29 )
+extents = Vector2( 5.6673, 8.34526 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle Down"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SmartSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Idle Down" ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle Right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SmartSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Idle Right" ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Idle Up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SmartSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Idle Up" ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Walk Down"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SmartSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Walk" ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Idle Right"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Idle Down"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Idle Up"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Idle Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=15]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 16 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=22]
+blend_point_0/node = SubResource( 18 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 19 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 20 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 21 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlend2" id=23]
+
+[sub_resource type="AnimationNodeBlendTree" id=9]
+graph_offset = Vector2( -297, 99.9931 )
+nodes/Idle/node = SubResource( 15 )
+nodes/Idle/position = Vector2( 2, 123 )
+nodes/Walk/node = SubResource( 22 )
+nodes/Walk/position = Vector2( -2, 278.993 )
+nodes/idle_walk/node = SubResource( 23 )
+nodes/idle_walk/position = Vector2( 222, 185.993 )
+nodes/output/position = Vector2( 427, 245 )
+node_connections = [ "output", 0, "idle_walk", "idle_walk", 0, "Walk", "idle_walk", 1, "Idle" ]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -28.7321, 39.5833, 0, 0, 0, 0, -25.3818, 44.4575, -0.264865, 43.438, 0.264865, -43.438, 0.0309448, 0.391243, 0, 0, 0, 0, -24.2776, -43.9385, 0, 0, 3.91397, 1.75505, -27.6185, -39.484 )
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -48.75, 9.25, 0, 0, 0, 0, -47.25, 13.125, -0.139865, 15.313, 0.139865, -15.313, -39.875, -0.125, 0, 0, 0, 0, -47, -12.125, 0, 0, 3.91397, 1.75505, -48.5, -8.75 )
 }
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -26,12 +146,28 @@ extents = Vector2( 29.775, 5.19012 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Idle Down" = SubResource( 6 )
+"anims/Idle Right" = SubResource( 10 )
+"anims/Idle Up" = SubResource( 11 )
+"anims/Walk Down" = SubResource( 17 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Idle/blend_position = Vector2( -0.121299, -0.191083 )
+parameters/Walk/blend_position = Vector2( -0.256925, 0.33758 )
+parameters/idle_walk/blend_amount = 0.0
+
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource( 1 )
+speed = 100
 
 [node name="SmartSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-animation = "Idle"
+animation = "Walk"
+playing = true
 script = ExtResource( 4 )
 DEBUG = true
 
@@ -50,8 +186,9 @@ script = ExtResource( 7 )
 curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -28.7321, 39.5833 )
-rotation = 1.0351
+position = Vector2( -48.5, -8.75 )
+rotation = 2.17969
+offset = 39.6987
 loop = false
 
 [node name="AttackArea" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D"]
