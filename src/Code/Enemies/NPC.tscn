@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="Curve" id=2]
-_data = [ Vector2( 0.467213, 0 ), 0.0, -0.291866, 0, 0, Vector2( 0.893443, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.42623, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="NPC" type="KinematicBody2D"]
 position = Vector2( 481, 270 )
@@ -27,4 +27,5 @@ DEBUG = true
 [node name="Wander" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
 DEBUG = true
+max_distance = 300
 curve = SubResource( 2 )

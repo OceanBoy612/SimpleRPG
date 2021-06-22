@@ -32,7 +32,7 @@ func loop():
 	state = get_child(randi() % get_child_count()) as State
 #	state = get_child(0)
 	# start the state
-	state.enable(kb, 2.5)
+	state.enable(kb, 112.5)
 	print("started: ", state.name)
 	# yield until the state completes
 	yield(state, "completed")
