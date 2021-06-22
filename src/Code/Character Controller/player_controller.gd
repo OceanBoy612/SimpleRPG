@@ -5,7 +5,7 @@ export var speed = 400
 export var doubleTapTime = 3
 
 onready var kb = get_parent() as KinematicBody2D
-onready var AttackArea = get_parent().get_node("Facing/AttackArea")
+onready var Weapon = kb.get_node("Facing/Weapon")
 
 enum {
 	ATTACK,
@@ -19,6 +19,8 @@ var doubleTapTimer = 0
 var lastKey = "nothing"
 var keyOptions = ["ui_right", "ui_left", "ui_up", "ui_down"]
 
+var accept_buffer_time = 0.2
+var time_since_accept = 999
 
 func _physics_process(delta):
 	if not kb:
@@ -27,8 +29,11 @@ func _physics_process(delta):
 	
 	var axis: Vector2 = _get_input_axis()
 
+	# buffer acceptPressed
+	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
+	var acceptPressed = time_since_accept < accept_buffer_time
+	
 	# Check for interaction or attacking
-	var acceptPressed = Input.is_action_just_pressed("ui_accept")
 	if acceptPressed and state == MOVE and kb.has_meta("interactable"):
 		var inter : Interactable = kb.get_meta("interactable")
 		inter.start_interaction()
@@ -65,10 +70,10 @@ func handle_movement(axis):
 
 func handle_attacking():
 	if startAttack:
-		AttackArea.run_attack()
+		Weapon.run_attack()
 		startAttack = false
 		# TODO add attacking animation
-	elif AttackArea.attacking == false:
+	elif Weapon.attacking == false:
 		state = MOVE
 
 func handle_rolling():

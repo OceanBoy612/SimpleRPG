@@ -1,17 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Code/Character Controller/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Code/Character Controller/facing.gd" type="Script" id=3]
 [ext_resource path="res://Code/Character Controller/smart_sprite.gd" type="Script" id=4]
-[ext_resource path="res://Code/Character Controller/melee_attack.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Code/Character Controller/Weapon/weapon.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 29 )
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 19.2499
-height = 34.9811
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -28.7321, 39.5833, 0, 0, 0, 0, -25.3818, 44.4575, -0.264865, 43.438, 0.264865, -43.438, 0.0309448, 0.391243, 0, 0, 0, 0, -24.2776, -43.9385, 0, 0, 3.91397, 1.75505, -27.6185, -39.484 )
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5.33349, 30.9439 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 29.775, 5.19012 )
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -32,13 +40,41 @@ cast_to = Vector2( 50, 0 )
 collision_mask = 33
 script = ExtResource( 3 )
 
-[node name="AttackArea" type="Area2D" parent="Facing"]
+[node name="Weapon" type="Node2D" parent="Facing"]
 position = Vector2( 52, 0 )
+script = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="Facing/Weapon"]
+
+[node name="Path2D" type="Path2D" parent="Facing/Weapon"]
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
+position = Vector2( -28.7321, 39.5833 )
+rotation = 1.0351
+loop = false
+
+[node name="AttackArea" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D"]
+position = Vector2( -0.263598, 31.1804 )
 collision_layer = 0
 collision_mask = 36
-script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/AttackArea"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/AttackArea"]
+shape = SubResource( 5 )
 
-[connection signal="body_entered" from="Facing/AttackArea" to="Facing/AttackArea" method="_on_AttackArea_body_entered"]
+[node name="Area2D" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D"]
+visible = false
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/Area2D"]
+position = Vector2( 31.498, 0 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Facing/Weapon/Path2D/PathFollow2D/Area2D"]
+position = Vector2( 29.9231, 0 )
+scale = Vector2( 1, 0.163334 )
+texture = ExtResource( 6 )
+
+[connection signal="body_entered" from="Facing/Weapon/Path2D/PathFollow2D/AttackArea" to="Facing/Weapon" method="_on_AttackArea_body_entered"]

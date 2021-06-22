@@ -13,7 +13,6 @@ export(float) var activation_duration = 0.1
 
 export(float) var damage_amt = 1
 
-var test = "Conneted"
 var attacking = false
 
 

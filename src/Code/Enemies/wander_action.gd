@@ -42,14 +42,10 @@ func _physics_process(delta):
 	var ang = noise.get_noise_1d(_place) # [-0.5, 0.5]
 	_place += 0.05
 	var scaled_ang = ( (ang+0.0) ) * PI * 2 # [-PI, PI]
-	random_dir = Vector2(1,0).rotated(scaled_ang)
 	
 	travel_dir = travel_dir.linear_interpolate(home_dir, 0.15).normalized()
-#	travel_dir = (travel_dir + home_dir).normalized()
 	
-	print(scaled_ang)
-	summed_dir = travel_dir.rotated(scaled_ang)
-	summed_dir = summed_dir.normalized()
+	summed_dir = travel_dir.rotated(scaled_ang).normalized()
 	
 	kb.move_and_collide(100 * summed_dir * delta)
 	
@@ -59,7 +55,8 @@ func _physics_process(delta):
 func _draw():
 	if not DEBUG:
 		return
-	draw_string(default_font, Vector2(0, -64), "dot: %.3f" % [home_dir.dot(random_dir)], Color("#ffaaff"))
+	
+	draw_string(default_font, Vector2(-20, -64), "Wandering around spawn", Color("#ffaaff"))
 	
 #	draw_line(Vector2(), travel_dir*60, Color("#00ff67"), 2.0)
 	draw_line(Vector2(), home_dir*60, Color("#f7aa34"), 2.0)
