@@ -13,19 +13,31 @@ export(float) var activation_duration = 0.1
 
 export(float) var damage_amt = 1
 
+var test = "Conneted"
+var attacking = false
+
 
 func _ready():
 	$CollisionShape2D.disabled = true # start disabled
 
 
-func _input(event):
-	if event.is_action_pressed(input_name):
-		yield(get_tree().create_timer(delay_time), "timeout")
-		$CollisionShape2D.disabled = false
-		yield(get_tree().create_timer(activation_duration), "timeout")
-		$CollisionShape2D.disabled = true
+#func _input(event):
+#	if event.is_action_pressed(input_name):
+#		yield(get_tree().create_timer(delay_time), "timeout")
+#		$CollisionShape2D.disabled = false
+#		yield(get_tree().create_timer(activation_duration), "timeout")
+#		$CollisionShape2D.disabled = true
 
 
 func _on_AttackArea_body_entered(body):
 	if body.has_method("damage"):
 		body.damage(damage_amt)
+
+
+func run_attack():
+	attacking = true
+	yield(get_tree().create_timer(delay_time), "timeout")
+	$CollisionShape2D.disabled = false
+	yield(get_tree().create_timer(activation_duration), "timeout")
+	$CollisionShape2D.disabled = true
+	attacking = false
