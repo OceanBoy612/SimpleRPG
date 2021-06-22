@@ -48,6 +48,16 @@ _global_script_classes=[ {
 "class": "SmartSprite",
 "language": "GDScript",
 "path": "res://Code/Character Controller/smart_sprite.gd"
+}, {
+"base": "Node2D",
+"class": "State",
+"language": "GDScript",
+"path": "res://Code/Enemies/state.gd"
+}, {
+"base": "Node2D",
+"class": "UtilityStateMachine",
+"language": "GDScript",
+"path": "res://Code/Enemies/States.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -57,7 +67,9 @@ _global_script_class_icons={
 "Interactable": "",
 "Interaction": "",
 "LocalMap": "",
-"SmartSprite": ""
+"SmartSprite": "",
+"State": "",
+"UtilityStateMachine": ""
 }
 
 [application]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Code/Enemies/States.gd" type="Script" id=1]
+[ext_resource path="res://Code/Enemies/wait_action.gd" type="Script" id=2]
+[ext_resource path="res://Code/Enemies/wander_action.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.467213, 0 ), 0.0, -0.291866, 0, 0, Vector2( 0.893443, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="NPC" type="KinematicBody2D"]
+position = Vector2( 481, 270 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="Wait" type="Node2D" parent="StateMachine"]
+script = ExtResource( 2 )
+DEBUG = true
+
+[node name="Wander" type="Node2D" parent="StateMachine"]
+script = ExtResource( 3 )
+DEBUG = true
+curve = SubResource( 2 )
