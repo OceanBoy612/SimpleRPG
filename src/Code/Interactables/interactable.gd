@@ -19,23 +19,34 @@ var local_map# : LocalMap
 
 func _ready():
 	add_to_group("interactable")
-	connect('body_entered', self, '_on_body_entered')
-	connect('body_exited', self, '_on_body_exited')
+#	connect('body_entered', self, '_on_body_entered')
+#	connect('body_exited', self, '_on_body_exited')
 
 
 func initialize(_local_map):
 	local_map = _local_map
 
 
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	if auto_start_interaction:
-		start_interaction()
-	else:
-		dialogue_balloon.show()
+func focused():
+	# gets called when the player is able to interact with this object
+	dialogue_balloon.show()
+	pass
 
-
-func _on_body_exited(body: PhysicsBody2D) -> void:
+func unfocused():
+	# called when focus is lost
 	dialogue_balloon.hide()
+	pass
+
+
+#func _on_body_entered(body: PhysicsBody2D) -> void:
+#	if auto_start_interaction:
+#		start_interaction()
+#	else:
+#		dialogue_balloon.show()
+#
+#
+#func _on_body_exited(body: PhysicsBody2D) -> void:
+#	dialogue_balloon.hide()
 	
 
 func start_interaction() -> void:

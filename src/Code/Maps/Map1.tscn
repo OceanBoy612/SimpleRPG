@@ -29,8 +29,6 @@ visible = false
 
 [node name="Interactable" parent="Interactables" instance=ExtResource( 3 )]
 position = Vector2( 607.446, 223.705 )
-auto_start_interaction = true
-vanish_on_interaction = true
 interactions = [ ExtResource( 7 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]

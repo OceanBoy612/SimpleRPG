@@ -18,7 +18,6 @@ func interact(local_map: LocalMap) -> void:
 #	else:
 #		for s in range(speech.size()):
 #			dialogue["%s" % s] = speech[s] #<-- this won't work
-	print(dialogue)
 	yield(local_map.play_dialogue(dialogue), "completed")
 	emit_signal("finished")
 

@@ -27,7 +27,6 @@ func start(dialogue: Dictionary) -> void:
 
 
 func _on_ButtonNext_pressed() -> void:
-	print("next pressed")
 	dialogue_player.next()
 	update_content()
 

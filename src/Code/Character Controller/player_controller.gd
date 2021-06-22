@@ -29,8 +29,8 @@ func _physics_process(delta):
 
 	# Check for interaction or attacking
 	var acceptPressed = Input.is_action_just_pressed("ui_accept")
-	if acceptPressed  and state == MOVE and has_meta("interactable"):
-		var inter : Interactable = get_meta("interactable")
+	if acceptPressed and state == MOVE and kb.has_meta("interactable"):
+		var inter : Interactable = kb.get_meta("interactable")
 		inter.start_interaction()
 	elif acceptPressed and state == MOVE:
 		state = ATTACK
