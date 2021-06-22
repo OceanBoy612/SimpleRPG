@@ -18,5 +18,3 @@ shape = SubResource( 1 )
 position = Vector2( 0, -51.0798 )
 scale = Vector2( 0.389035, 0.389035 )
 texture = ExtResource( 2 )
-
-[node name="Actions" type="Node" parent="."]

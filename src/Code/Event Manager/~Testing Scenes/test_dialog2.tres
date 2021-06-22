@@ -1,8 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=2]
-
-[ext_resource path="res://Code/Event Manager/Scripts/dialog.gd" type="Script" id=1]
-
-[resource]
-script = ExtResource( 1 )
-speech = [ "Would you look at that. A new Dialog!", "Ok stop this is number 2 already. To much... NOooooooooo!", "welp. that's number three of two. Cryptic init?" ]
-current_index = 0
