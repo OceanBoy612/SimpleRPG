@@ -136,7 +136,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 5.33349, 30.9439 )
+extents = Vector2( 3.61358, 7.87783 )
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -176,6 +176,8 @@ script = ExtResource( 3 )
 [node name="Weapon" type="Node2D" parent="Facing"]
 position = Vector2( 52, 0 )
 script = ExtResource( 7 )
+delay_time = 0.0
+attack_time = 0.24
 
 [node name="Tween" type="Tween" parent="Facing/Weapon"]
 
@@ -183,9 +185,9 @@ script = ExtResource( 7 )
 curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -48.5, -8.75 )
-rotation = 2.17969
-offset = 39.6987
+position = Vector2( -39.8817, 0.346618 )
+rotation = -1.59275
+offset = 19.8493
 loop = false
 
 [node name="AttackArea" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D"]
@@ -194,9 +196,13 @@ collision_layer = 0
 collision_mask = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/AttackArea"]
+position = Vector2( 0.518366, -23.6069 )
 shape = SubResource( 19 )
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
+position = Vector2( 0.0372043, 7.34433 )
+rotation = 2.38786
 frames = ExtResource( 5 )
+animation = "Wood"
 
 [connection signal="body_entered" from="Facing/Weapon/Path2D/PathFollow2D/AttackArea" to="Facing/Weapon" method="_on_AttackArea_body_entered"]
