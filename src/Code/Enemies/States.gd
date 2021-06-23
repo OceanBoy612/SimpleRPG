@@ -24,14 +24,12 @@ old way:
 
 """
 
-onready var kb = get_parent() as KinematicBody2D
+onready var kb = get_parent() as Entity
 var state: State
 #onready var spawn_pos : Vector2 = kb.global_position
 
 
 func _ready():
-	kb.set_meta("spawn_point", kb.global_position)
-	
 	if not Engine.editor_hint:
 #		_start_random_state()
 		state = $Wander
@@ -56,21 +54,53 @@ func _on_DetectionRadius_entity_entered(entity):
 	if not _is_entity_hostile(entity):
 		return
 	
+	## TESTING
+	state.emit_signal("completed")
+	return
+	## TESTING
+	
+	
 	# stop wandering
 	state.disconnect("completed", self, "_state_completed")
 	state.disable()
 	
 	# go into the alert state.
+#	state = get_node_or_null("Alert")
+#	assert(state, "No Alert state")
+#	_start_state(false)
+#	yield(state, "completed")
+#	state.disable()
+	
+	# go to the steering state.
+	state = get_node_or_null("Steering")
+	assert(state, "No steering state")
+	_start_state(false)
+	yield(state, "completed")
+	state.disable()
 	
 	# go into the attack state
 	state = get_node_or_null("Attack")
 	assert(state, "No attack state")
-	_start_state()
+	_start_state(true)
 
 
 func _state_completed():
 	state.disable()
-	_start_random_state()
+	# TODO: add intelligence to the state choosing logic
+	if state.name == "Wait":
+		state = $Wander
+	elif state.name == "Wander" or state.name == "Attack":
+		if (kb as CombatEntity).target_nearest_enemy():
+			state = $Steering
+		else:
+			state = $Wait
+	elif state.name == "Steering":
+		state = $Attack
+	else:
+		assert(false, "wtf")
+		
+	_start_state()
+#	_start_random_state()
 
 ### Callbacks ###
 
@@ -82,13 +112,14 @@ func _start_random_state():
 	_start_state()
 
 
-func _start_state():
-	if not state.is_connected("completed", self, "_state_completed"):
-		state.connect("completed", self, "_state_completed")
-	else:
-		print("Warn: Repeating the %s state" % state.name)
+func _start_state(_connect=true):
+	if _connect:
+		if not state.is_connected("completed", self, "_state_completed"):
+			state.connect("completed", self, "_state_completed")
+		else:
+			print("Warn: Repeating the %s state" % state.name)
 	state.enable(kb, 112.5)
-	print("started: ", state.name)
+	print("%s started: %s" % [kb.name, state.name])
 
 
 func _is_entity_hostile(entity) -> bool:

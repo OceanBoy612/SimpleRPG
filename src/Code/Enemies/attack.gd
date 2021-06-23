@@ -7,38 +7,36 @@ attacks once
 ends
 """
 
-var target
-var speed = 30
-var dir: Vector2
-export var attack_range = 30
-
-func on_enable():
-	# choose the closest target
-	target = null
-	if kb.has_meta("nearby"):
-		var max_dist: float
-		for entity in kb.get_meta("nearby"):
-			var dist = entity.global_position.distance_to(global_position)
-			if not target or dist < max_dist:
-				target = entity
-				max_dist = dist
-	assert(target, "no target for attack found")
-	print("TARGET FOUND: %s" % target.name)
+#func on_enable():
+#	target_nearest_enemy()
+#
+#	if not kb.target: # no target found
+#		print("Couldn't find a target for Attack")
+#		emit_signal("completed")
 
 
 func _physics_process(delta):
+	print("hi")
 	if Engine.editor_hint:
 		set_physics_process(false)
 		return
 	
-	# walk towards the target
-	dir = target.global_position-global_position
-	kb.move_and_collide(dir.normalized() * delta * speed)
-	# when within range attack
-	if dir.length() < attack_range:
-		emit_signal("completed")
-	
-	update()
+	(kb as CombatEntity).last_attack_time = 0
+	(kb as CombatEntity).target = null
+	print("completed")
+	emit_signal("completed")
+#
+#	# walk towards the target
+#	var to_target = kb.target.global_position-global_position
+#	kb.move_dir = to_target
+#
+#	# when within range attack
+#	if to_target.length() < kb.attack_range:
+#		kb.target = null
+#		kb.move_dir = Vector2()
+#		emit_signal("completed")
+#
+#	update()
 
 
 ### Helpers ###
@@ -54,7 +52,7 @@ func _draw():
 	if not DEBUG:
 		return
 	
-	draw_line(Vector2(), dir, Color("#abcdef"))
-	draw_arc(Vector2(), attack_range, 0, 2*PI, 32, Color("#ff1111"))
+	# TODO: This should move to the CombatEntity debug class
+	draw_arc(Vector2(), kb.attack_range, 0, 2*PI, 32, Color("#ff1111"))
 
 

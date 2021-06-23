@@ -19,6 +19,6 @@ func _physics_process(delta):
 func _draw():
 	if not DEBUG: return
 	# draws the time remaining
-	draw_string(default_font, Vector2(0, -64), 
+	draw_string(default_font, Vector2(20, -32), 
 			"waiting: %.2f" % [wait_time-curr_time], 
 			Color("#ffff00"))

@@ -10,27 +10,30 @@ export var DEBUG = false setget set_DEBUG
 export(int, 10, 300) var radius = 150 setget set_radius
 
 
-onready var kb = get_parent() as KinematicBody2D
+onready var kb = get_parent() as Entity
 
 
 func _ready():
-	kb.set_meta("nearby", [])
 	connect("body_entered", self, "_on_DetectionRadius_body_entered")
 	connect("body_exited", self, "_on_DetectionRadius_body_exited")
 	
 
 
 func _on_DetectionRadius_body_entered(body):
+	if not body is Entity: # TODO: Should have a collision mask for entities...
+		return
 	if body == kb:
 		return
-	kb.get_meta("nearby").append(body)
+	kb.nearby.append(body)
 	emit_signal("entity_entered", body)
 
 
 func _on_DetectionRadius_body_exited(body):
+	if not body is Entity: # TODO: Should have a collision mask for entities...
+		return
 	if body == kb:
 		return
-	kb.get_meta("nearby").erase(body)
+	kb.nearby.erase(body)
 	emit_signal("entity_exited", body)
 
 

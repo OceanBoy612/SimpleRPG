@@ -5,11 +5,11 @@ class_name State
 signal completed
 
 
-export var DEBUG = false setget set_DEBUG
+export var DEBUG: bool = false setget set_DEBUG
 
 
-var kb: KinematicBody2D
-var default_font = Control.new().get_font("font") # just get the default font
+var kb: Entity
+var default_font: Font = Control.new().get_font("font") # just get the default font
 
 
 func _ready():
@@ -23,7 +23,7 @@ func on_ready():
 func on_enable():
 	pass
 
-func enable(_kb: KinematicBody2D, max_time: float):
+func enable(_kb: Entity, max_time: float):
 	set_process(true)
 	set_physics_process(true)
 	show()
@@ -42,3 +42,8 @@ func disable():
 func set_DEBUG(value):
 	DEBUG = value
 	update()
+
+### Helpers ###
+
+
+	

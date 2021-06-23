@@ -1,26 +1,37 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Code/Enemies/States.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemies/wait_action.gd" type="Script" id=2]
 [ext_resource path="res://Code/Enemies/wander_action.gd" type="Script" id=3]
 [ext_resource path="res://Code/Enemies/detection_radius.gd" type="Script" id=4]
 [ext_resource path="res://Code/Enemies/attack.gd" type="Script" id=5]
+[ext_resource path="res://Code/Enemies/steering.gd" type="Script" id=6]
+[ext_resource path="res://Code/Entities/CombatEntity.gd" type="Script" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.80636
 
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0.42623, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0234765, 0, 0, Vector2( 1, 1 ), 2.8841, 0.0, 0, 0 ]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=4]
 radius = 66.0
 
 [node name="NPC" type="KinematicBody2D"]
 position = Vector2( 161, 96 )
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 7 )
 __meta__ = {
 "nearby": [  ],
 "spawn_point": Vector2( 161, 96 )
 }
+DEBUG = true
+faction = 4
+hostile_factions = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -36,20 +47,29 @@ DEBUG = true
 
 [node name="Wander" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
+DEBUG = true
 max_distance = 88
-curve = SubResource( 2 )
+curve = SubResource( 3 )
+
+[node name="Steering" type="Node2D" parent="StateMachine"]
+script = ExtResource( 6 )
+DEBUG = true
+target_curve = SubResource( 2 )
+target_min = 0
 
 [node name="Attack" type="Node2D" parent="StateMachine"]
 script = ExtResource( 5 )
 DEBUG = true
 
 [node name="DetectionRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
 script = ExtResource( 4 )
 DEBUG = true
 radius = 66
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [connection signal="entity_entered" from="DetectionRadius" to="StateMachine" method="_on_DetectionRadius_entity_entered"]

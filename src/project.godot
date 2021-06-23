@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/dialogue/characters/Character.gd"
 }, {
+"base": "Entity",
+"class": "CombatEntity",
+"language": "GDScript",
+"path": "res://Code/Entities/CombatEntity.gd"
+}, {
 "base": "Interaction",
 "class": "DialogueAction",
 "language": "GDScript",
@@ -28,6 +33,16 @@ _global_script_classes=[ {
 "class": "DialoguePlayer",
 "language": "GDScript",
 "path": "res://Code/dialogue/DialoguePlayer.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Code/Entities/Entity.gd"
+}, {
+"base": "Reference",
+"class": "Helpers",
+"language": "GDScript",
+"path": "res://Code/helpers.gd"
 }, {
 "base": "Area2D",
 "class": "Interactable",
@@ -61,9 +76,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "",
+"CombatEntity": "",
 "DialogueAction": "",
 "DialogueBox": "",
 "DialoguePlayer": "",
+"Entity": "",
+"Helpers": "",
 "Interactable": "",
 "Interaction": "",
 "LocalMap": "",
