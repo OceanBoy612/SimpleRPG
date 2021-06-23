@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T_pal-Sheet.png-7084af90fc2979325d96c96b0a572a25.stex"
+path="res://.import/T pal Walk-Sheet.png-1f99e1cd7e9461c2f52f5ced50b1975f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/~Sprites/T_pal-Sheet.png"
-dest_files=[ "res://.import/T_pal-Sheet.png-7084af90fc2979325d96c96b0a572a25.stex" ]
+source_file="res://Art/~Sprites/T pal Walk-Sheet.png"
+dest_files=[ "res://.import/T pal Walk-Sheet.png-1f99e1cd7e9461c2f52f5ced50b1975f.stex" ]
 
 [params]
 
