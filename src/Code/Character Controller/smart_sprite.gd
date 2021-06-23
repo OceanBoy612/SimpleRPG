@@ -14,6 +14,7 @@ export(bool) var DEBUG = false
 
 onready var kb = get_parent() as KinematicBody2D
 onready var anim_tree = kb.get_node("AnimationTree") as AnimationTree
+onready var facing = kb.get_node("Facing") as RayCast2D
 
 
 var ang_index
@@ -40,17 +41,28 @@ func _process(delta):
 #		pass
 	
 	
+	
+#	var facingAngle = wrapf(facing.rotation, 0, PI)
+	var lookDirection = Vector2(cos(facing.rotation), sin(facing.rotation)).normalized()
+	flip_h = lookDirection.x < 0
+	ang_index = stepify( lerp(0, 4, lookDirection.y), 0.5 )
+
+	suffix = "Down" if ang_index == 4 else "Right"
+	suffix = "Up" if ang_index == -4 else suffix
+
 	if kb.get_meta("direction") != Vector2.ZERO:
-		flip_h = kb.get_meta("direction").x < 0
-		
-		var ang = kb.get_meta("rotation") # slightly embarassing code o_o
-		ang_index = stepify( lerp(0, 4, (ang+(1.33*PI)) / (2*PI)), 0.5 )
-		suffix = "Down" if ang_index == 3.5 else "Right"
-		suffix = "Up" if ang_index == 1.5 else suffix
-		
 		play("Walk %s" % [suffix])
 	else:
 		play("Idle %s" % [suffix])
+
+
+#	if kb.get_meta("direction") != Vector2.ZERO:
+#		flip_h = kb.get_meta("direction").x < 0
+#
+#		var ang = kb.get_meta("rotation") # slightly embarassing code o_o
+#		ang_index = stepify( lerp(0, 4, (ang+(1.33*PI)) / (2*PI)), 0.5 )
+###		suffix = "Down" if ang_index == 3.5 else "Right"
+###		suffix = "Up" if ang_index == 1.5 else suffix
 	
 	
 	if DEBUG:
