@@ -1,16 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Code/Enemies/States.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemies/wait_action.gd" type="Script" id=2]
 [ext_resource path="res://Code/Enemies/wander_action.gd" type="Script" id=3]
+[ext_resource path="res://Code/Enemies/detection_radius.gd" type="Script" id=4]
+[ext_resource path="res://Code/Enemies/attack.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 3.80636
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0.42623, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 66.0
+
 [node name="NPC" type="KinematicBody2D"]
-position = Vector2( 481, 270 )
+position = Vector2( 161, 96 )
+__meta__ = {
+"nearby": [  ],
+"spawn_point": Vector2( 161, 96 )
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -26,6 +36,20 @@ DEBUG = true
 
 [node name="Wander" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
-DEBUG = true
-max_distance = 300
+max_distance = 88
 curve = SubResource( 2 )
+
+[node name="Attack" type="Node2D" parent="StateMachine"]
+script = ExtResource( 5 )
+DEBUG = true
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+script = ExtResource( 4 )
+DEBUG = true
+radius = 66
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+visible = false
+shape = SubResource( 3 )
+
+[connection signal="entity_entered" from="DetectionRadius" to="StateMachine" method="_on_DetectionRadius_entity_entered"]
