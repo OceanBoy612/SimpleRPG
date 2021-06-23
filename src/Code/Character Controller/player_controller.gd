@@ -15,6 +15,8 @@ enum {
 
 var state = MOVE
 var startAttack = false
+
+# Used for rolling
 var doubleTapTimer = 0
 var lastKey = "nothing"
 var keyOptions = ["ui_right", "ui_left", "ui_up", "ui_down"]

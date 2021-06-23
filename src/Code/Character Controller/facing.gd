@@ -22,8 +22,10 @@ func _process(delta):
 		print("Facing requires a KinematicBody2D as a parent")
 		return
 	
-	if kb.has_meta("rotation"):
-		rotation = kb.get_meta("rotation")
+	look_at(get_global_mouse_position())
+	
+#	if kb.has_meta("rotation"):
+#		rotation = kb.get_meta("rotation")
 	
 	if is_colliding():
 		var col = get_collider() as Interactable
