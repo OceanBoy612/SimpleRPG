@@ -1,43 +1,51 @@
 extends State
 
 """
-This state chooses the closest target.
-walks up to it
 attacks once
-ends
+ends when animation finishes
 """
 
-#func on_enable():
-#	target_nearest_enemy()
-#
-#	if not kb.target: # no target found
-#		print("Couldn't find a target for Attack")
-#		emit_signal("completed")
+var anim : AnimatedSprite
+export var damage_amount = 1
+
+func on_enable():
+#	anim = (kb.get_node("AnimatedSprite") as AnimatedSprite)
+#	anim.connect("animation_finished", self, "on_animation_finished")
+#	anim.play("Attack")
+	var player = (kb.get_node("AnimationPlayer") as AnimationPlayer)
+	player.play("Attack")
+#	player.connect("animation_finished", "on_animation_finished")
 
 
-func _physics_process(delta):
-	print("hi")
-	if Engine.editor_hint:
-		set_physics_process(false)
-		return
-	
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
 	(kb as CombatEntity).last_attack_time = 0
 	(kb as CombatEntity).target = null
-	print("completed")
 	emit_signal("completed")
-#
-#	# walk towards the target
-#	var to_target = kb.target.global_position-global_position
-#	kb.move_dir = to_target
-#
-#	# when within range attack
-#	if to_target.length() < kb.attack_range:
-#		kb.target = null
-#		kb.move_dir = Vector2()
-#		emit_signal("completed")
-#
-#	update()
+	pass # Replace with function body.
 
+
+
+func on_animation_finished():
+	return 
+	anim.disconnect("animation_finished", self, "on_animation_finished")
+	(kb as CombatEntity).last_attack_time = 0
+	(kb as CombatEntity).target = null
+	anim.play("Idle")
+	
+	var area = (kb.get_node("AttackArea") as Area2D)
+	
+	var bodies = area.get_overlapping_bodies()
+	for b in bodies:
+		if b == kb: continue
+		if b.has_method("damage"):
+			b.damage(damage_amount)
+		if b.has_method("knockback"):
+			b.knockback(kb, damage_amount)
+	
+	emit_signal("completed")
+	pass
 
 ### Helpers ###
 
@@ -48,11 +56,13 @@ func _physics_process(delta):
 
 ### DEBUG ###
 
-func _draw():
-	if not DEBUG:
-		return
-	
-	# TODO: This should move to the CombatEntity debug class
-	draw_arc(Vector2(), kb.attack_range, 0, 2*PI, 32, Color("#ff1111"))
+#func _draw():
+#	if not DEBUG:
+#		return
+#
+#	# TODO: This should move to the CombatEntity debug class
+#	draw_arc(Vector2(), kb.attack_range, 0, 2*PI, 32, Color("#ff1111"))
+#
+#
 
 

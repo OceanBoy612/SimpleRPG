@@ -47,6 +47,9 @@ func _on_DetectionRadius_entity_entered(entity):
 	# if that entity is hostile and we are wandering
 	#  set it as the target and complete the current 
 	#  action and attack
+	
+	print("entity entered")
+	
 	if state.name != "Wander":
 		return
 	
@@ -54,34 +57,8 @@ func _on_DetectionRadius_entity_entered(entity):
 	if not _is_entity_hostile(entity):
 		return
 	
-	## TESTING
+	# just find best fitting state again
 	state.emit_signal("completed")
-	return
-	## TESTING
-	
-	
-	# stop wandering
-	state.disconnect("completed", self, "_state_completed")
-	state.disable()
-	
-	# go into the alert state.
-#	state = get_node_or_null("Alert")
-#	assert(state, "No Alert state")
-#	_start_state(false)
-#	yield(state, "completed")
-#	state.disable()
-	
-	# go to the steering state.
-	state = get_node_or_null("Steering")
-	assert(state, "No steering state")
-	_start_state(false)
-	yield(state, "completed")
-	state.disable()
-	
-	# go into the attack state
-	state = get_node_or_null("Attack")
-	assert(state, "No attack state")
-	_start_state(true)
 
 
 func _state_completed():
