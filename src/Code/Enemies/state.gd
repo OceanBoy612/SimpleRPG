@@ -36,6 +36,8 @@ func enable(_kb: Entity, max_time: float):
 func disable():
 	set_process(false)
 	set_physics_process(false)
+	if kb:
+		kb.move_dir = Vector2()
 	hide()
 
 
