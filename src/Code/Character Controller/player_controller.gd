@@ -4,7 +4,7 @@ extends Node
 export var speed = 400
 export var doubleTapTime = 3
 
-onready var kb = get_parent() as KinematicBody2D
+onready var kb = get_parent() as CombatEntity
 onready var Weapon = kb.get_node("Facing/Weapon")
 onready var smartsprit = kb.get_node("SmartSprite")
 
@@ -71,10 +71,12 @@ func handle_movement(axis):
 	if axis != Vector2.ZERO:
 		kb.set_meta("rotation", axis.angle())	
 	kb.set_meta("direction", speed * axis)
-	kb.move_and_slide(speed * axis)
+#	kb.move_and_slide(speed * axis)
+	kb.move_dir = axis
 
 
 func handle_attacking():
+	kb.move_dir = Vector2() # stop moveing when attacking
 	if startAttack:
 		Weapon.run_attack()
 		startAttack = false
@@ -88,6 +90,7 @@ func handle_rolling():
 		startRolling = false
 	elif smartsprit.rolling == false:
 		state = MOVE
+		kb.speed_multiplier = 1
 	else:
 		var dash_axis = Vector2(0, 0)
 		if dash_dir == "ui_down":
@@ -98,7 +101,9 @@ func handle_rolling():
 			dash_axis = Vector2(1, 0)
 		elif dash_dir == "ui_left":
 			dash_axis = Vector2(-1, 0)
-		kb.move_and_slide(speed * dash_axis)
+#		kb.move_and_slide(speed * dash_axis)
+		kb.move_dir = dash_axis
+		kb.speed_multiplier = 2
 
 func check_double_press(delta):
 	if doubleTapTimer >= doubleTapTime:

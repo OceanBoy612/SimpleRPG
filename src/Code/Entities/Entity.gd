@@ -3,6 +3,7 @@ class_name Entity
 
 
 export(bool) var DEBUG = false
+export var speed: float = 50.0
 
 
 onready var spawn_point: Vector2 = global_position
@@ -10,13 +11,13 @@ onready var spawn_point: Vector2 = global_position
 
 var look_dir: Vector2 setget set_look
 var move_dir: Vector2 setget set_move
-var speed: float = 50.0
 var nearby: Array = []
+var speed_multiplier = 1
 
 ### Vars ###
 
 func _physics_process(delta):
-	move_and_slide(move_dir * speed)
+	move_and_slide(move_dir * speed * speed_multiplier)
 	update()
 	on_physics_process(delta)
 	

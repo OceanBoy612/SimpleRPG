@@ -17,10 +17,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -209.244
-margin_top = -391.407
-margin_right = -60.2443
-margin_bottom = -188.407
+margin_left = -81.9795
+margin_top = -130.87
+margin_right = -19.9795
+margin_bottom = -46.8696
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,57 +29,74 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -185.0
+margin_top = -48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Columns" type="HBoxContainer" parent="Panel"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1005.0
-margin_bottom = 164.0
+[node name="MC" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Columns" type="HBoxContainer" parent="Panel/MC"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 315.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( -74.5, 22.5 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="Panel/Columns"]
-margin_right = 38.0
-margin_bottom = 144.0
+[node name="Name" type="Label" parent="Panel/MC/Columns"]
+margin_right = 22.0
+margin_bottom = 38.0
 size_flags_vertical = 5
 text = "Name"
 
-[node name="Text" type="Label" parent="Panel/Columns"]
-margin_left = 42.0
-margin_right = 801.0
-margin_bottom = 144.0
+[node name="Text" type="Label" parent="Panel/MC/Columns"]
+margin_left = 26.0
+margin_right = 266.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Dialogue Text"
 align = 1
 valign = 1
 
-[node name="ButtonNext" type="Button" parent="Panel/Columns"]
-margin_left = 805.0
-margin_right = 985.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 180, 80 )
-size_flags_vertical = 0
+[node name="ButtonNext" type="Button" parent="Panel/MC/Columns"]
+margin_left = 270.0
+margin_top = 9.0
+margin_right = 310.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 40, 20 )
+size_flags_vertical = 4
 text = "Next"
 
-[node name="ButtonFinished" type="Button" parent="Panel/Columns"]
+[node name="ButtonFinished" type="Button" parent="Panel/MC/Columns"]
 visible = false
-margin_left = 805.0
-margin_right = 985.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 180, 80 )
-size_flags_vertical = 0
+margin_left = 280.0
+margin_top = 14.0
+margin_right = 320.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 40, 20 )
+size_flags_vertical = 4
 text = "End"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="DialoguePlayer" parent="." instance=ExtResource( 3 )]
 
-[connection signal="pressed" from="Panel/Columns/ButtonNext" to="." method="_on_ButtonNext_pressed"]
-[connection signal="pressed" from="Panel/Columns/ButtonFinished" to="." method="_on_ButtonFinished_pressed"]
+[connection signal="pressed" from="Panel/MC/Columns/ButtonNext" to="." method="_on_ButtonNext_pressed"]
+[connection signal="pressed" from="Panel/MC/Columns/ButtonFinished" to="." method="_on_ButtonFinished_pressed"]
 [connection signal="finished" from="DialoguePlayer" to="." method="_on_DialoguePlayer_finished"]

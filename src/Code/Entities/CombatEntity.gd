@@ -18,8 +18,9 @@ export(float) var attack_cooldown = 1.0
 export(float) var attack_damage = 1.0
 export(NodePath) var attack_area_path
 
+export var health: float = 10
 
-var health: float = 10
+
 var target = null # : CombatEntity <- except cyclic issue
 
 var last_attack_time: float = 999

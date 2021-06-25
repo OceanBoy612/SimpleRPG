@@ -10,7 +10,7 @@ signal attack_finished
 export(String) var input_name = "ui_accept"
 export(float) var delay_time = 0.1
 export(float) var attack_time = 0.1
-export(float) var damage_amt = 1
+#export(float) var damage_amt = 1
 
 
 onready var path = $Path2D/PathFollow2D
@@ -47,6 +47,6 @@ func tween_finished():
 	shape.disabled = true
 
 
-func _on_AttackArea_body_entered(body):
-	if body.has_method("damage"):
-		body.damage(damage_amt)
+#func _on_AttackArea_body_entered(body):
+#	if body.has_method("damage"):
+#		body.damage(damage_amt)

@@ -5,11 +5,11 @@ signal dialogue_ended
 
 onready var dialogue_player = $DialoguePlayer as DialoguePlayer
 
-onready var name_label = $Panel/Columns/Name as Label
-onready var text_label = $Panel/Columns/Text as Label
+onready var name_label = $Panel/MC/Columns/Name as Label
+onready var text_label = $Panel/MC/Columns/Text as Label
 
-onready var button_next = $Panel/Columns/ButtonNext as Button
-onready var button_finished = $Panel/Columns/ButtonFinished as Button
+onready var button_next = $Panel/MC/Columns/ButtonNext as Button
+onready var button_finished = $Panel/MC/Columns/ButtonFinished as Button
 
 onready var portrait = $Portrait as TextureRect
 
