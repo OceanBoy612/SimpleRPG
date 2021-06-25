@@ -47,9 +47,14 @@ func _process(delta):
 	flip_h = lookDirection.x < 0
 	ang_index = stepify( lerp(0, 4, lookDirection.y), 0.5 )
 
-	suffix = "Down" if ang_index == 4 else "Right"
-	suffix = "Up" if ang_index == -4 else suffix
 
+	if ang_index == 4:
+		suffix = "Down"
+	elif ang_index == -4:
+		suffix = "Up"
+	else:
+		suffix = "Right"
+		
 	if kb.get_meta("direction") != Vector2.ZERO:
 		play("Walk %s" % [suffix])
 	else:

@@ -185,7 +185,7 @@ attack_time = 0.24
 curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -39.8817, 0.346618 )
+position = Vector2( -39.8818, 0.346656 )
 rotation = -1.59275
 offset = 19.8493
 loop = false
@@ -203,6 +203,6 @@ shape = SubResource( 19 )
 position = Vector2( 0.0372043, 7.34433 )
 rotation = 2.38786
 frames = ExtResource( 5 )
-animation = "Wood"
+animation = "Broadsword"
 
 [connection signal="body_entered" from="Facing/Weapon/Path2D/PathFollow2D/AttackArea" to="Facing/Weapon" method="_on_AttackArea_body_entered"]
