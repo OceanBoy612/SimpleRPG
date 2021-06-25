@@ -19,6 +19,7 @@ onready var facing = kb.get_node("Facing") as RayCast2D
 
 var ang_index
 var suffix = "Right"
+var rolling = false
 
 
 func _process(delta):
@@ -40,25 +41,27 @@ func _process(delta):
 #		anim_tree["parameters/idle_walk/blend_amount"] = 1
 #		pass
 	
-	
-	
 #	var facingAngle = wrapf(facing.rotation, 0, PI)
-	var lookDirection = Vector2(cos(facing.rotation), sin(facing.rotation)).normalized()
-	flip_h = lookDirection.x < 0
-	ang_index = stepify( lerp(0, 4, lookDirection.y), 0.5 )
 
 
-	if ang_index == 4:
-		suffix = "Down"
-	elif ang_index == -4:
-		suffix = "Up"
+	if rolling:
+		pass
 	else:
-		suffix = "Right"
-		
-	if kb.get_meta("direction") != Vector2.ZERO:
-		play("Walk %s" % [suffix])
-	else:
-		play("Idle %s" % [suffix])
+		var lookDirection = Vector2(cos(facing.rotation), sin(facing.rotation)).normalized()
+		flip_h = lookDirection.x < 0
+		ang_index = stepify( lerp(0, 4, lookDirection.y), 0.5 )
+
+		if ang_index == 4:
+			suffix = "Down"
+		elif ang_index == -4:
+			suffix = "Up"
+		else:
+			suffix = "Right"
+			
+		if kb.get_meta("direction") != Vector2.ZERO:
+			play("Walk %s" % [suffix])
+		else:
+			play("Idle %s" % [suffix])
 
 
 #	if kb.get_meta("direction") != Vector2.ZERO:
@@ -72,6 +75,23 @@ func _process(delta):
 	
 	if DEBUG:
 		update() # the draw method
+
+func run_roll(direction):
+	if direction == "ui_down":
+		self.play("Dash Down")
+	elif direction == "ui_up":
+		self.play("Dash Up")
+	elif direction == "ui_right":
+		self.play("Dash Right")
+	elif direction == "ui_left":
+		self.flip_h = true
+		self.play("Dash Right")
+	rolling = true
+	yield(self, "animation_finished")
+	rolling = false
+
+	
+
 
 
 var default_font = Control.new().get_font("font") # just get the default font

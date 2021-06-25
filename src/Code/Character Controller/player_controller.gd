@@ -6,6 +6,7 @@ export var doubleTapTime = 3
 
 onready var kb = get_parent() as KinematicBody2D
 onready var Weapon = kb.get_node("Facing/Weapon")
+onready var smartsprit = kb.get_node("SmartSprite")
 
 enum {
 	ATTACK,
@@ -15,6 +16,7 @@ enum {
 
 var state = MOVE
 var startAttack = false
+var startRolling = false
 
 # Used for rolling
 var doubleTapTimer = 0
@@ -23,6 +25,7 @@ var keyOptions = ["ui_right", "ui_left", "ui_up", "ui_down"]
 
 var accept_buffer_time = 0.2
 var time_since_accept = 999
+var dash_dir = ""
 
 func _physics_process(delta):
 	if not kb:
@@ -46,6 +49,7 @@ func _physics_process(delta):
 	# Check for rolling
 	if check_double_press(delta) and state == MOVE:
 		state = ROLL
+		startRolling = true
 	
 	match state:
 		MOVE:
@@ -74,13 +78,27 @@ func handle_attacking():
 	if startAttack:
 		Weapon.run_attack()
 		startAttack = false
-		# TODO add attacking animation
 	elif Weapon.attacking == false:
 		state = MOVE
 
 func handle_rolling():
-	print("You rolled")
-	state = MOVE
+	if startRolling:
+		dash_dir = lastKey
+		smartsprit.run_roll(lastKey)
+		startRolling = false
+	elif smartsprit.rolling == false:
+		state = MOVE
+	else:
+		var dash_axis = Vector2(0, 0)
+		if dash_dir == "ui_down":
+			dash_axis = Vector2(0, 1)
+		elif dash_dir == "ui_up":
+			dash_axis = Vector2(0, -1)
+		elif dash_dir == "ui_right":
+			dash_axis = Vector2(1, 0)
+		elif dash_dir == "ui_left":
+			dash_axis = Vector2(-1, 0)
+		kb.move_and_slide(speed * dash_axis)
 
 func check_double_press(delta):
 	if doubleTapTimer >= doubleTapTime:
