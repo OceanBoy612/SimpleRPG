@@ -7,7 +7,7 @@ TODO: add a delay to this OR move all animations to an animationplayer
 """
 
 
-export(String) var input_name = "ui_accept"
+#export(String) var input_name = "ui_accept"
 export(float) var delay_time = 0.1
 export(float) var activation_duration = 0.1
 
