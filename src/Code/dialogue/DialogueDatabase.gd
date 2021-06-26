@@ -25,3 +25,8 @@ func get_texture(character_name: String, expression: String = "neutral") -> Text
 	assert(character_name in characters)
 	assert(expression in characters[character_name].expressions)
 	return characters[character_name].expressions[expression]
+
+
+func get_display_name(character_name: String) -> String:
+	assert(character_name in characters)
+	return characters[character_name].display_name
