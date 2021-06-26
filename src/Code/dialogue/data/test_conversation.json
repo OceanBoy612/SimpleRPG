@@ -1,4 +1,4 @@
 {
-    "001" : {"name":"Char1", "expression": "neutral", "text":"Look I said something" },
-    "002" : {"name":"Char2", "expression": "neutral", "text":"You did indeed, I am now speaking! Hurray!" }
+    "001" : {"name":"Char1", "side":"left", "expression": "neutral", "text":"Look I said something" },
+    "002" : {"name":"Char2", "side":"right", "expression": "neutral", "text":"You did indeed, I am now speaking! Hurray!" }
 }
