@@ -7,7 +7,7 @@ positions the weapon sprite along the path, and allows it to swing along the pat
 signal attack_finished
 
 
-export(String) var input_name = "ui_accept"
+#export(String) var input_name = "ui_accept"
 export(float) var delay_time = 0.1
 export(float) var attack_time = 0.1
 #export(float) var damage_amt = 1

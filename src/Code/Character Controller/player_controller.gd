@@ -27,22 +27,26 @@ var accept_buffer_time = 0.2
 var time_since_accept = 999
 var dash_dir = ""
 
+
+func _process(delta):
+	# buffer acceptPressed
+#	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
+#	var acceptPressed = time_since_accept < accept_buffer_time
+	var interact_pressed = Input.is_action_just_pressed("interact")
+	# Check for interaction or attacking
+	if interact_pressed and state == MOVE and kb.has_meta("interactable"):
+		var inter : Interactable = kb.get_meta("interactable")
+		inter.start_interaction()
+
 func _physics_process(delta):
 	if not kb:
 		print("Character controller requires a KinematicBody2D as a parent")
 		return
 	
 	var axis: Vector2 = _get_input_axis()
-
-	# buffer acceptPressed
-	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
-	var acceptPressed = time_since_accept < accept_buffer_time
 	
-	# Check for interaction or attacking
-	if acceptPressed and state == MOVE and kb.has_meta("interactable"):
-		var inter : Interactable = kb.get_meta("interactable")
-		inter.start_interaction()
-	elif acceptPressed and state == MOVE:
+	var attack_pressed = Input.is_action_just_pressed("attack") # leftmousebutton
+	if attack_pressed and state == MOVE:
 		state = ATTACK
 		startAttack = true
 	

@@ -49,6 +49,7 @@ interactions = [ ExtResource( 7 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 149.045, 80.8723 )
+health = 1000.0
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -56,13 +57,13 @@ position = Vector2( 149.045, 80.8723 )
 position = Vector2( 11.9948, -28.4842 )
 
 [node name="NPC2" parent="Enemies" instance=ExtResource( 9 )]
-position = Vector2( -83.7416, 284.633 )
+position = Vector2( -14.8195, 90.6022 )
 
 [node name="NPC3" parent="Enemies" instance=ExtResource( 9 )]
-position = Vector2( 532.662, -95.155 )
+position = Vector2( -23.9592, 29.9537 )
 
 [node name="NPC4" parent="Enemies" instance=ExtResource( 9 )]
-position = Vector2( 463.361, 293.227 )
+position = Vector2( 46.0825, 32.5215 )
 
 [node name="NPC5" parent="Enemies" instance=ExtResource( 9 )]
-position = Vector2( 378.684, -166.588 )
+position = Vector2( 85.0158, -34.737 )
