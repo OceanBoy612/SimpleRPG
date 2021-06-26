@@ -11,8 +11,8 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
-length = 0.867
-step = 0.067
+length = 0.278
+step = 0.055
 tracks/0/type = "value"
 tracks/0/path = NodePath("AttackArea/CollisionShape2D:shape:radius")
 tracks/0/interp = 1
@@ -20,10 +20,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.335, 0.536, 0.603, 0.871 ),
-"transitions": PoolRealArray( 1, 9.18958, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.055, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.01, 0.01, 16.0, 24.0, 0.01 ]
+"values": [ 16.0, 24.0, 0.01 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AttackArea/CollisionShape2D:disabled")
@@ -32,7 +32,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.67 ),
+"times": PoolRealArray( 0, 0.22 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -42,19 +42,19 @@ tracks/2/path = NodePath("AnimatedSprite:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1.31951 ),
 "update": 1,
-"values": [ "Attack" ]
+"values": [ "Detonate" ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -64,9 +64,9 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/path = NodePath("AnimatedSprite:frame")
 tracks/4/interp = 1
-tracks/4/loop_wrap = true
+tracks/4/loop_wrap = false
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -78,7 +78,7 @@ tracks/4/keys = {
 radius = 6.90314
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 66.0
+radius = 140.0
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0234765, 0, 0, Vector2( 1, 1 ), 2.8841, 0.0, 0, 0 ]
@@ -96,7 +96,7 @@ _data = [ Vector2( 0, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 
 
 [sub_resource type="CircleShape2D" id=8]
 resource_local_to_scene = true
-radius = 0.01
+radius = 16.0
 
 [node name="NPC" type="KinematicBody2D"]
 position = Vector2( 161, 96 )
@@ -110,6 +110,7 @@ __meta__ = {
 DEBUG = true
 faction = 4
 hostile_factions = 1
+attack_cooldown = 0.0
 attack_area_path = NodePath("AttackArea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -121,8 +122,8 @@ shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 8 )
-animation = "Attack"
-frame = 13
+animation = "Detonate"
+frame = 5
 playing = true
 
 [node name="DetectionRadius" type="Area2D" parent="."]
@@ -130,9 +131,10 @@ collision_layer = 0
 collision_mask = 6
 script = ExtResource( 4 )
 DEBUG = true
-radius = 66
+radius = 140
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+visible = false
 shape = SubResource( 3 )
 
 [node name="StateMachine" type="Node2D" parent="."]
@@ -151,6 +153,7 @@ curve = SubResource( 4 )
 [node name="Steering" type="Node2D" parent="StateMachine"]
 script = ExtResource( 6 )
 DEBUG = true
+attack_range = 50.0
 hostile_curve = SubResource( 5 )
 ally_curve = SubResource( 6 )
 target_curve = SubResource( 7 )
@@ -159,6 +162,8 @@ distance_min = 0
 [node name="Attack" type="Node2D" parent="StateMachine"]
 script = ExtResource( 5 )
 
+[node name="Tween" type="Tween" parent="StateMachine/Attack"]
+
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 6
@@ -166,5 +171,5 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource( 8 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="entity_entered" from="DetectionRadius" to="StateMachine" method="_on_DetectionRadius_entity_entered"]
+[connection signal="tween_all_completed" from="StateMachine/Attack/Tween" to="StateMachine/Attack" method="_on_Tween_tween_all_completed"]

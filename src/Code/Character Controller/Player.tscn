@@ -212,5 +212,3 @@ position = Vector2( 0.0372043, 7.34433 )
 rotation = 2.38786
 frames = ExtResource( 5 )
 animation = "Broadsword"
-
-[connection signal="body_entered" from="Facing/Weapon/Path2D/PathFollow2D/AttackArea" to="Facing/Weapon" method="_on_AttackArea_body_entered"]
