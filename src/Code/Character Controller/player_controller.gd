@@ -48,7 +48,7 @@ func _physics_process(delta):
 		Weapon.run_attack()
 	
 	# Check for rolling
-	var roll_pressed = Input.is_action_just_pressed("ui_accept")
+	var roll_pressed = Input.is_action_just_pressed("dash")
 	var no_side = (axis.x == 0 and axis.y != 0) or (axis.x != 0 and axis.y == 0)
 	if roll_pressed and state == MOVE and axis != Vector2.ZERO and no_side:
 		print(axis)
