@@ -16,11 +16,10 @@ enum {
 var state = MOVE
 #var startAttack = false
 var startRolling = false
-
 # Used for rolling
-var doubleTapTimer = 0
+#var doubleTapTimer = 0
 var lastKey = "nothing"
-var keyOptions = ["ui_right", "ui_left", "ui_up", "ui_down"]
+#var keyOptions = ["ui_right", "ui_left", "ui_up", "ui_down"]
 
 var accept_buffer_time = 0.2
 var time_since_accept = 999
@@ -49,10 +48,22 @@ func _physics_process(delta):
 		Weapon.run_attack()
 	
 	# Check for rolling
-	if check_double_press(delta) and state == MOVE:
+	var roll_pressed = Input.is_action_just_pressed("ui_accept")
+	var no_side = (axis.x == 0 and axis.y != 0) or (axis.x != 0 and axis.y == 0)
+	if roll_pressed and state == MOVE and axis != Vector2.ZERO and no_side:
+		print(axis)
+		dash_dir = lastKey
+		if axis.y > 0 and axis.x == 0:
+			dash_dir = "ui_down"
+		elif axis.y < 0 and axis.x == 0:
+			dash_dir = "ui_up"
+		elif axis.x > 0 and axis.y == 0:
+			dash_dir = "ui_right"
+		elif axis.x < 0 and axis.y == 0:
+			dash_dir = "ui_left"
 		state = ROLL
+
 		startRolling = true
-	
 	match state:
 		MOVE:
 			handle_movement(axis)
@@ -85,8 +96,7 @@ func handle_movement(axis):
 
 func handle_rolling():
 	if startRolling:
-		dash_dir = lastKey
-		smartsprit.run_roll(lastKey)
+		smartsprit.run_roll(dash_dir)
 		startRolling = false
 	elif smartsprit.rolling == false:
 		state = MOVE
@@ -105,16 +115,16 @@ func handle_rolling():
 		kb.move_dir = dash_axis
 		kb.speed_multiplier = 2
 
-func check_double_press(delta):
-	if doubleTapTimer >= doubleTapTime:
-		lastKey = "nothing"
-		doubleTapTimer = 0
-	else:
-		doubleTapTimer += delta
-	for key in keyOptions:
-		var keyPressed = Input.is_action_just_pressed(key) 
-		if keyPressed and key == lastKey:
-			return true
-		elif keyPressed:
-			lastKey = key
-	return false
+#func check_double_press(delta):
+#	if doubleTapTimer >= doubleTapTime:
+#		lastKey = "nothing"
+#		doubleTapTimer = 0
+#	else:
+#		doubleTapTimer += delta
+#	for key in keyOptions:
+#		var keyPressed = Input.is_action_just_pressed(key) 
+#		if keyPressed and key == lastKey:
+#			return true
+#		elif keyPressed:
+#			lastKey = key
+#	return false
