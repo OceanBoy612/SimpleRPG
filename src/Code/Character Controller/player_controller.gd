@@ -9,13 +9,12 @@ onready var Weapon = kb.get_node("Facing/Weapon")
 onready var smartsprit = kb.get_node("SmartSprite")
 
 enum {
-	ATTACK,
 	MOVE,
 	ROLL
 }
 
 var state = MOVE
-var startAttack = false
+#var startAttack = false
 var startRolling = false
 
 # Used for rolling
@@ -47,8 +46,7 @@ func _physics_process(delta):
 	
 	var attack_pressed = Input.is_action_just_pressed("attack") # leftmousebutton
 	if attack_pressed and state == MOVE:
-		state = ATTACK
-		startAttack = true
+		Weapon.run_attack()
 	
 	# Check for rolling
 	if check_double_press(delta) and state == MOVE:
@@ -58,8 +56,6 @@ func _physics_process(delta):
 	match state:
 		MOVE:
 			handle_movement(axis)
-		ATTACK:
-			handle_attacking()
 		ROLL:
 			handle_rolling()
 	
@@ -79,13 +75,13 @@ func handle_movement(axis):
 	kb.move_dir = axis
 
 
-func handle_attacking():
-	kb.move_dir = Vector2() # stop moveing when attacking
-	if startAttack:
-		Weapon.run_attack()
-		startAttack = false
-	elif Weapon.attacking == false:
-		state = MOVE
+#func handle_attacking():
+#	kb.move_dir = Vector2() # stop moveing when attacking
+#	if startAttack:
+#
+#		startAttack = false
+#	elif Weapon.attacking == false:
+#		state = MOVE
 
 func handle_rolling():
 	if startRolling:
