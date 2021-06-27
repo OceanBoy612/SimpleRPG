@@ -36,9 +36,9 @@ func run_attack():
 			start_pt, end_pt, attack_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
-	var temp = start_pt
-	start_pt = end_pt
-	end_pt = temp
+#	var temp = start_pt
+#	start_pt = end_pt
+#	end_pt = temp
 
 
 func tween_finished():
