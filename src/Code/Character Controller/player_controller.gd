@@ -24,6 +24,7 @@ var lastKey = "nothing"
 var accept_buffer_time = 0.2
 var time_since_accept = 999
 var dash_dir = ""
+var dash_axis
 
 
 func _process(delta):
@@ -49,18 +50,17 @@ func _physics_process(delta):
 	
 	# Check for rolling
 	var roll_pressed = Input.is_action_just_pressed("dash")
-	var no_side = (axis.x == 0 and axis.y != 0) or (axis.x != 0 and axis.y == 0)
-	if roll_pressed and state == MOVE and axis != Vector2.ZERO and no_side:
-		print(axis)
+	if roll_pressed and state == MOVE and axis != Vector2.ZERO:
 		dash_dir = lastKey
-		if axis.y > 0 and axis.x == 0:
-			dash_dir = "ui_down"
-		elif axis.y < 0 and axis.x == 0:
-			dash_dir = "ui_up"
-		elif axis.x > 0 and axis.y == 0:
+		dash_axis = axis
+		if axis.x > 0:
 			dash_dir = "ui_right"
-		elif axis.x < 0 and axis.y == 0:
+		elif axis.x < 0:
 			dash_dir = "ui_left"
+		elif axis.y > 0:
+			dash_dir = "ui_down"
+		elif axis.y < 0:
+			dash_dir = "ui_up"
 		state = ROLL
 
 		startRolling = true
@@ -102,15 +102,6 @@ func handle_rolling():
 		state = MOVE
 		kb.speed_multiplier = 1
 	else:
-		var dash_axis = Vector2(0, 0)
-		if dash_dir == "ui_down":
-			dash_axis = Vector2(0, 1)
-		elif dash_dir == "ui_up":
-			dash_axis = Vector2(0, -1)
-		elif dash_dir == "ui_right":
-			dash_axis = Vector2(1, 0)
-		elif dash_dir == "ui_left":
-			dash_axis = Vector2(-1, 0)
 #		kb.move_and_slide(speed * dash_axis)
 		kb.move_dir = dash_axis
 		kb.speed_multiplier = 2

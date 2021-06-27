@@ -82,6 +82,7 @@ func run_roll(direction):
 	elif direction == "ui_up":
 		self.play("Dash Up")
 	elif direction == "ui_right":
+		self.flip_h = false
 		self.play("Dash Right")
 	elif direction == "ui_left":
 		self.flip_h = true

@@ -190,7 +190,7 @@ curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
 position = Vector2( -42.4403, -1.08582 )
-rotation = -0.168148
+rotation = -0.225957
 loop = false
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
