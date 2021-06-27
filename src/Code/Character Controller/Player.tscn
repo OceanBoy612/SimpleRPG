@@ -133,7 +133,7 @@ node_connections = [ "output", 0, "idle_walk", "idle_walk", 0, "Walk", "idle_wal
 
 [sub_resource type="Curve2D" id=18]
 _data = {
-"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -48.75, 9.25, 0, 0, 0, 0, -47.25, 13.125, -0.139865, 15.313, 0.139865, -15.313, -39.875, -0.125, 0, 0, 0, 0, -47, -12.125, 0, 0, 3.91397, 1.75505, -48.5, -8.75 )
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -44.4374, -1.08576, 0, 0, 0, 0, -38.1306, -1.82154, 0.175471, -2.45094, -0.175471, 2.45094, -34.1364, 1.75227, 0, 0, 0, 0, -38.8664, 9.11011 )
 }
 
 [sub_resource type="RectangleShape2D" id=19]
@@ -146,7 +146,7 @@ DEBUG = true
 speed = 100.0
 faction = 1
 hostile_factions = 12
-attack_area_path = NodePath("Facing/Weapon/Path2D/PathFollow2D/AttackArea")
+attack_area_path = NodePath("Facing/Weapon/Path2D/PathFollow2D/WeaponSprite/AttackArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -169,13 +169,6 @@ parameters/idle_walk/blend_amount = 0.0
 script = ExtResource( 1 )
 speed = 100
 
-[node name="SmartSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
-animation = "Idle Down"
-frame = 1
-script = ExtResource( 4 )
-DEBUG = true
-
 [node name="Facing" type="RayCast2D" parent="."]
 cast_to = Vector2( 50, 0 )
 collision_mask = 33
@@ -190,25 +183,33 @@ attack_time = 0.24
 [node name="Tween" type="Tween" parent="Facing/Weapon"]
 
 [node name="Path2D" type="Path2D" parent="Facing/Weapon"]
+position = Vector2( 0.10511, 0 )
 curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -39.8818, 0.346656 )
-rotation = -1.59275
-offset = 19.8493
+position = Vector2( -44.4374, -1.08576 )
+rotation = -0.152587
 loop = false
 
-[node name="AttackArea" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D"]
-position = Vector2( -0.263598, 31.1804 )
+[node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
+rotation = -0.785398
+frames = ExtResource( 5 )
+animation = "Broadsword"
+
+[node name="AttackArea" type="Area2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite"]
+position = Vector2( 16.5319, -17.174 )
+rotation = -2.38786
 collision_layer = 0
 collision_mask = 36
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/AttackArea"]
-position = Vector2( 0.518366, -23.6069 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite/AttackArea"]
+position = Vector2( 0.325951, -20.5513 )
+rotation = -3.09796
 shape = SubResource( 19 )
 
-[node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
-position = Vector2( 0.0372043, 7.34433 )
-rotation = 2.38786
-frames = ExtResource( 5 )
-animation = "Broadsword"
+[node name="SmartSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "Idle Down"
+frame = 1
+script = ExtResource( 4 )
+DEBUG = true
