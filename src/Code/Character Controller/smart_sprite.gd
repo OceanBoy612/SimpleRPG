@@ -100,9 +100,11 @@ func _draw():
 	if not DEBUG:
 		return 
 	
+	
 	draw_string(default_font, Vector2(64, 0), animation)
 	
-	draw_line(Vector2(), kb.get_meta("direction").normalized()*30, Color("#ffaaff"), 2.0)
+	if kb.has_meta("direction"): # why is this necessary? only on reload?
+		draw_line(Vector2(), kb.get_meta("direction").normalized()*30, Color("#ffaaff"), 2.0)
 	
 	draw_string(default_font, Vector2(64, 20), str(ang_index))
 

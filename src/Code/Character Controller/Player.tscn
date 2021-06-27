@@ -133,7 +133,7 @@ node_connections = [ "output", 0, "idle_walk", "idle_walk", 0, "Walk", "idle_wal
 
 [sub_resource type="Curve2D" id=18]
 _data = {
-"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -42.4403, -1.08582, 0, 0, 0, 0, -36.2387, -2.03182, 1.3317, -4.13273, -1.3317, 4.13273, -37.7103, 5.01068, 0, 0, 0, 0, -46.5397, 11.843 )
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -48.75, 9.25, 0, 0, 0, 0, -47.25, 13.125, -0.139865, 15.313, 0.139865, -15.313, -39.875, -0.125, 0, 0, 0, 0, -47, -12.125, 0, 0, 3.91397, 1.75505, -48.5, -8.75 )
 }
 
 [sub_resource type="RectangleShape2D" id=19]
@@ -189,8 +189,8 @@ position = Vector2( 0.10511, 0 )
 curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -42.4403, -1.08582 )
-rotation = -0.225957
+position = Vector2( -48.75, 9.25 )
+rotation = 0.968517
 loop = false
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]

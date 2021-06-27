@@ -81,7 +81,10 @@ func damage(amt) -> bool:
 	_flash_white()
 	if health <= 0:
 		emit_signal("died")
-		queue_free()
+		if name == "Player":
+			get_tree().reload_current_scene()
+		else:
+			queue_free()
 		return true
 	return false
 

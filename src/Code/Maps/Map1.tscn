@@ -77,9 +77,8 @@ enable_on_complete = NodePath("../Interactable3")
 interactions = [ ExtResource( 13 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 149.045, 80.8723 )
+position = Vector2( 236.019, 153.704 )
 DEBUG = false
-health = 1000.0
 
 [node name="Enemies" type="Node2D" parent="."]
 
