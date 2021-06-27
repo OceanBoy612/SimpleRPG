@@ -26,6 +26,7 @@ old way:
 
 onready var kb = get_parent() as Entity
 var state: State
+export var DEBUG = false
 #onready var spawn_pos : Vector2 = kb.global_position
 
 
@@ -47,8 +48,8 @@ func _on_DetectionRadius_entity_entered(entity):
 	# if that entity is hostile and we are wandering
 	#  set it as the target and complete the current 
 	#  action and attack
-	
-	print("entity entered")
+	if DEBUG:
+		print("entity entered")
 	
 	if state.name != "Wander":
 		return
@@ -94,9 +95,11 @@ func _start_state(_connect=true):
 		if not state.is_connected("completed", self, "_state_completed"):
 			state.connect("completed", self, "_state_completed")
 		else:
-			print("Warn: Repeating the %s state" % state.name)
+			if DEBUG:
+				print("Warn: Repeating the %s state" % state.name)
 	state.enable(kb, 112.5)
-	print("%s started: %s" % [kb.name, state.name])
+	if DEBUG:
+		print("%s started: %s" % [kb.name, state.name])
 
 
 func _is_entity_hostile(entity) -> bool:

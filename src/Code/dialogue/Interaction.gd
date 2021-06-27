@@ -7,17 +7,12 @@ class_name Interaction
 
 
 signal finished
-#var local_map
 var active: bool = true
+var target : Entity 
 
 
-#func _ready() -> void:
-#	# using a group so LocalMap can initialize all Interactions
-#	add_to_group("interaction")
-
-
-#func initialize(_local_map):
-#	local_map = _local_map
+func set_target(t: Entity):
+	target = t
 
 
 func interact(local_map) -> void:

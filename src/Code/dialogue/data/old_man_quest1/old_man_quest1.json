@@ -1,0 +1,7 @@
+{
+    "001" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Hey gramps, I'm headed out." },
+    "002" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"Hey, kid! While you're out would you do me a favor?" },
+    "003" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Uuuuugh..." },
+    "004" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"No, it'll be fun! The Frim have been acting up again, I just need an up-and-coming adventurer like yourself to go show 'em what's what!" },
+    "005" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Well why didn't you say so! Let me at'm, I won't show any mercy, you'll see!" }
+}

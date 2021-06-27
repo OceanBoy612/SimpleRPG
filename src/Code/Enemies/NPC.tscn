@@ -108,6 +108,7 @@ __meta__ = {
 "spawn_point": Vector2( 161, 96 )
 }
 DEBUG = true
+type = "Frim"
 faction = 4
 hostile_factions = 1
 attack_cooldown = 0.0

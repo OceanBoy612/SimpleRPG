@@ -3,7 +3,10 @@ class_name CombatEntity
 
 
 signal died
+signal killed(what)
 
+
+export(String) var type # the name of the entity (player, frim etc...)
 
 enum Factions { 
 	Player = 1,
@@ -51,7 +54,7 @@ func on_physics_process(delta):
 func on_draw():
 	if is_instance_valid(target):
 		draw_line(Vector2(), target.global_position-global_position, Color("#ff0000"), 1.5)
-
+	
 
 ### Overrides ###
 ### Helpers ###
@@ -63,18 +66,24 @@ func damage_entity(body: PhysicsBody2D):
 	if not b: return
 	if b.faction & hostile_factions == 0: return  # entity not hostile
 	
-	if body.has_method("damage"):
-		body.damage(attack_damage)
 	if body.has_method("knockback"):
 		body.knockback(self, knockback_amount)
+	if body.has_method("damage"):
+		var killed = body.damage(attack_damage)
+		if killed:
+			_increment_killed(body)
+			emit_signal("killed", body)
 
 
-func damage(amt):
+# Returns true if the entity dies, false otherwise
+func damage(amt) -> bool:
 	health -= amt
 	_flash_white()
 	if health <= 0:
 		emit_signal("died")
 		queue_free()
+		return true
+	return false
 
 
 func knockback(source: Node2D, amt: float):
@@ -100,11 +109,13 @@ func target_nearest_enemy():
 			max_dist = dist
 	
 	if _target:
-		print("Targeting: %s" % _target.name)
+		if DEBUG:
+			print("Targeting: %s" % _target.name)
 		target = _target
 		return true
 	else:
-		print("No hostile targets found")
+		if DEBUG:
+			print("No hostile targets found")
 		return false
 
 
@@ -118,4 +129,27 @@ func _flash_white():
 	modulate = Color(1,1,1,1)
 
 
+func _get_killed_id(what) -> String:
+	return "%s_killed" % what.type
+
+func _increment_killed(what) -> void:
+	var id = _get_killed_id(what)
+	if not has_meta(id):
+		set_meta(id, 0)
+	set_meta(id, get_meta(id) + 1)
+
+func _num_killed(what) -> int:
+	var id = _get_killed_id(what)
+	if not has_meta(id):
+		return 0
+	return get_meta(id)
+
 ### Subroutines ###
+
+
+
+
+
+
+
+

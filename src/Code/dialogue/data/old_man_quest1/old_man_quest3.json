@@ -1,0 +1,10 @@
+{
+    "001" : {"name":"Player", "side":"left", "expression": "neutral", "text":"I did it!" },
+    "002" : {"name":"Player", "side":"left", "expression": "neutral", "text":"..." },
+    "003" : {"name":"Player", "side":"left", "expression": "neutral", "text":"What did I win?" },
+    "004" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"The experience! The acid burns! The triumph!" },
+    "005" : {"name":"Player", "side":"left", "expression": "neutral", "text":"......." },
+    "006" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"I'm kidding! I'm kidding. Here, how would you lik fifteen whole dollars?" },
+    "007" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Sold!" },
+    "008" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"Go buy yourself something nice, and then I've got another job for you." }
+}

@@ -36,11 +36,13 @@ func _process(delta):
 	
 	if is_colliding():
 		var col = get_collider() as Interactable
-		col.focused()
-		kb.set_meta("interactable", col)
+		if is_instance_valid(col):
+			col.focused()
+			kb.set_meta("interactable", col)
 	elif kb.has_meta("interactable"):
-		kb.get_meta("interactable").unfocused()
-		kb.set_meta("interactable", null)
+		if is_instance_valid(kb.get_meta("interactable")): # need a better sol...
+			kb.get_meta("interactable").unfocused()
+			kb.set_meta("interactable", null)
 		
 #		if not talkin:
 #			col.start_interaction()

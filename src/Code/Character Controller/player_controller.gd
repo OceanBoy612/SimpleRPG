@@ -35,7 +35,7 @@ func _process(delta):
 	# Check for interaction or attacking
 	if interact_pressed and state == MOVE and kb.has_meta("interactable"):
 		var inter : Interactable = kb.get_meta("interactable")
-		inter.start_interaction()
+		inter.start_interaction(kb)
 
 func _physics_process(delta):
 	if not kb:

@@ -1,0 +1,8 @@
+{
+    "001" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"How's it going kiddo?" },
+    "002" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Uhh..." },
+    "003" : {"name":"Player", "side":"left", "expression": "neutral", "text":"There are a lot of them, for sure." },
+    "004" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"You need some-" },
+    "005" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Nope! I got it." },
+    "006" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"Well, it looks like there's only a couple more! Keep it up!" }
+}

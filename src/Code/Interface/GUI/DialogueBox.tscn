@@ -103,6 +103,7 @@ rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
+flip_h = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

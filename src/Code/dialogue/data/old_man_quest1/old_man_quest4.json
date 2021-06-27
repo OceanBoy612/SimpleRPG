@@ -1,0 +1,4 @@
+{
+    "001" : {"name":"OldMan", "side":"right", "expression": "neutral", "text":"Go buy something! This is all the content in the game right now, but come back once you figure out how to spend that hard earned cash." },
+    "002" : {"name":"Player", "side":"left", "expression": "neutral", "text":"Sure! I bet placeholder has some sweet new placeholders!" },
+}
