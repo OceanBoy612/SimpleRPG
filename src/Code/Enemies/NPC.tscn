@@ -131,7 +131,6 @@ playing = true
 collision_layer = 0
 collision_mask = 6
 script = ExtResource( 4 )
-DEBUG = true
 radius = 140
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
@@ -143,17 +142,14 @@ script = ExtResource( 1 )
 
 [node name="Wait" type="Node2D" parent="StateMachine"]
 script = ExtResource( 2 )
-DEBUG = true
 
 [node name="Wander" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
-DEBUG = true
 max_distance = 88
 curve = SubResource( 4 )
 
 [node name="Steering" type="Node2D" parent="StateMachine"]
 script = ExtResource( 6 )
-DEBUG = true
 attack_range = 50.0
 hostile_curve = SubResource( 5 )
 ally_curve = SubResource( 6 )
