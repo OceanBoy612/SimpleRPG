@@ -55,27 +55,31 @@ visible = false
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 2
+frame = 1
 playing = true
 flip_h = true
 
 [node name="Interactable" parent="Interactables/librarian" instance=ExtResource( 3 )]
+position = Vector2( 0, 18.4055 )
 vanish_on_interaction = true
 interactions = [ ExtResource( 14 ), ExtResource( 10 ) ]
 
 [node name="Interactable2" parent="Interactables/librarian" instance=ExtResource( 3 )]
+position = Vector2( 0, 18.4055 )
 disable = true
 enable_on_complete = NodePath("../Interactable")
 interactions = [ ExtResource( 12 ) ]
 disable_on_completed = ExtResource( 10 )
 
 [node name="Interactable3" parent="Interactables/librarian" instance=ExtResource( 3 )]
+position = Vector2( 0, 18.4055 )
 disable = true
 vanish_on_interaction = true
 interactions = [ ExtResource( 11 ) ]
 enable_on_completed = ExtResource( 10 )
 
 [node name="Interactable4" parent="Interactables/librarian" instance=ExtResource( 3 )]
+position = Vector2( 0, 18.4055 )
 disable = true
 enable_on_complete = NodePath("../Interactable3")
 interactions = [ ExtResource( 13 ) ]

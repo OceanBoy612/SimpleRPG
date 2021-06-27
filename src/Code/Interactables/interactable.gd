@@ -15,7 +15,7 @@ export(Resource) var disable_on_completed # a quest hopefully...
 export(Resource) var enable_on_completed
 
 
-onready var dialogue_balloon: Sprite = $Balloon
+onready var dialogue_balloon: AnimatedSprite = $Balloon
 
 
 var local_map# : LocalMap
