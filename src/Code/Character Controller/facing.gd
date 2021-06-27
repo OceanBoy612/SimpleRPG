@@ -9,6 +9,7 @@ rotation is a normalized Vector2 pointing in the direction of movement
 """
 
 onready var kb = get_parent() as KinematicBody2D
+onready var weapon = $Weapon
 var talkin = false
 
 func _ready():
@@ -23,6 +24,12 @@ func _process(delta):
 		return
 	
 	look_at(get_global_mouse_position())
+	
+	var lookDirection = Vector2(cos(self.rotation), sin(self.rotation)).normalized()
+	if lookDirection.x < 0:
+		weapon.scale.y = -1
+	else:
+		weapon.scale.y = 1
 	
 #	if kb.has_meta("rotation"):
 #		rotation = kb.get_meta("rotation")

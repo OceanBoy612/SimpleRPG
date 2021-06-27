@@ -14,7 +14,7 @@ export(float) var attack_time = 0.1
 
 
 onready var path = $Path2D/PathFollow2D
-onready var shape = $Path2D/PathFollow2D/AttackArea/CollisionShape2D
+onready var shape = $Path2D/PathFollow2D/WeaponSprite/AttackArea/CollisionShape2D
 
 
 var start_pt = 0
@@ -45,6 +45,7 @@ func tween_finished():
 	emit_signal("attack_finished")
 	attacking = false
 	shape.disabled = true
+	path.offset = 0
 
 
 #func _on_AttackArea_body_entered(body):
