@@ -96,7 +96,7 @@ _data = [ Vector2( 0, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 
 
 [sub_resource type="CircleShape2D" id=8]
 resource_local_to_scene = true
-radius = 16.0
+radius = 0.01
 
 [node name="NPC" type="KinematicBody2D"]
 position = Vector2( 161, 96 )
@@ -107,7 +107,6 @@ __meta__ = {
 "nearby": [  ],
 "spawn_point": Vector2( 161, 96 )
 }
-DEBUG = true
 type = "Frim"
 faction = 4
 hostile_factions = 1
@@ -167,6 +166,7 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource( 8 )
+disabled = true
 
 [connection signal="entity_entered" from="DetectionRadius" to="StateMachine" method="_on_DetectionRadius_entity_entered"]
 [connection signal="tween_all_completed" from="StateMachine/Attack/Tween" to="StateMachine/Attack" method="_on_Tween_tween_all_completed"]

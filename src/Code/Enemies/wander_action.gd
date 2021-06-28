@@ -1,5 +1,5 @@
 #tool
-extends State
+extends EntityState
 #class_name SteeringBehavior
 
 """

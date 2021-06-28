@@ -1,4 +1,4 @@
-extends State
+extends EntityState
 
 
 var wait_time = 1

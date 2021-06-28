@@ -8,12 +8,6 @@ signal killed(what)
 
 export(String) var type # the name of the entity (player, frim etc...)
 
-enum Factions { 
-	Player = 1,
-	Neutral = 2,
-	Faction1 = 4,
-	Faction2 = 8,
-}
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var faction
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var hostile_factions
 
@@ -78,7 +72,10 @@ func damage_entity(body: PhysicsBody2D):
 # Returns true if the entity dies, false otherwise
 func damage(amt) -> bool:
 	health -= amt
-	_flash_white()
+	
+	if health > 0:
+		_flash_white()
+	
 	if health <= 0:
 		emit_signal("died")
 		if name == "Player":
@@ -86,6 +83,7 @@ func damage(amt) -> bool:
 		else:
 			queue_free()
 		return true
+	
 	return false
 
 

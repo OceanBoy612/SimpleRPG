@@ -1,4 +1,4 @@
-extends State
+extends CombatEntityState
 
 
 """
@@ -33,11 +33,9 @@ func on_ready():
 
 
 func _physics_process(delta):
-	pass
-	var ckb = kb as CombatEntity
-	var can_attack = ckb.last_attack_time >= ckb.attack_cooldown
+	var can_attack = kb.last_attack_time >= kb.attack_cooldown
 	
-	if not ckb.target or not is_instance_valid(ckb.target):
+	if not kb.target or not is_instance_valid(kb.target):
 		emit_signal("completed")
 		print("Bubbly")
 		return
@@ -47,7 +45,7 @@ func _physics_process(delta):
 	move_vectors = []
 	
 	# for each nearby element
-	for ele in ckb.nearby + [ckb.target]:
+	for ele in kb.nearby + [kb.target]:
 		
 		# create a vector pointing at and away from the element
 		var between = ele.global_position - global_position
@@ -72,7 +70,7 @@ func _physics_process(delta):
 	kb.move_dir = super_vector.rotated(ang * 1.1).normalized()
 	
 	# stop steering if in range for attack
-	var in_range = ckb.global_position.distance_to(ckb.target.global_position) < attack_range
+	var in_range = kb.global_position.distance_to(kb.target.global_position) < attack_range
 	if in_range and can_attack:
 		emit_signal("completed")
 	
@@ -92,13 +90,11 @@ func map(ele, attra: Vector2, type: String) -> Vector2:
 ###
 
 func get_type(ele) -> String:
-	var c_kb: CombatEntity = kb as CombatEntity
-	
-	if ele == c_kb.target:
+	if ele == kb.target:
 		return "target"
-	elif ele.faction & c_kb.hostile_factions:
+	elif ele.faction & kb.hostile_factions:
 		return "enemy"
-	elif ele.faction & c_kb.faction:
+	elif ele.faction & kb.faction:
 		return "ally"
 	else:
 		return "neutral"

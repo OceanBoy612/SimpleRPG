@@ -25,7 +25,7 @@ old way:
 """
 
 onready var kb = get_parent() as Entity
-var state: State
+var state: BaseState
 export var DEBUG = false
 #onready var spawn_pos : Vector2 = kb.global_position
 
@@ -86,7 +86,7 @@ func _state_completed():
 
 
 func _start_random_state():
-	state = get_child(randi() % get_child_count()) as State
+	state = get_child(randi() % get_child_count()) as BaseState
 	_start_state()
 
 

@@ -55,7 +55,6 @@ visible = false
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 1
 playing = true
 flip_h = true
 
@@ -87,30 +86,26 @@ interactions = [ ExtResource( 13 ) ]
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 236.019, 153.704 )
 DEBUG = false
+knockback_amount = 1500.0
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="NPC" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 11.9948, -28.4842 )
-DEBUG = false
 health = 3.0
 
 [node name="NPC2" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( -14.8195, 90.6022 )
-DEBUG = false
 health = 3.0
 
 [node name="NPC3" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( -23.9592, 29.9537 )
-DEBUG = false
 health = 3.0
 
 [node name="NPC4" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 46.0825, 32.5215 )
-DEBUG = false
 health = 3.0
 
 [node name="NPC5" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 85.0158, -34.737 )
-DEBUG = false
 health = 3.0

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Code/dialogue/Conversation.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+[sub_resource type="Resource" id=2]
+resource_name = "Sentence"
+script = SubResource( 1 )
+speaker = ""
+side = ""
+expression = ""
+text = ""
+
+[resource]
+script = ExtResource( 1 )
+add_new_line = false
+sentences = [ SubResource( 2 ) ]
