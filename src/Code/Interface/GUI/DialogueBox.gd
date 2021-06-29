@@ -9,6 +9,7 @@ onready var dialogue_player = $DialoguePlayer as DialoguePlayer
 
 onready var name_label = $Panel/MC/Rows/Name as Label
 onready var text_label = $Panel/MC/Rows/Columns/Text as Label
+onready var click_next = $Panel/MC/Rows/Columns/Text/ClickNext as Control
 
 #onready var button_next = $Panel/MC/Rows/Columns/ButtonNext as Button
 #onready var button_finished = $Panel/MC/Rows/Columns/ButtonFinished as Button
@@ -63,7 +64,10 @@ func start_type_write():
 	var duration = text_label.text.length() / chars_per_second
 	tween.interpolate_property(text_label, "percent_visible",
 			0, 1, duration, Tween.TRANS_LINEAR)
+	tween.interpolate_property(click_next, "visible",
+			false, true, 0, Tween.TRANS_LINEAR, Tween.EASE_IN, duration)
 	tween.start()
+	click_next.visible = false
 
 
 
@@ -74,6 +78,7 @@ func _on_DialogueBox_gui_input(event):
 	if cond1 or cond2:
 		if tween.is_active():
 			tween.seek(tween.get_runtime()) # finish the tween
+			click_next.visible = true
 		elif dialogue_finished:
 			emit_signal("dialogue_ended")
 			hide()
