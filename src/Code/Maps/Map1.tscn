@@ -66,12 +66,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Interactables" type="Node2D" parent="YSort"]
+[node name="Interactables" type="YSort" parent="YSort"]
 
 [node name="librarian" type="AnimatedSprite" parent="YSort/Interactables"]
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
+frame = 1
 playing = true
 flip_h = true
 
@@ -105,7 +106,7 @@ position = Vector2( 236.019, 153.704 )
 DEBUG = false
 knockback_amount = 1500.0
 
-[node name="Enemies" type="Node2D" parent="YSort"]
+[node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="NPC" parent="YSort/Enemies" instance=ExtResource( 9 )]
 position = Vector2( 11.9948, -28.4842 )
