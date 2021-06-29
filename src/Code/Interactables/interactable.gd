@@ -42,12 +42,12 @@ func _ready():
 
 
 func enable():
-	print("enabling ", name)
+#	print("enabling ", name)
 	$CollisionShape2D.set_deferred("disabled", false)
 
 
 func disable():
-	print("disabling ", name)
+#	print("disabling ", name)
 	$CollisionShape2D.set_deferred("disabled", true)
 
 

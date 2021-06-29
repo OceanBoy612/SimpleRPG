@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Code/Character Controller/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=2]
@@ -7,9 +7,10 @@
 [ext_resource path="res://Art/SpriteFrame Resources/Sword_sprite_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://Code/Entities/CombatEntity.gd" type="Script" id=6]
 [ext_resource path="res://Code/Character Controller/Weapon/weapon.gd" type="Script" id=7]
+[ext_resource path="res://Code/Items/ItemAttractor.tscn" type="PackedScene" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.6673, 8.34526 )
+[sub_resource type="CircleShape2D" id=20]
+radius = 4.62669
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle Down"
@@ -149,7 +150,8 @@ hostile_factions = 12
 attack_area_path = NodePath("Facing/Weapon/Path2D/PathFollow2D/WeaponSprite/AttackArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 0, 4.375 )
+shape = SubResource( 20 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Idle Down" = SubResource( 2 )
@@ -190,7 +192,7 @@ curve = SubResource( 18 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
 position = Vector2( -43.071, 0.28064 )
-rotation = 0.0574947
+rotation = -0.0653785
 loop = false
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
@@ -215,3 +217,5 @@ animation = "Idle Down"
 frame = 1
 script = ExtResource( 4 )
 DEBUG = true
+
+[node name="ItemAttractor" parent="." instance=ExtResource( 8 )]

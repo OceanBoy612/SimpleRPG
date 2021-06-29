@@ -98,6 +98,11 @@ _global_script_classes=[ {
 "class": "UtilityStateMachine",
 "language": "GDScript",
 "path": "res://Code/Enemies/States.gd"
+}, {
+"base": "Entity",
+"class": "WorldItem",
+"language": "GDScript",
+"path": "res://Code/Items/WorldItem.gd"
 } ]
 _global_script_class_icons={
 "BaseState": "",
@@ -117,7 +122,8 @@ _global_script_class_icons={
 "QuestInteraction": "",
 "Sentence": "",
 "SmartSprite": "",
-"UtilityStateMachine": ""
+"UtilityStateMachine": "",
+"WorldItem": ""
 }
 
 [application]
@@ -236,6 +242,7 @@ attack={
 2d_physics/layer_4="PlayerAttack"
 2d_physics/layer_5="EnemyAttack"
 2d_physics/layer_6="InteractableObject"
+2d_physics/layer_7="Items"
 
 [physics]
 

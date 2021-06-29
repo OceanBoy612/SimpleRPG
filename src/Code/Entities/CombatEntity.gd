@@ -7,6 +7,10 @@ signal killed(what) # when i kill something else
 signal health_changed(new_health, max_health)
 #signal mana_changed(new_mana, max_mana)
 
+## REMOVE THIS Later? ##
+signal coin_collected
+## REMOVE THIS Later? ##
+
 
 export(String) var type # the name of the entity (player, frim etc...)
 
