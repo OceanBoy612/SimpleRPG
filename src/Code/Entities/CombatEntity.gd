@@ -2,8 +2,10 @@ extends Entity
 class_name CombatEntity
 
 
-signal died
-signal killed(what)
+signal died # when I die
+signal killed(what) # when i kill something else
+signal health_changed(new_health, max_health)
+#signal mana_changed(new_mana, max_mana)
 
 
 export(String) var type # the name of the entity (player, frim etc...)
@@ -15,8 +17,10 @@ export(float) var attack_cooldown = 1.0
 export(float) var attack_damage = 1.0
 export(NodePath) var attack_area_path
 
-export var health: float = 10
-
+export var max_health: float = 10
+var health: float = max_health
+#export var max_mana: float = 10
+#var mana: float = max_mana
 
 var target = null # : CombatEntity <- except cyclic issue
 
@@ -72,6 +76,7 @@ func damage_entity(body: PhysicsBody2D):
 # Returns true if the entity dies, false otherwise
 func damage(amt) -> bool:
 	health -= amt
+	emit_signal("health_changed", health, max_health)
 	
 	if health > 0:
 		_flash_white()

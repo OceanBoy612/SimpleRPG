@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Art/~Sprites/resource_bars/hp_bar_prog.png" type="Texture" id=1]
+[ext_resource path="res://Art/~Sprites/resource_bars/hp_bar_back.png" type="Texture" id=2]
+[ext_resource path="res://Art/~Sprites/resource_bars/mana_bar_back.png" type="Texture" id=3]
+[ext_resource path="res://Art/~Sprites/resource_bars/mana_bar_prog.png" type="Texture" id=4]
+[ext_resource path="res://Code/GUI/PlayerGUI.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 2.4, 1.6 ), Vector2( 0.25, 1.5 ), Vector2( -0.75, 0.5 ), Vector2( -0.75, -0.25 ), Vector2( 0, 0 ) ]
+}
+
+[node name="PlayerGUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health_bg" type="TextureRect" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 67.0
+margin_bottom = 24.333
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bar" type="TextureProgress" parent="health_bg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+value = 0.88
+texture_progress = ExtResource( 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mana_bg" type="TextureRect" parent="."]
+visible = false
+margin_left = 3.0
+margin_top = 22.5916
+margin_right = 67.0
+margin_bottom = 43.9246
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bar" type="TextureProgress" parent="mana_bg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+value = 0.88
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.5
+anims/shake = SubResource( 1 )
