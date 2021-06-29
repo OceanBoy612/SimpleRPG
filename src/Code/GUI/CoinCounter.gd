@@ -2,17 +2,17 @@ extends Control
 
 
 export(NodePath) var nodePath
+export(String) var item_id
 
 
 func _ready():
-	var n : Node2D = get_node_or_null(nodePath)
+	var n : CombatEntity = get_node_or_null(nodePath)
 	if n:
-		if n.has_signal("coin_collected"):
-			n.connect("coin_collected", self, "on_coin_collected")
-		else:
-			print("REEEEEEEEEEEEEEEEE")
+		# need to use _inventory cuz godot is stupid :(
+		n._inventory.connect("inventory_changed", self, "inv_changed")
+		inv_changed(n._inventory)
 
 
-func on_coin_collected():
-	print("a coin has been collected")
-	$Label.text = str(int($Label.text) + 1)
+func inv_changed(inv: Inventory):
+	var amt = inv.get_amount(item_id)
+	$TextureRect/Label.text = str(amt)

@@ -127,7 +127,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Panel/MC/Rows/Columns/Text/ClickNext"]
 frames = SubResource( 3 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="PortraitRight" type="TextureRect" parent="Panel/MC/Rows/Columns"]

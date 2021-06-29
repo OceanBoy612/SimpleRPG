@@ -7,6 +7,8 @@ Attracts items that get within the area
 
 #signal item_picked_up(item)
 
+onready var kb: CombatEntity = get_parent() as CombatEntity
+
 export var pickup_range = 30 setget set_pickup_range
 var _pickup_range_squared = pickup_range*pickup_range
 var max_len = 80
@@ -18,21 +20,21 @@ var to_remove = []
 
 func _on_ItemAttractor_body_entered(body):
 	# body should be an item
-	body = body as Entity
+	body = body as WorldItem
 	
 	if body:
 		items_in_range.append(body)
 
 
 func _physics_process(delta):
-	for item in items_in_range:
-		
-		attract(item)
-		if item.global_position.distance_squared_to(global_position) < _pickup_range_squared:
-			to_remove.append(item)
-			get_parent().emit_signal("coin_collected")
-#			emit_signal("item_picked_up", item)
-			item.queue_free()
+	for i in items_in_range:
+		var world_item = i as WorldItem
+		attract(world_item)
+		if world_item.global_position.distance_squared_to(global_position) < _pickup_range_squared:
+			to_remove.append(world_item)
+#			kb.emit_signal("coin_collected")
+			kb.inventory.add_item(world_item.item)
+			world_item.queue_free()
 	
 	for item in to_remove:
 		items_in_range.erase(item)

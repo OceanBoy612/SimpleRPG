@@ -74,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/dialogue/Interaction.gd"
 }, {
+"base": "Resource",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Code/Items/Inventory.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Code/Items/Item.gd"
+}, {
 "base": "Node",
 "class": "LocalMap",
 "language": "GDScript",
@@ -118,6 +128,8 @@ _global_script_class_icons={
 "Helpers": "",
 "Interactable": "",
 "Interaction": "",
+"Inventory": "",
+"Item": "",
 "LocalMap": "",
 "QuestInteraction": "",
 "Sentence": "",

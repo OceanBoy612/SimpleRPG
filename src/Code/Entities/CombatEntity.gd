@@ -14,6 +14,9 @@ signal coin_collected
 
 export(String) var type # the name of the entity (player, frim etc...)
 
+export(Resource) var _inventory
+onready var inventory: Inventory = _inventory as Inventory
+
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var faction
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var hostile_factions
 

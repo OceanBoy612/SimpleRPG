@@ -3,7 +3,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Code/GUI/CoinCounter.gd" type="Script" id=2]
 
-[node name="CoinCounter" type="Control"]
+[node name="PotionCounter" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -12,14 +12,19 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.60712
-margin_top = -38.1913
-margin_right = 39.6071
-margin_bottom = -5.19131
+margin_left = -40.4915
+margin_top = -38.9932
+margin_right = -7.49152
+margin_bottom = -5.99326
 texture = ExtResource( 1 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="TextureRect"]
 margin_left = 26.2336
