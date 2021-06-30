@@ -94,6 +94,16 @@ func get_amount(item_id: String) -> int:
 	return items[ind].amount
 
 
+func change_amount(item_id: String, amt: int) -> void:
+	var ind = get_index_id(item_id)
+	assert(ind != -1, "tried to change the amount of a nonexistant item")
+	assert(items[ind].amount + amt >= 0, "tried to change amount of item to below 0")
+	items[ind].amount += amt
+	if items[ind].amount == 0:
+		remove_item(items[ind])
+	emit_signal("inventory_changed", self)
+
+
 ### Name based inputs
 
 

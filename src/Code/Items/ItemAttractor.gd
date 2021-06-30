@@ -23,7 +23,8 @@ func _on_ItemAttractor_body_entered(body):
 	body = body as WorldItem
 	
 	if body:
-		items_in_range.append(body)
+		if not body in items_in_range:
+			items_in_range.append(body)
 
 
 func _physics_process(delta):
@@ -34,6 +35,7 @@ func _physics_process(delta):
 			to_remove.append(world_item)
 #			kb.emit_signal("coin_collected")
 			kb.inventory.add_item(world_item.item)
+			print("adding item", items_in_range)
 			world_item.queue_free()
 	
 	for item in to_remove:

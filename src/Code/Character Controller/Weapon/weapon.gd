@@ -15,7 +15,7 @@ export(float) var attack_time = 0.1
 
 onready var path = $Path2D/PathFollow2D
 onready var shape = $Path2D/PathFollow2D/WeaponSprite/AttackArea/CollisionShape2D
-
+onready var sprite = $Path2D/PathFollow2D/WeaponSprite as AnimatedSprite
 
 var start_pt = 0
 var end_pt = 0.99 # glitches at 1.0
@@ -46,6 +46,10 @@ func tween_finished():
 	attacking = false
 	shape.disabled = true
 	path.offset = 0
+
+
+func switch_sword(sword_name: String) -> void:
+	sprite.play(sword_name)
 
 
 #func _on_AttackArea_body_entered(body):

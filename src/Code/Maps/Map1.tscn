@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Code/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Code/Items/Item.gd" type="Script" id=18]
 [ext_resource path="res://Code/Items/Items/HealthPotion.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Code/GUI/PotionCounter.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Art/~Sprites/Broadsword.png" type="Texture" id=21]
+[ext_resource path="res://Code/Interactables/interactions/damage_upgrade.tres" type="Resource" id=22]
 
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
@@ -169,6 +171,15 @@ position = Vector2( 0, 18.4055 )
 disable = true
 enable_on_complete = NodePath("../Interactable3")
 interactions = [ ExtResource( 13 ) ]
+
+[node name="Interactable" parent="YSort/Interactables" instance=ExtResource( 3 )]
+position = Vector2( 233.085, 229.306 )
+vanish_on_interaction = true
+interactions = [ ExtResource( 22 ) ]
+
+[node name="Sprite" type="Sprite" parent="YSort/Interactables/Interactable"]
+position = Vector2( 0, -16.379 )
+texture = ExtResource( 21 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 236.019, 153.704 )

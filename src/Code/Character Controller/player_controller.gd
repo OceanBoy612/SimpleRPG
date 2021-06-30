@@ -27,6 +27,15 @@ var dash_dir = ""
 var dash_axis
 
 
+func _input(event):
+	if event.is_action_pressed("drink_potion"):
+		if kb.health != kb.max_health:
+			var amt = kb.inventory.get_amount("Health Potion")
+			if amt > 0:
+				kb.heal(5)
+				kb.inventory.change_amount("Health Potion", -1)
+
+
 func _process(delta):
 	# buffer acceptPressed
 #	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
@@ -35,7 +44,8 @@ func _process(delta):
 	# Check for interaction or attacking
 	if interact_pressed and state == MOVE and kb.has_meta("interactable"):
 		var inter : Interactable = kb.get_meta("interactable")
-		inter.start_interaction(kb)
+		if is_instance_valid(inter):
+			inter.start_interaction(kb)
 
 func _physics_process(delta):
 	if not kb:

@@ -80,9 +80,13 @@ func damage_entity(body: PhysicsBody2D):
 			emit_signal("killed", body)
 
 
+func heal(amt) -> bool:
+	return damage(-amt)
+
 # Returns true if the entity dies, false otherwise
 func damage(amt) -> bool:
 	health -= amt
+	health = clamp(health, 0, max_health)
 	emit_signal("health_changed", health, max_health)
 	
 	if health > 0:
