@@ -1,5 +1,5 @@
 tool
-extends Interaction
+extends Resource
 class_name Conversation
 
 """
@@ -19,7 +19,7 @@ func add_line(v):
 
 ###
 
-func interact(local_map) -> void:
-	yield(local_map.play_conversation(self), "completed")
-	emit_signal("finished")
+#func interact(local_map) -> void:
+#	yield(local_map.play_conversation(self), "completed")
+#	emit_signal("finished")
 

@@ -35,8 +35,9 @@ func _process(delta):
 #		rotation = kb.get_meta("rotation")
 	
 	if is_colliding():
-		var col = get_collider() as Interactable
-		if is_instance_valid(col):
+#		var col = get_collider() as Interactable
+		var col = get_collider()
+		if is_instance_valid(col) and col.has_method("focused"):
 			col.focused()
 			kb.set_meta("interactable", col)
 	elif kb.has_meta("interactable"):

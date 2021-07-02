@@ -34,18 +34,24 @@ func _input(event):
 			if amt > 0:
 				kb.heal(5)
 				kb.inventory.change_amount("Health Potion", -1)
+	if event.is_action_pressed("interact"):
+		if state == MOVE and kb.has_meta("interactable"):
+			var inter = kb.get_meta("interactable")
+			if is_instance_valid(inter) and inter.has_method("start_interaction"):
+				inter.start_interaction(kb)
 
 
-func _process(delta):
-	# buffer acceptPressed
-#	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
-#	var acceptPressed = time_since_accept < accept_buffer_time
-	var interact_pressed = Input.is_action_just_pressed("interact")
-	# Check for interaction or attacking
-	if interact_pressed and state == MOVE and kb.has_meta("interactable"):
-		var inter : Interactable = kb.get_meta("interactable")
-		if is_instance_valid(inter):
-			inter.start_interaction(kb)
+#func _process(delta):
+#	# buffer acceptPressed
+##	time_since_accept = 0 if Input.is_action_just_pressed("ui_accept") else time_since_accept + delta
+##	var acceptPressed = time_since_accept < accept_buffer_time
+#	var interact_pressed = Input.is_action_just_pressed("interact")
+#	# Check for interaction or attacking
+#	if interact_pressed and state == MOVE and kb.has_meta("interactable"):
+##		var inter : Interactable = kb.get_meta("interactable")
+#		var inter : InteractableV2 = kb.get_meta("interactable")
+#		if is_instance_valid(inter):
+#			inter.start_interaction(kb)
 
 func _physics_process(delta):
 	if not kb:

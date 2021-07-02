@@ -10,7 +10,8 @@ onready var dialogue_box = $Interface/DialogueBox
 func _ready() -> void:
 	assert(dialogue_box)
 	for action in get_tree().get_nodes_in_group("interactable"):
-		(action as Interactable).initialize(self)
+#		(action as Interactable).initialize(self)
+		(action).initialize(self)
 
 
 func play_dialogue(data):
