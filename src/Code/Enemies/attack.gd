@@ -16,7 +16,7 @@ var vel2 : float
 
 var dash_speed = 125
 var jump_duration = 0.4
-var jump_height = 300
+var jump_height = 24#300
 var attack_delay = 0.6
 
 
@@ -28,7 +28,9 @@ func on_enable():
 	
 #	$Tween.interpolate_property(self, "vel",  dash_speed, 0, jump_duration, Tween.TRANS_LINEAR, Tween.EASE_IN, attack_delay)
 	$Tween.interpolate_property(self, "vel",  dash_speed, dash_speed, jump_duration, Tween.TRANS_LINEAR, Tween.EASE_IN, attack_delay)
-	$Tween.interpolate_property(self, "vel2", jump_height, -jump_height, jump_duration, Tween.TRANS_LINEAR, Tween.EASE_IN, attack_delay)
+#	$Tween.interpolate_property(self, "vel2", jump_height, -jump_height, jump_duration, Tween.TRANS_LINEAR, Tween.EASE_IN, attack_delay)
+	$Tween.interpolate_property(anim, "position", Vector2(), Vector2(0, -jump_height), jump_duration/2, Tween.TRANS_CIRC, Tween.EASE_OUT, attack_delay)
+	$Tween.interpolate_property(anim, "position", Vector2(0, -jump_height), Vector2(), jump_duration/2, Tween.TRANS_CIRC, Tween.EASE_IN, attack_delay+jump_duration/2)
 	$Tween.start()
 	dir = (kb.target.global_position - global_position).normalized()
 	
