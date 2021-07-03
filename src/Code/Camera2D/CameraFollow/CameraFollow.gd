@@ -29,7 +29,7 @@ export (NodePath) var target  # Assign the node this camera will follow.
 onready var cam : Camera2D = get_parent()
 
 
-func _process(delta):
+func _process(_delta):
 	if Engine.editor_hint: # don't run in the editor
 		return
 	

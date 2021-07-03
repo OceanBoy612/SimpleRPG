@@ -24,7 +24,7 @@ old way:
 
 """
 
-onready var kb = get_parent() as Entity
+onready var kb = get_parent() as CombatEntity
 var state: BaseState
 export var DEBUG = false
 #onready var spawn_pos : Vector2 = kb.global_position
@@ -68,7 +68,7 @@ func _state_completed():
 	if state.name == "Wait":
 		state = $Wander
 	elif state.name == "Wander" or state.name == "Attack":
-		if (kb as CombatEntity).target_nearest_enemy():
+		if kb.target_nearest_enemy():
 			state = $Steering
 		else:
 			state = $Wait
@@ -102,7 +102,7 @@ func _start_state(_connect=true):
 		print("%s started: %s" % [kb.name, state.name])
 
 
-func _is_entity_hostile(entity) -> bool:
+func _is_entity_hostile(_entity) -> bool:
 	return true
 
 ### Helpers ###

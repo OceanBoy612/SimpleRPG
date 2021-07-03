@@ -42,7 +42,7 @@ func _on_DetectionRadius_body_exited(body):
 ### DEBUG
 
 
-func _process(delta):
+func _process(_delta):
 	update()
 
 var default_font: Font = Control.new().get_font("font") # just get the default font

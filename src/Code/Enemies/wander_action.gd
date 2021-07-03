@@ -33,7 +33,7 @@ func on_enable():
 	kb.move_dir = Vector2(1,0)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Engine.editor_hint:
 		set_physics_process(false)
 		return
@@ -48,7 +48,7 @@ func _physics_process(delta):
 	# get random direction
 	var ang = noise.get_noise_1d(_place) # [-0.5, 0.5]
 	_place += 0.24
-	var scaled_ang = ( (ang+0.0) ) * PI * 2 # [-PI, PI]
+#	var scaled_ang = ( (ang+0.0) ) * PI * 2 # [-PI, PI]
 	
 #	kb.move_dir = kb.move_dir.linear_interpolate(home_dir, home_pull).normalized()
 #	var new_angle = lerp(kb.move_dir.angle(), home_dir.angle(), home_pull)

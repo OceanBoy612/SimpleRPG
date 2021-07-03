@@ -32,7 +32,7 @@ func on_ready():
 #	kb.target_nearest_enemy()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var can_attack = kb.last_attack_time >= kb.attack_cooldown
 	
 	if not kb.target or not is_instance_valid(kb.target):

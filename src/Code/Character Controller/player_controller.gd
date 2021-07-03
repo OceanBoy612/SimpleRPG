@@ -53,7 +53,7 @@ func _input(event):
 #		if is_instance_valid(inter):
 #			inter.start_interaction(kb)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not kb:
 		print("Character controller requires a KinematicBody2D as a parent")
 		return

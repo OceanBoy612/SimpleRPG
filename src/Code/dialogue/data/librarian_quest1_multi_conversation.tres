@@ -32,8 +32,8 @@ sentences = [ SubResource( 1 ), SubResource( 2 ) ]
 resource_name = "0"
 script = ExtResource( 2 )
 trigger = "on-ready"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 3 )
 quest = ExtResource( 5 )
 
@@ -63,8 +63,8 @@ sentences = [ SubResource( 5 ), SubResource( 6 ) ]
 resource_name = "1"
 script = ExtResource( 2 )
 trigger = "on-previous"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 7 )
 
 [sub_resource type="Resource" id=9]
@@ -93,8 +93,8 @@ sentences = [ SubResource( 9 ), SubResource( 10 ) ]
 resource_name = "2"
 script = ExtResource( 2 )
 trigger = "on-quest"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 11 )
 quest = ExtResource( 5 )
 

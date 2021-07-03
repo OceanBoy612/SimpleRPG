@@ -12,7 +12,7 @@ onready var item: Item = _item as Item
 #	pass
 
 
-func on_physics_process(delta):
+func on_physics_process(_delta):
 	# decay speed
 	if speed > 1:
 		speed *= 0.9

@@ -17,10 +17,11 @@ func _ready() -> void:
 func play_dialogue(data):
 	dialogue_box.start(data)
 	yield(dialogue_box, "dialogue_ended")
+	emit_signal("dialogue_finished")
 
 
-func play_conversation(conversation: Conversation):
-#	dialogue_box.start(conversation)
-#	yield(dialogue_box, "dialogue_ended")
-	assert(false, "UNIMPLEMENTED ERROR")
-	pass
+#func play_conversation(conversation: Conversation):
+##	dialogue_box.start(conversation)
+##	yield(dialogue_box, "dialogue_ended")
+#	assert(false, "UNIMPLEMENTED ERROR")
+#	pass

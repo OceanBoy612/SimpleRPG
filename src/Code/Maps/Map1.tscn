@@ -80,8 +80,8 @@ kill_amt = 5
 resource_name = "0"
 script = ExtResource( 23 )
 trigger = "on-ready"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 14 )
 quest = SubResource( 15 )
 
@@ -143,8 +143,8 @@ sentences = [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResour
 resource_name = "1"
 script = ExtResource( 23 )
 trigger = "on-previous"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 28 )
 
 [sub_resource type="Resource" id=29]
@@ -221,8 +221,8 @@ sentences = [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResour
 resource_name = "2"
 script = ExtResource( 23 )
 trigger = "on-quest"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 37 )
 quest = SubResource( 15 )
 
@@ -260,8 +260,8 @@ sentences = [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ]
 resource_name = "3"
 script = ExtResource( 23 )
 trigger = "on-previous"
-create_conversation = false
-create_quest = false
+_create_conversation = false
+_create_quest = false
 conversation = SubResource( 41 )
 
 [sub_resource type="Resource" id=20]
@@ -395,7 +395,7 @@ __meta__ = {
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 2
+frame = 1
 playing = true
 flip_h = true
 

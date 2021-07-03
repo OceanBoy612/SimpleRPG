@@ -12,12 +12,14 @@ export(Array, Resource) var conv_triggers
 var index = 0
 
 
-func init(inter):
+func init(_inter):
 	for tr in conv_triggers:
 		tr.init(self)
 
 
 func create_convtrigger(v):
+	if v == false:
+		 return
 	var a = ConvTrigger.new()
 	a.resource_name = "%s" % conv_triggers.size()
 	conv_triggers.append(a)

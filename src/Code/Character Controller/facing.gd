@@ -18,7 +18,7 @@ func _ready():
 	collide_with_bodies = false # ????
 
 
-func _process(delta):
+func _process(_delta):
 	if not kb:
 		print("Facing requires a KinematicBody2D as a parent")
 		return

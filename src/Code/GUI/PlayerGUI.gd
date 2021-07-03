@@ -27,7 +27,7 @@ func on_health_changed(new_health, max_health) -> void:
 
 
 func on_mana_changed(new_mana, max_mana) -> void:
-	var new_perc = _tween_bar($mana_bg/bar, new_mana, max_mana)
+	var _new_perc = _tween_bar($mana_bg/bar, new_mana, max_mana)
 
 
 func _tween_bar(bar: TextureProgress, new_health: float, max_health: float) -> float:

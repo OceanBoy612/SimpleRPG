@@ -7,10 +7,6 @@ signal killed(what) # when i kill something else
 signal health_changed(new_health, max_health)
 #signal mana_changed(new_mana, max_mana)
 
-## REMOVE THIS Later? ##
-signal coin_collected
-## REMOVE THIS Later? ##
-
 
 export(String) var type # the name of the entity (player, frim etc...)
 
@@ -22,7 +18,8 @@ export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var hostile_fact
 
 export(float) var attack_cooldown = 1.0
 export(float) var attack_damage = 1.0
-export(NodePath) var attack_area_path
+#export(NodePath) var attack_area_path
+var attack_area: AttackArea # set elsewhere
 
 export var max_health: float = 10
 var health: float = max_health
@@ -41,10 +38,10 @@ export(float) var knockback_amount = 1000
 ### Overrides ###
 
 
-func _ready():
-	var area = get_node_or_null(attack_area_path)
-	if area:
-		area.connect("body_entered", self, "damage_entity")
+#func _ready():
+#	var area = get_node_or_null(attack_area_path)
+#	if area:
+#		area.connect("body_entered", self, "damage_entity")
 
 
 func on_physics_process(delta):

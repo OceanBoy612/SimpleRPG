@@ -63,6 +63,8 @@ func start_interaction(obj: Entity) -> void:
 ### Tool Helpers ###
 
 func create_conv(v):
+	if v == false:
+		 return
 	var a = MultiConversation.new()
 	a.resource_name = "MultiConversation"
 	multi_conv = a

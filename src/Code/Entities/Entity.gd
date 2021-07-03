@@ -21,7 +21,7 @@ func _physics_process(delta):
 	update()
 	on_physics_process(delta)
 	
-func on_physics_process(delta):
+func on_physics_process(_delta):
 	pass
 
 func _draw():

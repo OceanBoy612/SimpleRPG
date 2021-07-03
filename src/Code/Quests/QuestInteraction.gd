@@ -13,7 +13,7 @@ signal completed
 export var kill_type : String
 export var kill_amt : int
 
-func interact(local_map) -> void:
+func interact(_local_map) -> void:
 	# gives the quest to the player
 	print("Interacting with quest")
 #	if not target.has_meta("quests"):

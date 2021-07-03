@@ -15,6 +15,6 @@ func set_target(t: Entity):
 	target = t
 
 
-func interact(local_map) -> void:
+func interact(_local_map) -> void:
 	print("You forgot to override the interact method in an Interaction")
 	emit_signal("finished")

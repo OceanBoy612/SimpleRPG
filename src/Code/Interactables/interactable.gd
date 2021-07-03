@@ -4,7 +4,7 @@ class_name Interactable
 
 signal interaction_finished
 
-export var disable = false
+export var _disable = false
 export(NodePath) var enable_on_complete # some other interaction
 #export var auto_start_interaction := false
 export var vanish_on_interaction := false
@@ -23,7 +23,7 @@ var local_map# : LocalMap
 
 func _ready():
 	add_to_group("interactable")
-	if disable:
+	if _disable:
 		disable()
 	else:
 		enable()

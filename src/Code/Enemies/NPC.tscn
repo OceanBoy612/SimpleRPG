@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Code/Enemies/States.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemies/wait_action.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Code/Entities/CombatEntity.gd" type="Script" id=7]
 [ext_resource path="res://Art/SpriteFrame Resources/Frim_sprite_frames.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Art/~Sprites/shadow.png" type="Texture" id=9]
+[ext_resource path="res://Code/Enemies/AttackArea.gd" type="Script" id=10]
+[ext_resource path="res://Code/Enemies/DashAction.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -112,7 +114,6 @@ type = "Frim"
 faction = 4
 hostile_factions = 1
 attack_cooldown = 0.0
-attack_area_path = NodePath("AttackArea")
 
 [node name="shadow" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.584314 )
@@ -166,9 +167,16 @@ script = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="StateMachine/Attack"]
 
+[node name="Dash" type="Node2D" parent="StateMachine"]
+script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="StateMachine/Dash"]
+
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 6
+script = ExtResource( 10 )
+entityPath = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource( 8 )

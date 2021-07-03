@@ -27,7 +27,7 @@ func _on_ItemAttractor_body_entered(body):
 			items_in_range.append(body)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for i in items_in_range:
 		var world_item = i as WorldItem
 		attract(world_item)

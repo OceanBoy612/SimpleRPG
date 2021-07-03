@@ -17,7 +17,7 @@ signal inventory_reset
 
 
 export var id = "UNNAMED" setget set_inv_name
-export(bool) var add_item setget add_empty_item
+export(bool) var _add_item setget add_empty_item
 export(Array, Resource) var items setget set_item_infos, get_items
 
 
@@ -76,13 +76,13 @@ func get_index(item: Item):
 ### Name based inputs
 
 
-func get_index_id(id: String):
+func get_index_id(item_id: String):
 	# returns the index of a matching item, -1 otherwise
-	if id == "":
+	if item_id == "":
 		return -1
 	for i in range(items.size()):
 		var cur: Item = items[i]
-		if cur.id == id:
+		if cur.id == item_id:
 			return i
 	return -1
 
@@ -136,6 +136,8 @@ func _get_save_path():
 ### Tool sccript stuff ###
 
 func add_empty_item(v):
+	if v == false:
+		 return
 	var item = Item.new()
 	item.resource_name = "Item"
 	add_item(item)

@@ -3,13 +3,13 @@ extends Resource
 class_name ConvTrigger
 
 
-signal conversation_triggered
+#signal conversation_triggered
 
 
 export(String, "on-ready", "on-previous", "on-quest") var trigger = "on-ready"
 
-export(bool) var create_conversation setget create_conversation
-export(bool) var create_quest setget create_quest
+export(bool) var _create_conversation setget create_conversation
+export(bool) var _create_quest setget create_quest
 export(Resource) var conversation = null
 export(Resource) var quest = null
 
@@ -23,6 +23,8 @@ func create_quest(v):
 
 
 func create_conversation(v):
+	if v == false:
+		 return
 	var a = Conversation.new()
 	a.resource_name = "Conversation"
 	conversation = a
@@ -41,11 +43,11 @@ func init(mc):#: MultiConversation):
 		"on-quest":
 			assert(quest, "no quest found, on a on-quest conversation trigger")
 			quest = quest as QuestInteraction
-			quest.connect("completed", self, "trigger_quest", [mc, quest])
+			quest.connect("completed", self, "trigger_quest", [mc])
 			pass # connect to the quests completed method
 
 
-func trigger(mc) -> bool:#: MultiConversation):
+func _trigger(mc) -> bool:#: MultiConversation):
 	var self_i = mc.conv_triggers.find(self)
 #	assert(self_i - 1 == mc.index, "conversation triggered in the improper place")
 	print("Triggering: %s, %s" % [self_i, mc.index])
@@ -60,12 +62,12 @@ func trigger_ready(mc):
 	mc.disconnect("finished", self, "trigger_ready")
 
 func trigger_prev(mc):
-	if trigger(mc):
+	if _trigger(mc):
 		give_quest(mc)
 		mc.disconnect("finished", self, "trigger_prev")
 	
-func trigger_quest(mc, quest):
-	if trigger(mc):
+func trigger_quest(mc):
+	if _trigger(mc):
 		quest.disconnect("completed", self, "trigger_quest")
 
 	
