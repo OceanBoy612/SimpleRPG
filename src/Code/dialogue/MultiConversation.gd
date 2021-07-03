@@ -10,7 +10,7 @@ export(bool) var create_trigger setget create_convtrigger
 export(Array, Resource) var conv_triggers
 
 var index = 0
-
+var locked = false
 
 func init(_inter):
 	for tr in conv_triggers:
@@ -40,6 +40,7 @@ func interact(local_map) -> void:
 	yield(local_map.play_dialogue(dialogue), "completed")
 	
 	emit_signal("finished")
+	locked = false
 
 
 func load_dict() -> Dictionary:

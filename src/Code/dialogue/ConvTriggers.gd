@@ -47,37 +47,46 @@ func init(mc):#: MultiConversation):
 			pass # connect to the quests completed method
 
 
-func _trigger(mc) -> bool:#: MultiConversation):
-	var self_i = mc.conv_triggers.find(self)
-#	assert(self_i - 1 == mc.index, "conversation triggered in the improper place")
-	print("Triggering: %s, %s" % [self_i, mc.index])
-	if self_i - 1 == mc.index:
-		mc.index += 1
-		return true
-	else:
-		return false
+#func _trigger(mc) -> bool:#: MultiConversation):
+#	var self_i = mc.conv_triggers.find(self)
+##	assert(self_i - 1 == mc.index, "conversation triggered in the improper place")
+#	print("Triggering: %s, %s,  %s" % [self_i, mc.index, self_i - 1 == mc.index])
+#	if self_i - 1 == mc.index:
+#		mc.index = self_i
+#		return true
+#	else:
+#		return false
 
 func trigger_ready(mc):
+#	if mc.locked: return
 	give_quest(mc)
 	mc.disconnect("finished", self, "trigger_ready")
+#	mc.locked = true
 
 func trigger_prev(mc):
-	if _trigger(mc):
+	if mc.locked: return
+	
+	var self_i = mc.conv_triggers.find(self)
+	if self_i - 1 == mc.index:
+		mc.index = self_i
 		give_quest(mc)
 		mc.disconnect("finished", self, "trigger_prev")
+		mc.locked = true
 	
 func trigger_quest(mc):
-	if _trigger(mc):
-		quest.disconnect("completed", self, "trigger_quest")
+	if mc.locked: return
+	var self_i = mc.conv_triggers.find(self)
+	mc.index = self_i
+	quest.disconnect("completed", self, "trigger_quest")
+	mc.locked = true
 
 	
 func give_quest(mc):
 	# give quest if it has one
 	quest = quest as QuestInteraction
 	if trigger != "on-quest" and quest != null:
-		# give the quest...how
+		# give the quest...
 		quest.set_target(mc.target)
 		quest.interact(null)
-#		yield(quest, "finished")
-		print("success")
-		pass
+		# check if the quest has been completed
+		quest.check_completion()

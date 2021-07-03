@@ -32,3 +32,13 @@ func on_killed(what: CombatEntity):
 			print("Yay! you killed them all")
 			emit_signal("completed")
 	pass
+
+func check_completion():
+	var a = { "type" : kill_type }
+	if target._num_killed(a) >= kill_amt:
+		emit_signal("completed")
+
+
+func is_complete() -> bool:
+	var a = { "type" : kill_type }
+	return target._num_killed(a) >= kill_amt
