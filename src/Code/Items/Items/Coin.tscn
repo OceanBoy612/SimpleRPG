@@ -16,3 +16,7 @@ _item = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 3 )
+frame = 2
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -0.506433, 0.482018 )

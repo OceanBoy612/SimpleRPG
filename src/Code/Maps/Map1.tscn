@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Code/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -22,6 +22,262 @@
 [ext_resource path="res://Code/GUI/PotionCounter.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Art/~Sprites/Broadsword.png" type="Texture" id=21]
 [ext_resource path="res://Code/Interactables/interactions/damage_upgrade.tres" type="Resource" id=22]
+[ext_resource path="res://Code/dialogue/ConvTriggers.gd" type="Script" id=23]
+[ext_resource path="res://Code/dialogue/Conversation.gd" type="Script" id=24]
+[ext_resource path="res://Code/dialogue/Sentence.gd" type="Script" id=25]
+[ext_resource path="res://Code/Quests/QuestInteraction.gd" type="Script" id=26]
+[ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Code/dialogue/MultiConversation.gd" type="Script" id=28]
+
+[sub_resource type="Resource" id=9]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Hey gramps, I'm headed out."
+
+[sub_resource type="Resource" id=10]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "Hey, kid! While you're out would you do me a favor?"
+
+[sub_resource type="Resource" id=11]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Uuuuugh..."
+
+[sub_resource type="Resource" id=12]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "No, it'll be fun! The Frim have been acting up again, I just need an up-and-coming adventurer like yourself to go show 'em what's what!"
+
+[sub_resource type="Resource" id=13]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Well why didn't you say so! Let me at'm, I won't show any mercy, you'll see!"
+
+[sub_resource type="Resource" id=14]
+resource_name = "Conversation"
+script = ExtResource( 24 )
+add_new_line = false
+sentences = [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+
+[sub_resource type="Resource" id=15]
+resource_name = "Quest"
+script = ExtResource( 26 )
+kill_type = "Frim"
+kill_amt = 5
+
+[sub_resource type="Resource" id=16]
+resource_name = "0"
+script = ExtResource( 23 )
+trigger = "on-ready"
+create_conversation = false
+create_quest = false
+conversation = SubResource( 14 )
+quest = SubResource( 15 )
+
+[sub_resource type="Resource" id=22]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "How's it going kiddo?"
+
+[sub_resource type="Resource" id=23]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Uhh..."
+
+[sub_resource type="Resource" id=24]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "There are a lot of them, for sure."
+
+[sub_resource type="Resource" id=25]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "You need some-"
+
+[sub_resource type="Resource" id=26]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Nope! I got it."
+
+[sub_resource type="Resource" id=27]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "Well, it looks like there's only a couple more! Keep it up!"
+
+[sub_resource type="Resource" id=28]
+resource_name = "Conversation"
+script = ExtResource( 24 )
+add_new_line = false
+sentences = [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ]
+
+[sub_resource type="Resource" id=17]
+resource_name = "1"
+script = ExtResource( 23 )
+trigger = "on-previous"
+create_conversation = false
+create_quest = false
+conversation = SubResource( 28 )
+
+[sub_resource type="Resource" id=29]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "I did it!"
+
+[sub_resource type="Resource" id=30]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "..."
+
+[sub_resource type="Resource" id=31]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "What did I win?"
+
+[sub_resource type="Resource" id=32]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "The experience! The acid burns! The triumph!"
+
+[sub_resource type="Resource" id=33]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "......."
+
+[sub_resource type="Resource" id=34]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "I'm kidding! I'm kidding. Here, how would you like fifteen whole dollars?"
+
+[sub_resource type="Resource" id=35]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Sold!"
+
+[sub_resource type="Resource" id=36]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "Go buy yourself something nice, and then I've got another job for you."
+
+[sub_resource type="Resource" id=37]
+resource_name = "Conversation"
+script = ExtResource( 24 )
+add_new_line = false
+sentences = [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ]
+
+[sub_resource type="Resource" id=18]
+resource_name = "2"
+script = ExtResource( 23 )
+trigger = "on-quest"
+create_conversation = false
+create_quest = false
+conversation = SubResource( 37 )
+quest = SubResource( 15 )
+
+[sub_resource type="Resource" id=38]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "Go buy something! "
+
+[sub_resource type="Resource" id=39]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "This is all the content in the game right now, but come back once you figure out how to spend that hard earned cash."
+
+[sub_resource type="Resource" id=40]
+resource_name = "Sentence"
+script = ExtResource( 25 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "Sure! I bet placeholder has some sweet new placeholders!"
+
+[sub_resource type="Resource" id=41]
+resource_name = "Conversation"
+script = ExtResource( 24 )
+add_new_line = false
+sentences = [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ]
+
+[sub_resource type="Resource" id=19]
+resource_name = "3"
+script = ExtResource( 23 )
+trigger = "on-previous"
+create_conversation = false
+create_quest = false
+conversation = SubResource( 41 )
+
+[sub_resource type="Resource" id=20]
+resource_name = "MultiConversation"
+script = ExtResource( 28 )
+create_trigger = false
+conv_triggers = [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]
+
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 5.69061
+height = 5.17633
 
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
@@ -104,16 +360,17 @@ layer = 100
 [node name="PlayerGUI" parent="Interface" instance=ExtResource( 15 )]
 combatEntityPath = NodePath("../../YSort/Player")
 
-[node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
-visible = false
-
 [node name="CoinCounter" parent="Interface" instance=ExtResource( 17 )]
 nodePath = NodePath("../../YSort/Player")
 item_id = "Coin"
 
 [node name="PotionCounter" parent="Interface" instance=ExtResource( 20 )]
+visible = false
 nodePath = NodePath("../../YSort/Player")
 item_id = "Health Potion"
+
+[node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
+visible = false
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource( 6 )
@@ -143,34 +400,39 @@ __meta__ = {
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 2
 playing = true
 flip_h = true
 
 [node name="Interactable" parent="YSort/Interactables/librarian" instance=ExtResource( 3 )]
-position = Vector2( 0, 18.4055 )
+position = Vector2( 74.6503, 73.5271 )
 vanish_on_interaction = true
 interactions = [ ExtResource( 14 ), ExtResource( 10 ) ]
 
 [node name="Interactable2" parent="YSort/Interactables/librarian" instance=ExtResource( 3 )]
-position = Vector2( 0, 18.4055 )
+position = Vector2( 74.6503, 73.5271 )
 disable = true
 enable_on_complete = NodePath("../Interactable")
 interactions = [ ExtResource( 12 ) ]
 disable_on_completed = ExtResource( 10 )
 
 [node name="Interactable3" parent="YSort/Interactables/librarian" instance=ExtResource( 3 )]
-position = Vector2( 0, 18.4055 )
+position = Vector2( 74.6503, 73.5271 )
 disable = true
 vanish_on_interaction = true
 interactions = [ ExtResource( 11 ) ]
 enable_on_completed = ExtResource( 10 )
 
 [node name="Interactable4" parent="YSort/Interactables/librarian" instance=ExtResource( 3 )]
-position = Vector2( 0, 18.4055 )
+position = Vector2( 74.6503, 73.5271 )
 disable = true
 enable_on_complete = NodePath("../Interactable3")
 interactions = [ ExtResource( 13 ) ]
+
+[node name="InteractableV2" parent="YSort/Interactables/librarian" instance=ExtResource( 27 )]
+multi_conv = SubResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/librarian/InteractableV2"]
+shape = SubResource( 21 )
 
 [node name="Interactable" parent="YSort/Interactables" instance=ExtResource( 3 )]
 position = Vector2( 233.085, 229.306 )

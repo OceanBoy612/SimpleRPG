@@ -45,23 +45,28 @@ func init(mc):#: MultiConversation):
 			pass # connect to the quests completed method
 
 
-func trigger(mc):#: MultiConversation):
+func trigger(mc) -> bool:#: MultiConversation):
 	var self_i = mc.conv_triggers.find(self)
-	assert(self_i - 1 == mc.index, "conversation triggered in the improper place")
-	mc.index += 1
+#	assert(self_i - 1 == mc.index, "conversation triggered in the improper place")
+	print("Triggering: %s, %s" % [self_i, mc.index])
+	if self_i - 1 == mc.index:
+		mc.index += 1
+		return true
+	else:
+		return false
 
 func trigger_ready(mc):
 	give_quest(mc)
 	mc.disconnect("finished", self, "trigger_ready")
 
 func trigger_prev(mc):
-	trigger(mc)
-	give_quest(mc)
-	mc.disconnect("finished", self, "trigger_prev")
+	if trigger(mc):
+		give_quest(mc)
+		mc.disconnect("finished", self, "trigger_prev")
 	
 func trigger_quest(mc, quest):
-	trigger(mc)
-	quest.disconnect("completed", self, "trigger_quest")
+	if trigger(mc):
+		quest.disconnect("completed", self, "trigger_quest")
 
 	
 func give_quest(mc):

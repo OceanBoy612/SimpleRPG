@@ -6,7 +6,7 @@
 [ext_resource path="res://Code/dialogue/Sentence.gd" type="Script" id=4]
 [ext_resource path="res://Code/Quests/quest1.tres" type="Resource" id=5]
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=1]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -14,7 +14,7 @@ side = "left"
 expression = "neutral"
 text = "h"
 
-[sub_resource type="Resource" id=13]
+[sub_resource type="Resource" id=2]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -22,22 +22,22 @@ side = "left"
 expression = "neutral"
 text = "hhhh"
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=3]
 resource_name = "Conversation"
 script = ExtResource( 1 )
 add_new_line = false
-sentences = [ SubResource( 12 ), SubResource( 13 ) ]
+sentences = [ SubResource( 1 ), SubResource( 2 ) ]
 
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=4]
 resource_name = "0"
 script = ExtResource( 2 )
 trigger = "on-ready"
 create_conversation = false
 create_quest = false
-conversation = SubResource( 14 )
+conversation = SubResource( 3 )
 quest = ExtResource( 5 )
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id=5]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -45,7 +45,7 @@ side = "left"
 expression = "neutral"
 text = "asd"
 
-[sub_resource type="Resource" id=16]
+[sub_resource type="Resource" id=6]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -53,21 +53,21 @@ side = "left"
 expression = "neutral"
 text = "asdasdasd"
 
-[sub_resource type="Resource" id=17]
+[sub_resource type="Resource" id=7]
 resource_name = "Conversation"
 script = ExtResource( 1 )
 add_new_line = false
-sentences = [ SubResource( 15 ), SubResource( 16 ) ]
+sentences = [ SubResource( 5 ), SubResource( 6 ) ]
 
-[sub_resource type="Resource" id=18]
+[sub_resource type="Resource" id=8]
 resource_name = "1"
 script = ExtResource( 2 )
 trigger = "on-previous"
 create_conversation = false
 create_quest = false
-conversation = SubResource( 17 )
+conversation = SubResource( 7 )
 
-[sub_resource type="Resource" id=19]
+[sub_resource type="Resource" id=9]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -75,7 +75,7 @@ side = "left"
 expression = "neutral"
 text = "wow quest ocmplete"
 
-[sub_resource type="Resource" id=20]
+[sub_resource type="Resource" id=10]
 resource_name = "Sentence"
 script = ExtResource( 4 )
 name = "Player"
@@ -83,23 +83,23 @@ side = "left"
 expression = "neutral"
 text = "bleb"
 
-[sub_resource type="Resource" id=21]
+[sub_resource type="Resource" id=11]
 resource_name = "Conversation"
 script = ExtResource( 1 )
 add_new_line = false
-sentences = [ SubResource( 19 ), SubResource( 20 ) ]
+sentences = [ SubResource( 9 ), SubResource( 10 ) ]
 
-[sub_resource type="Resource" id=22]
+[sub_resource type="Resource" id=12]
 resource_name = "2"
 script = ExtResource( 2 )
 trigger = "on-quest"
 create_conversation = false
 create_quest = false
-conversation = SubResource( 21 )
+conversation = SubResource( 11 )
 quest = ExtResource( 5 )
 
 [resource]
 resource_name = "MultiConversation"
 script = ExtResource( 3 )
 create_trigger = false
-conv_triggers = [ SubResource( 11 ), SubResource( 18 ), SubResource( 22 ) ]
+conv_triggers = [ SubResource( 4 ), SubResource( 8 ), SubResource( 12 ) ]
