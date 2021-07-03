@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Code/Character Controller/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Code/Items/Inventory.gd" type="Script" id=9]
 [ext_resource path="res://Code/Items/Item.gd" type="Script" id=10]
 [ext_resource path="res://Code/Enemies/AttackArea.gd" type="Script" id=11]
+[ext_resource path="res://Art/~Sprites/Heal-Sheet.png" type="Texture" id=12]
 
 [sub_resource type="Resource" id=1]
 resource_name = "Health Potion x1"
@@ -28,13 +29,49 @@ items = [ SubResource( 1 ) ]
 [sub_resource type="CircleShape2D" id=3]
 radius = 4.62669
 
-[sub_resource type="Curve2D" id=20]
+[sub_resource type="Curve2D" id=4]
 _data = {
 "points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.071, 0.28064, 0, 0, 0, 0, -37.4671, 0.196152, -0.665425, -3.39694, 0.665425, 3.39694, -34.0939, 3.47017, 0, 0, 0, 0, -40.5427, 10.5143 )
 }
 
-[sub_resource type="RectangleShape2D" id=21]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 3.61358, 7.87783 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 12 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 12 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 12 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 12 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 12 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 12 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), null ],
+"loop": false,
+"name": "default",
+"speed": 16.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -70,7 +107,7 @@ playback/speed = 1.2
 
 [node name="Path2D" type="Path2D" parent="Facing/Weapon"]
 position = Vector2( 0.10511, 0 )
-curve = SubResource( 20 )
+curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
 position = Vector2( -43.071, 0.28064 )
@@ -93,7 +130,7 @@ entityPath = NodePath("../../../../../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite/AttackArea"]
 position = Vector2( 0.325951, -20.5513 )
 rotation = -3.09796
-shape = SubResource( 21 )
+shape = SubResource( 5 )
 
 [node name="SmartSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
@@ -102,3 +139,8 @@ script = ExtResource( 4 )
 DEBUG = true
 
 [node name="ItemAttractor" parent="." instance=ExtResource( 8 )]
+
+[node name="Heal" type="AnimatedSprite" parent="."]
+frames = SubResource( 13 )
+frame = 7
+playing = true

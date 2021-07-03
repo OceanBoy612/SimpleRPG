@@ -34,6 +34,9 @@ func _input(event):
 			if amt > 0:
 				kb.heal(5)
 				kb.inventory.change_amount("Health Potion", -1)
+				var heal: AnimatedSprite = kb.get_node_or_null("Heal")
+				if heal:
+					heal.frame = 0
 	if event.is_action_pressed("interact"):
 		if state == MOVE and kb.has_meta("interactable"):
 			var inter = kb.get_meta("interactable")

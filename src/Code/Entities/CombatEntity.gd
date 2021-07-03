@@ -86,7 +86,7 @@ func damage(amt) -> bool:
 	health = clamp(health, 0, max_health)
 	emit_signal("health_changed", health, max_health)
 	
-	if health > 0:
+	if health > 0 and amt > 0:
 		_flash_white()
 	
 	if health <= 0:

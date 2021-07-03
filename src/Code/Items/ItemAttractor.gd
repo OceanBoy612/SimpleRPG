@@ -35,7 +35,7 @@ func _physics_process(_delta):
 			to_remove.append(world_item)
 #			kb.emit_signal("coin_collected")
 			kb.inventory.add_item(world_item.item)
-			print("adding item", items_in_range)
+#			print("adding item", items_in_range)
 			world_item.queue_free()
 	
 	for item in to_remove:
