@@ -1,3 +1,4 @@
+tool
 extends Entity
 class_name CombatEntity
 
@@ -91,6 +92,8 @@ func damage(amt) -> bool:
 	
 	if health <= 0:
 		emit_signal("died")
+		if lootTable:
+			(lootTable as LootTable).spawn_loot(self)
 		if name == "Player":
 			get_tree().reload_current_scene()
 		else:
@@ -104,6 +107,17 @@ func knockback(source: Node2D, amt: float):
 	# push self away from source
 	knockback_amt = amt
 	knockback_dir = (global_position - source.global_position).normalized()
+
+export(bool) var create_new_loot_table setget create_loottable
+export(Resource) var lootTable
+func create_loottable(v):
+	if v == false: return
+	if lootTable != null: return 
+	var a = LootTable.new()
+	a.resource_name = "Loot Table"
+	lootTable = a
+	property_list_changed_notify()
+
 
 
 func target_nearest_enemy():

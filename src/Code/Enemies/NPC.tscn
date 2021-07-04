@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Code/Enemies/States.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemies/wait_action.gd" type="Script" id=2]
@@ -11,9 +11,32 @@
 [ext_resource path="res://Art/~Sprites/shadow.png" type="Texture" id=9]
 [ext_resource path="res://Code/Enemies/AttackArea.gd" type="Script" id=10]
 [ext_resource path="res://Code/Enemies/DashAction.gd" type="Script" id=11]
+[ext_resource path="res://Code/Items/Items/Coin.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Enemies/LootTable.gd" type="Script" id=13]
+[ext_resource path="res://Code/Enemies/LootPair.gd" type="Script" id=14]
+[ext_resource path="res://Code/Items/Items/HealthPotion.tscn" type="PackedScene" id=15]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Attack"
+[sub_resource type="Resource" id=1]
+resource_name = "loot 0"
+script = ExtResource( 14 )
+scene = ExtResource( 12 )
+amount = 13
+chance = 1.0
+
+[sub_resource type="Resource" id=2]
+resource_name = "loot 1"
+script = ExtResource( 14 )
+scene = ExtResource( 15 )
+amount = 1
+chance = 0.25
+
+[sub_resource type="Resource" id=3]
+resource_name = "Loot Table"
+script = ExtResource( 13 )
+loot = [ SubResource( 1 ), SubResource( 2 ) ]
+_add_loot = false
+
+[sub_resource type="Animation" id=4]
 length = 0.278
 step = 0.055
 tracks/0/type = "value"
@@ -77,27 +100,27 @@ tracks/4/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=5]
 radius = 6.90314
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=6]
 radius = 140.0
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0234765, 0, 0, Vector2( 1, 1 ), 2.8841, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=8]
 min_value = -1.0
 _data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=9]
 min_value = -1.0
 _data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=11]
 resource_local_to_scene = true
 radius = 0.01
 
@@ -114,6 +137,7 @@ type = "Frim"
 faction = 4
 hostile_factions = 1
 attack_cooldown = 0.0
+lootTable = SubResource( 3 )
 
 [node name="shadow" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.584314 )
@@ -121,11 +145,11 @@ position = Vector2( 0, 3.5 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 1 )
+anims/Attack = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4.68607 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 8 )
@@ -141,7 +165,7 @@ radius = 140
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -152,14 +176,14 @@ script = ExtResource( 2 )
 [node name="Wander" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
 max_distance = 88
-curve = SubResource( 4 )
+curve = SubResource( 7 )
 
 [node name="Steering" type="Node2D" parent="StateMachine"]
 script = ExtResource( 6 )
 attack_range = 50.0
-hostile_curve = SubResource( 5 )
-ally_curve = SubResource( 6 )
-target_curve = SubResource( 7 )
+hostile_curve = SubResource( 8 )
+ally_curve = SubResource( 9 )
+target_curve = SubResource( 10 )
 distance_min = 0
 
 [node name="Attack" type="Node2D" parent="StateMachine"]
@@ -179,7 +203,7 @@ script = ExtResource( 10 )
 entityPath = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource( 8 )
+shape = SubResource( 11 )
 disabled = true
 
 [connection signal="entity_entered" from="DetectionRadius" to="StateMachine" method="_on_DetectionRadius_entity_entered"]

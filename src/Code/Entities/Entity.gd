@@ -17,8 +17,10 @@ var speed_multiplier = 1
 ### Vars ###
 
 func _physics_process(delta):
-	move_and_slide(move_dir * speed * speed_multiplier)
 	update()
+	if Engine.editor_hint:
+		return 
+	move_and_slide(move_dir * speed * speed_multiplier)
 	on_physics_process(delta)
 	
 func on_physics_process(_delta):
