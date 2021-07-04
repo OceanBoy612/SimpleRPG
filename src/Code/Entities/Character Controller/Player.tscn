@@ -1,0 +1,147 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Code/Entities/Character Controller/Weapon/weapon.gd" type="Script" id=1]
+[ext_resource path="res://Code/Entities/Character Controller/player_controller.gd" type="Script" id=2]
+[ext_resource path="res://Code/Entities/Character Controller/smart_sprite.gd" type="Script" id=4]
+[ext_resource path="res://Code/Entities/Character Controller/facing.gd" type="Script" id=5]
+[ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Art/SpriteFrame Resources/Sword_sprite_frames.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://Art/~Sprites/Heal-Sheet.png" type="Texture" id=8]
+[ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Code/Entities/Items/Inventory.gd" type="Script" id=10]
+[ext_resource path="res://Code/Entities/Items/Item.gd" type="Script" id=11]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Health Potion x1"
+script = ExtResource( 11 )
+id = "Health Potion"
+amount = 1
+
+[sub_resource type="Resource" id=2]
+resource_name = "player Inventory"
+script = ExtResource( 10 )
+id = "player Inventory"
+_add_item = false
+items = [ SubResource( 1 ) ]
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 4.5
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 3.57065, 8.34544 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 8 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 8 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 8 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 8 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), null ],
+"loop": false,
+"name": "default",
+"speed": 16.0
+} ]
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.8048, 3.04468, -2.11574, 1.49155, 2.11574, -1.49155, -37.7502, 1.27414, -2.25, 0.88955, 2.25, -0.88955, -35.4963, -6.22735, -2.25, -0.62598, 2.25, 0.62598, -27.9391, -5.29549, -0.665425, -3.39694, 0.665425, 3.39694, -25.641, 1.83325, 1.875, -1.18607, -1.875, 1.18607, -29.8836, 9.33475, 7.01631, 3.14903, -7.01631, -3.14903, -43.2745, 8.3097 )
+}
+
+[node name="Player" instance=ExtResource( 9 )]
+collision_layer = 2
+collision_mask = 7
+DEBUG = true
+speed = 100.0
+_inventory = SubResource( 2 )
+faction = 1
+hostile_factions = 12
+
+[node name="shadow" parent="." index="0"]
+position = Vector2( 0, 4.09937 )
+scale = Vector2( 0.594765, 0.594765 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 4.30959 )
+shape = SubResource( 15 )
+
+[node name="AnimatedSprite" parent="." index="2"]
+frames = ExtResource( 6 )
+animation = "Walk Down"
+script = ExtResource( 4 )
+DEBUG = true
+
+[node name="AttackArea" parent="." index="4"]
+position = Vector2( 7.62553, -2.35923 )
+rotation = -0.165481
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="Heal" type="AnimatedSprite" parent="." index="5"]
+visible = false
+frames = SubResource( 13 )
+frame = 7
+playing = true
+
+[node name="PlayerController" type="Node" parent="." index="6"]
+script = ExtResource( 2 )
+speed = 100
+
+[node name="Facing" type="RayCast2D" parent="." index="7"]
+cast_to = Vector2( 50, 0 )
+collision_mask = 33
+script = ExtResource( 5 )
+
+[node name="Weapon" type="Node2D" parent="Facing" index="0"]
+position = Vector2( 52, 0 )
+script = ExtResource( 1 )
+delay_time = 0.0
+attack_time = 0.24
+
+[node name="Tween" type="Tween" parent="Facing/Weapon" index="0"]
+playback_speed = 1.2
+playback/speed = 1.2
+
+[node name="Path2D" type="Path2D" parent="Facing/Weapon" index="1"]
+position = Vector2( 0.10511, 0.0413493 )
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D" index="0"]
+position = Vector2( -43.8048, 3.04468 )
+rotation = -0.165481
+loop = false
+
+[node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D" index="0"]
+position = Vector2( 0.231417, -5.48203 )
+rotation = -0.785398
+frames = ExtResource( 7 )
+animation = "Wooden Sword"
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite" index="0"]
+rotation = 0.785398
+remote_path = NodePath("../../../../../../AttackArea")

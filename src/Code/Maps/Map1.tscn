@@ -1,28 +1,28 @@
 [gd_scene load_steps=65 format=2]
 
-[ext_resource path="res://Code/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Code/GUI/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
 [ext_resource path="res://Code/Interactables/Interactable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Code/Character Controller/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Code/Entities/Character Controller/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Camera2D/CameraFollow/CameraFollow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/Tileset Resources/Tileset1.tres" type="TileSet" id=6]
 [ext_resource path="res://Art/SpriteFrame Resources/old_man_sprite_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Code/Camera2D/CameraShake/CameraShake.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Code/Enemies/NPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/Frim.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Code/GUI/PlayerGUI.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Code/Items/Items/Coin.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/GUI/CoinCounter.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Code/Items/Item.gd" type="Script" id=18]
-[ext_resource path="res://Code/Items/Items/HealthPotion.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Code/Entities/Items/Item.gd" type="Script" id=18]
+[ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Code/GUI/PotionCounter.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Art/~Sprites/Broadsword.png" type="Texture" id=21]
 [ext_resource path="res://Code/Interactables/interactions/damage_upgrade.tres" type="Resource" id=22]
-[ext_resource path="res://Code/dialogue/ConvTriggers.gd" type="Script" id=23]
-[ext_resource path="res://Code/dialogue/Conversation.gd" type="Script" id=24]
-[ext_resource path="res://Code/dialogue/Sentence.gd" type="Script" id=25]
-[ext_resource path="res://Code/Quests/QuestInteraction.gd" type="Script" id=26]
+[ext_resource path="res://Code/GUI/Dialogue/ConvTriggers.gd" type="Script" id=23]
+[ext_resource path="res://Code/GUI/Dialogue/Conversation.gd" type="Script" id=24]
+[ext_resource path="res://Code/GUI/Dialogue/Sentence.gd" type="Script" id=25]
+[ext_resource path="res://Code/Interactables/Quests/QuestInteraction.gd" type="Script" id=26]
 [ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Code/dialogue/MultiConversation.gd" type="Script" id=28]
+[ext_resource path="res://Code/GUI/Dialogue/MultiConversation.gd" type="Script" id=28]
 
 [sub_resource type="Resource" id=1]
 resource_name = "Sentence"
@@ -350,14 +350,11 @@ pause_mode = 2
 layer = 100
 
 [node name="PlayerGUI" parent="Interface" instance=ExtResource( 15 )]
-combatEntityPath = NodePath("../../YSort/Player")
 
 [node name="CoinCounter" parent="Interface" instance=ExtResource( 17 )]
-nodePath = NodePath("../../YSort/Player")
 item_id = "Coin"
 
 [node name="PotionCounter" parent="Interface" instance=ExtResource( 20 )]
-nodePath = NodePath("../../YSort/Player")
 item_id = "Health Potion"
 
 [node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
@@ -385,12 +382,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 234.259, 156.134 )
+
 [node name="Interactables" type="YSort" parent="YSort"]
 
 [node name="librarian" type="AnimatedSprite" parent="YSort/Interactables"]
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
+frame = 2
 playing = true
 flip_h = true
 
@@ -409,52 +410,43 @@ interactions = [ ExtResource( 22 ) ]
 position = Vector2( 0, -16.379 )
 texture = ExtResource( 21 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 236.019, 153.704 )
-knockback_amount = 1500.0
-
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="NPC" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 11.9948, -28.4842 )
+[node name="Frim" parent="YSort/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 73.8737, 71.7282 )
 
-[node name="NPC2" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( -14.8195, 90.6022 )
+[node name="Frim2" parent="YSort/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 42.7258, 52.3788 )
 
-[node name="NPC3" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( -23.9592, 29.9537 )
+[node name="Frim3" parent="YSort/Enemies" instance=ExtResource( 10 )]
+position = Vector2( -7.77147, 67.9527 )
 
-[node name="NPC4" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 46.0825, 32.5215 )
+[node name="Frim4" parent="YSort/Enemies" instance=ExtResource( 10 )]
+position = Vector2( -0.692398, 33.0294 )
 
-[node name="NPC5" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 85.0158, -34.737 )
+[node name="Frim5" parent="YSort/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 53.5804, 16.0396 )
 
 [node name="Coins" type="YSort" parent="YSort"]
 
 [node name="Coin" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 153, 208 )
-speed = 0.0
 _item = SubResource( 34 )
 
 [node name="Coin2" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 138, 170.5 )
-speed = 0.0
 _item = SubResource( 35 )
 
 [node name="Coin3" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 118, 224 )
-speed = 0.0
 _item = SubResource( 36 )
 
 [node name="Coin4" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 145.5, 250 )
-speed = 0.0
 _item = SubResource( 37 )
 
 [node name="Coin5" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 96.5, 174 )
-speed = 0.0
 _item = SubResource( 38 )
 
 [node name="HealthPotion3" parent="YSort/Coins" instance=ExtResource( 19 )]

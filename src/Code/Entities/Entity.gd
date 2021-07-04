@@ -7,7 +7,10 @@ export var speed: float = 50.0
 
 
 onready var spawn_point: Vector2 = global_position
-
+onready var shadow = $shadow as AnimatedSprite
+onready var collision_shape = $CollisionShape2D as CollisionShape2D
+onready var sprite = $AnimatedSprite as AnimatedSprite
+onready var detection_radius = $DetectionRadius as Area2D
 
 var look_dir: Vector2 setget set_look
 var move_dir: Vector2 setget set_move

@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "AttackArea",
 "language": "GDScript",
-"path": "res://Code/Enemies/AttackArea.gd"
+"path": "res://Code/Entities/Enemies/AttackArea.gd"
 }, {
 "base": "Node2D",
 "class": "BaseState",
 "language": "GDScript",
-"path": "res://Code/Enemies/State/base_state.gd"
+"path": "res://Code/Entities/Enemies/State/base_state.gd"
 }, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Code/dialogue/characters/Character.gd"
+"path": "res://Code/GUI/Dialogue/characters/Character.gd"
 }, {
 "base": "Entity",
 "class": "CombatEntity",
@@ -32,17 +32,17 @@ _global_script_classes=[ {
 "base": "BaseState",
 "class": "CombatEntityState",
 "language": "GDScript",
-"path": "res://Code/Enemies/State/combat_entity_state.gd"
+"path": "res://Code/Entities/Enemies/State/combat_entity_state.gd"
 }, {
 "base": "Resource",
 "class": "ConvTrigger",
 "language": "GDScript",
-"path": "res://Code/dialogue/ConvTriggers.gd"
+"path": "res://Code/GUI/Dialogue/ConvTriggers.gd"
 }, {
 "base": "Resource",
 "class": "Conversation",
 "language": "GDScript",
-"path": "res://Code/dialogue/Conversation.gd"
+"path": "res://Code/GUI/Dialogue/Conversation.gd"
 }, {
 "base": "Interaction",
 "class": "DamageUpgradeInteraction",
@@ -52,17 +52,17 @@ _global_script_classes=[ {
 "base": "Interaction",
 "class": "DialogueAction",
 "language": "GDScript",
-"path": "res://Code/dialogue/DialogueAction.gd"
+"path": "res://Code/GUI/Dialogue/DialogueAction.gd"
 }, {
 "base": "Control",
 "class": "DialogueBox",
 "language": "GDScript",
-"path": "res://Code/Interface/GUI/DialogueBox.gd"
+"path": "res://Code/GUI/Interface/GUI/DialogueBox.gd"
 }, {
 "base": "Node",
 "class": "DialoguePlayer",
 "language": "GDScript",
-"path": "res://Code/dialogue/DialoguePlayer.gd"
+"path": "res://Code/GUI/Dialogue/DialoguePlayer.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Entity",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "BaseState",
 "class": "EntityState",
 "language": "GDScript",
-"path": "res://Code/Enemies/State/entity_state.gd"
+"path": "res://Code/Entities/Enemies/State/entity_state.gd"
 }, {
 "base": "Reference",
 "class": "Helpers",
@@ -92,17 +92,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Interaction",
 "language": "GDScript",
-"path": "res://Code/dialogue/Interaction.gd"
+"path": "res://Code/Interactables/interactions/Interaction.gd"
 }, {
 "base": "Resource",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://Code/Items/Inventory.gd"
+"path": "res://Code/Entities/Items/Inventory.gd"
 }, {
 "base": "Resource",
 "class": "Item",
 "language": "GDScript",
-"path": "res://Code/Items/Item.gd"
+"path": "res://Code/Entities/Items/Item.gd"
 }, {
 "base": "Node",
 "class": "LocalMap",
@@ -112,42 +112,42 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "LootPair",
 "language": "GDScript",
-"path": "res://Code/Enemies/LootPair.gd"
+"path": "res://Code/Entities/Enemies/LootPair.gd"
 }, {
 "base": "Resource",
 "class": "LootTable",
 "language": "GDScript",
-"path": "res://Code/Enemies/LootTable.gd"
+"path": "res://Code/Entities/Enemies/LootTable.gd"
 }, {
 "base": "Interaction",
 "class": "MultiConversation",
 "language": "GDScript",
-"path": "res://Code/dialogue/MultiConversation.gd"
+"path": "res://Code/GUI/Dialogue/MultiConversation.gd"
 }, {
 "base": "Interaction",
 "class": "QuestInteraction",
 "language": "GDScript",
-"path": "res://Code/Quests/QuestInteraction.gd"
+"path": "res://Code/Interactables/Quests/QuestInteraction.gd"
 }, {
 "base": "Resource",
 "class": "Sentence",
 "language": "GDScript",
-"path": "res://Code/dialogue/Sentence.gd"
+"path": "res://Code/GUI/Dialogue/Sentence.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "SmartSprite",
 "language": "GDScript",
-"path": "res://Code/Character Controller/smart_sprite.gd"
+"path": "res://Code/Entities/Character Controller/smart_sprite.gd"
 }, {
 "base": "Node2D",
 "class": "UtilityStateMachine",
 "language": "GDScript",
-"path": "res://Code/Enemies/States.gd"
+"path": "res://Code/Entities/Enemies/States.gd"
 }, {
 "base": "Entity",
 "class": "WorldItem",
 "language": "GDScript",
-"path": "res://Code/Items/WorldItem.gd"
+"path": "res://Code/Entities/Items/WorldItem.gd"
 } ]
 _global_script_class_icons={
 "AttackArea": "",
@@ -188,7 +188,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DialogueDatabase="*res://Code/dialogue/DialogueDatabase.gd"
+DialogueDatabase="*res://Code/GUI/Dialogue/DialogueDatabase.gd"
 
 [debug]
 
