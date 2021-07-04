@@ -36,17 +36,21 @@ func run_attack():
 			start_pt, end_pt, attack_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
-#	var temp = start_pt
-#	start_pt = end_pt
-#	end_pt = temp
+	var temp = start_pt
+	start_pt = end_pt
+	end_pt = temp
 
 
 func tween_finished():
 	emit_signal("attack_finished")
 	attacking = false
 	shape.disabled = true
-	path.offset = 0
+#	path.offset = 0
 
+func reset_sword():
+	path.offset = 0
+	start_pt = 0
+	end_pt = 0.99
 
 func switch_sword(sword_name: String) -> void:
 	sprite.play(sword_name)

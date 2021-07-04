@@ -31,11 +31,11 @@ radius = 4.62669
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.071, 0.28064, 0, 0, 0, 0, -37.4671, 0.196152, -0.665425, -3.39694, 0.665425, 3.39694, -34.0939, 3.47017, 0, 0, 0, 0, -40.5427, 10.5143 )
+"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.8048, 3.04468, -2.11574, 1.49155, 2.11574, -1.49155, -37.7502, 1.27414, -2.25, 0.88955, 2.25, -0.88955, -35.4963, -6.22735, -2.25, -0.62598, 2.25, 0.62598, -27.9391, -5.29549, -0.665425, -3.39694, 0.665425, 3.39694, -25.641, 1.83325, 1.875, -1.18607, -1.875, 1.18607, -29.8836, 9.33475, 7.01631, 3.14903, -7.01631, -3.14903, -43.2745, 8.3097 )
 }
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 3.61358, 7.87783 )
+extents = Vector2( 3.61358, 6.056 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 12 )
@@ -106,15 +106,17 @@ playback_speed = 1.2
 playback/speed = 1.2
 
 [node name="Path2D" type="Path2D" parent="Facing/Weapon"]
-position = Vector2( 0.10511, 0 )
+position = Vector2( 0.10511, 0.0413493 )
+scale = Vector2( 1, 0.948513 )
 curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D"]
-position = Vector2( -43.071, 0.28064 )
+position = Vector2( -44.0091, 3.21865 )
 rotation = -0.0653785
 loop = false
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D"]
+position = Vector2( 0.231417, -5.48203 )
 rotation = -0.785398
 frames = ExtResource( 5 )
 animation = "Wooden Sword"
@@ -128,7 +130,7 @@ script = ExtResource( 11 )
 entityPath = NodePath("../../../../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite/AttackArea"]
-position = Vector2( 0.325951, -20.5513 )
+position = Vector2( 0.0667133, -21.5604 )
 rotation = -3.09796
 shape = SubResource( 5 )
 
@@ -141,6 +143,7 @@ DEBUG = true
 [node name="ItemAttractor" parent="." instance=ExtResource( 8 )]
 
 [node name="Heal" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 13 )
 frame = 7
 playing = true
