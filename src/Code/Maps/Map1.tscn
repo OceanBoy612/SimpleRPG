@@ -24,7 +24,7 @@
 [ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Code/dialogue/MultiConversation.gd" type="Script" id=28]
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=1]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -32,7 +32,7 @@ side = "left"
 expression = "neutral"
 text = "Hey gramps, I'm headed out."
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=2]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -40,7 +40,7 @@ side = "right"
 expression = "neutral"
 text = "Hey, kid! While you're out would you do me a favor?"
 
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=3]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -48,7 +48,7 @@ side = "left"
 expression = "neutral"
 text = "Uuuuugh..."
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=4]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -56,7 +56,7 @@ side = "right"
 expression = "neutral"
 text = "No, it'll be fun! The Frim have been acting up again, I just need an up-and-coming adventurer like yourself to go show 'em what's what!"
 
-[sub_resource type="Resource" id=13]
+[sub_resource type="Resource" id=5]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -64,28 +64,28 @@ side = "left"
 expression = "neutral"
 text = "Well why didn't you say so! Let me at'm, I won't show any mercy, you'll see!"
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=6]
 resource_name = "Conversation"
 script = ExtResource( 24 )
 add_new_line = false
-sentences = [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+sentences = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ]
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id=7]
 resource_name = "Quest"
 script = ExtResource( 26 )
 kill_type = "Frim"
 kill_amt = 5
 
-[sub_resource type="Resource" id=16]
+[sub_resource type="Resource" id=8]
 resource_name = "0"
 script = ExtResource( 23 )
 trigger = "on-ready"
 _create_conversation = false
 _create_quest = false
-conversation = SubResource( 14 )
-quest = SubResource( 15 )
+conversation = SubResource( 6 )
+quest = SubResource( 7 )
 
-[sub_resource type="Resource" id=22]
+[sub_resource type="Resource" id=9]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -93,7 +93,7 @@ side = "right"
 expression = "neutral"
 text = "How's it going kiddo?"
 
-[sub_resource type="Resource" id=23]
+[sub_resource type="Resource" id=10]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -101,7 +101,7 @@ side = "left"
 expression = "neutral"
 text = "Uhh..."
 
-[sub_resource type="Resource" id=24]
+[sub_resource type="Resource" id=11]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -109,7 +109,7 @@ side = "left"
 expression = "neutral"
 text = "There are a lot of them, for sure."
 
-[sub_resource type="Resource" id=25]
+[sub_resource type="Resource" id=12]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -117,7 +117,7 @@ side = "right"
 expression = "neutral"
 text = "You need some-"
 
-[sub_resource type="Resource" id=26]
+[sub_resource type="Resource" id=13]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -125,7 +125,7 @@ side = "left"
 expression = "neutral"
 text = "Nope! I got it."
 
-[sub_resource type="Resource" id=27]
+[sub_resource type="Resource" id=14]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -133,21 +133,21 @@ side = "right"
 expression = "neutral"
 text = "Well, it looks like there's only a couple more! Keep it up!"
 
-[sub_resource type="Resource" id=28]
+[sub_resource type="Resource" id=15]
 resource_name = "Conversation"
 script = ExtResource( 24 )
 add_new_line = false
-sentences = [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ]
+sentences = [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
 
-[sub_resource type="Resource" id=17]
+[sub_resource type="Resource" id=16]
 resource_name = "1"
 script = ExtResource( 23 )
 trigger = "on-previous"
 _create_conversation = false
 _create_quest = false
-conversation = SubResource( 28 )
+conversation = SubResource( 15 )
 
-[sub_resource type="Resource" id=29]
+[sub_resource type="Resource" id=17]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -155,7 +155,7 @@ side = "left"
 expression = "neutral"
 text = "I did it!"
 
-[sub_resource type="Resource" id=30]
+[sub_resource type="Resource" id=18]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -163,7 +163,7 @@ side = "left"
 expression = "neutral"
 text = "..."
 
-[sub_resource type="Resource" id=31]
+[sub_resource type="Resource" id=19]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -171,7 +171,7 @@ side = "left"
 expression = "neutral"
 text = "What did I win?"
 
-[sub_resource type="Resource" id=32]
+[sub_resource type="Resource" id=20]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -179,7 +179,7 @@ side = "right"
 expression = "neutral"
 text = "The experience! The acid burns! The triumph!"
 
-[sub_resource type="Resource" id=33]
+[sub_resource type="Resource" id=21]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -187,7 +187,7 @@ side = "left"
 expression = "neutral"
 text = "......."
 
-[sub_resource type="Resource" id=34]
+[sub_resource type="Resource" id=22]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -195,7 +195,7 @@ side = "right"
 expression = "neutral"
 text = "I'm kidding! I'm kidding. Here, how would you like fifteen whole dollars?"
 
-[sub_resource type="Resource" id=35]
+[sub_resource type="Resource" id=23]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -203,7 +203,7 @@ side = "left"
 expression = "neutral"
 text = "Sold!"
 
-[sub_resource type="Resource" id=36]
+[sub_resource type="Resource" id=24]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -211,22 +211,21 @@ side = "right"
 expression = "neutral"
 text = "Go buy yourself something nice, and then I've got another job for you."
 
-[sub_resource type="Resource" id=37]
+[sub_resource type="Resource" id=25]
 resource_name = "Conversation"
 script = ExtResource( 24 )
 add_new_line = false
-sentences = [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ]
+sentences = [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
 
-[sub_resource type="Resource" id=18]
-resource_name = "2"
+[sub_resource type="Resource" id=26]
 script = ExtResource( 23 )
 trigger = "on-quest"
 _create_conversation = false
 _create_quest = false
-conversation = SubResource( 37 )
-quest = SubResource( 15 )
+conversation = SubResource( 25 )
+quest = SubResource( 7 )
 
-[sub_resource type="Resource" id=38]
+[sub_resource type="Resource" id=27]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -234,7 +233,7 @@ side = "right"
 expression = "neutral"
 text = "Go buy something! "
 
-[sub_resource type="Resource" id=39]
+[sub_resource type="Resource" id=28]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "OldMan"
@@ -242,7 +241,7 @@ side = "right"
 expression = "neutral"
 text = "This is all the content in the game right now, but come back once you figure out how to spend that hard earned cash."
 
-[sub_resource type="Resource" id=40]
+[sub_resource type="Resource" id=29]
 resource_name = "Sentence"
 script = ExtResource( 25 )
 name = "Player"
@@ -250,80 +249,78 @@ side = "left"
 expression = "neutral"
 text = "Sure! I bet placeholder has some sweet new placeholders!"
 
-[sub_resource type="Resource" id=41]
+[sub_resource type="Resource" id=30]
 resource_name = "Conversation"
 script = ExtResource( 24 )
 add_new_line = false
-sentences = [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ]
+sentences = [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ]
 
-[sub_resource type="Resource" id=19]
-resource_name = "3"
+[sub_resource type="Resource" id=31]
 script = ExtResource( 23 )
 trigger = "on-previous"
 _create_conversation = false
 _create_quest = false
-conversation = SubResource( 41 )
+conversation = SubResource( 30 )
 
-[sub_resource type="Resource" id=20]
-resource_name = "MultiConversation"
+[sub_resource type="Resource" id=32]
 script = ExtResource( 28 )
 create_trigger = false
-conv_triggers = [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]
+conv_triggers = [ SubResource( 8 ), SubResource( 16 ), SubResource( 26 ), SubResource( 31 ) ]
 
-[sub_resource type="CapsuleShape2D" id=21]
+[sub_resource type="CapsuleShape2D" id=33]
 radius = 5.69061
 height = 5.17633
 
-[sub_resource type="Resource" id=1]
+[sub_resource type="Resource" id=34]
 resource_local_to_scene = true
 resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=35]
 resource_local_to_scene = true
 resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=36]
 resource_local_to_scene = true
 resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=37]
 resource_local_to_scene = true
 resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
-[sub_resource type="Resource" id=5]
+[sub_resource type="Resource" id=38]
 resource_local_to_scene = true
 resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
-[sub_resource type="Resource" id=6]
+[sub_resource type="Resource" id=39]
 resource_local_to_scene = true
 resource_name = "Health Potion x1"
 script = ExtResource( 18 )
 id = "Health Potion"
 amount = 1
 
-[sub_resource type="Resource" id=7]
+[sub_resource type="Resource" id=40]
 resource_local_to_scene = true
 resource_name = "Health Potion x1"
 script = ExtResource( 18 )
 id = "Health Potion"
 amount = 1
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=41]
 resource_local_to_scene = true
 resource_name = "Health Potion x1"
 script = ExtResource( 18 )
@@ -360,7 +357,6 @@ nodePath = NodePath("../../YSort/Player")
 item_id = "Coin"
 
 [node name="PotionCounter" parent="Interface" instance=ExtResource( 20 )]
-visible = false
 nodePath = NodePath("../../YSort/Player")
 item_id = "Health Potion"
 
@@ -395,15 +391,14 @@ __meta__ = {
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 1
 playing = true
 flip_h = true
 
 [node name="InteractableV2" parent="YSort/Interactables/librarian" instance=ExtResource( 27 )]
-multi_conv = SubResource( 20 )
+multi_conv = SubResource( 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/librarian/InteractableV2"]
-shape = SubResource( 21 )
+shape = SubResource( 33 )
 
 [node name="Interactable" parent="YSort/Interactables" instance=ExtResource( 3 )]
 position = Vector2( 233.085, 229.306 )
@@ -439,32 +434,40 @@ position = Vector2( 85.0158, -34.737 )
 
 [node name="Coin" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 153, 208 )
-_item = SubResource( 1 )
+speed = 0.0
+_item = SubResource( 34 )
 
 [node name="Coin2" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 138, 170.5 )
-_item = SubResource( 2 )
+speed = 0.0
+_item = SubResource( 35 )
 
 [node name="Coin3" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 118, 224 )
-_item = SubResource( 3 )
+speed = 0.0
+_item = SubResource( 36 )
 
 [node name="Coin4" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 145.5, 250 )
-_item = SubResource( 4 )
+speed = 0.0
+_item = SubResource( 37 )
 
 [node name="Coin5" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 96.5, 174 )
-_item = SubResource( 5 )
+speed = 0.0
+_item = SubResource( 38 )
 
 [node name="HealthPotion3" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 297.613, 76.3154 )
-_item = SubResource( 6 )
+speed = 0.0
+_item = SubResource( 39 )
 
 [node name="HealthPotion" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 288.088, 56.076 )
-_item = SubResource( 7 )
+speed = 0.0
+_item = SubResource( 40 )
 
 [node name="HealthPotion2" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 261.896, 45.3611 )
-_item = SubResource( 8 )
+speed = 0.0
+_item = SubResource( 41 )

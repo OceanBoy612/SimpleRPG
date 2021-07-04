@@ -28,6 +28,7 @@ func _on_ItemAttractor_body_entered(body):
 
 
 func _physics_process(_delta):
+	return # disable
 	for i in items_in_range:
 		var world_item = i as WorldItem
 		attract(world_item)

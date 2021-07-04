@@ -86,7 +86,7 @@ func _on_Tween_tween_all_completed():
 	kb.collision_mask = kb.collision_mask | 1 # World layer
 	kb.collision_mask = kb.collision_mask | 2 # Player layer
 	kb.collision_mask = kb.collision_mask | 4 # Enemy layer
-	kb.collision_layer = kb.collision_mask | 4
+	kb.collision_layer = kb.collision_layer | 4
 
 
 

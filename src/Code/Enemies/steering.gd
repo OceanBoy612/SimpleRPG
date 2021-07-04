@@ -67,7 +67,9 @@ func _physics_process(_delta):
 	# move along super vector with noise
 	var ang = noise.get_noise_1d(_place) # [-0.5, 0.5]
 	_place += 0.14
-	kb.move_dir = super_vector.rotated(ang * 1.1).normalized()
+#	kb.move_dir = super_vector.rotated(ang * 1.1).normalized()
+	# to avoid jittering
+	kb.move_dir = kb.move_dir.linear_interpolate(super_vector.rotated(ang * 1.1).normalized(), 0.2)
 	
 	# stop steering if in range for attack
 	var in_range = kb.global_position.distance_to(kb.target.global_position) < attack_range
