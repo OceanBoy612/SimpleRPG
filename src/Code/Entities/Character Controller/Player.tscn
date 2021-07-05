@@ -24,49 +24,49 @@ id = "player Inventory"
 _add_item = false
 items = [ SubResource( 1 ) ]
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=3]
 radius = 4.5
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3.57065, 8.34544 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 8 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 8 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 8 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 8 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 8 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 8 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), null ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), null ],
 "loop": false,
 "name": "default",
 "speed": 16.0
 } ]
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=13]
 _data = {
 "points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.8048, 3.04468, -2.11574, 1.49155, 2.11574, -1.49155, -37.7502, 1.27414, -2.25, 0.88955, 2.25, -0.88955, -35.4963, -6.22735, -2.25, -0.62598, 2.25, 0.62598, -27.9391, -5.29549, -0.665425, -3.39694, 0.665425, 3.39694, -25.641, 1.83325, 1.875, -1.18607, -1.875, 1.18607, -29.8836, 9.33475, 7.01631, 3.14903, -7.01631, -3.14903, -43.2745, 8.3097 )
 }
@@ -86,7 +86,7 @@ scale = Vector2( 0.594765, 0.594765 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 4.30959 )
-shape = SubResource( 15 )
+shape = SubResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 6 )
@@ -97,14 +97,12 @@ DEBUG = true
 [node name="AttackArea" parent="." index="4"]
 position = Vector2( 7.62553, -2.35923 )
 rotation = -0.165481
-scale = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-shape = SubResource( 16 )
+shape = SubResource( 4 )
 
 [node name="Heal" type="AnimatedSprite" parent="." index="5"]
-visible = false
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 frame = 7
 playing = true
 
@@ -129,7 +127,7 @@ playback/speed = 1.2
 
 [node name="Path2D" type="Path2D" parent="Facing/Weapon" index="1"]
 position = Vector2( 0.10511, 0.0413493 )
-curve = SubResource( 4 )
+curve = SubResource( 13 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D" index="0"]
 position = Vector2( -43.8048, 3.04468 )

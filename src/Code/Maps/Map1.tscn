@@ -350,11 +350,14 @@ pause_mode = 2
 layer = 100
 
 [node name="PlayerGUI" parent="Interface" instance=ExtResource( 15 )]
+combatEntityPath = NodePath("../../YSort/Player")
 
 [node name="CoinCounter" parent="Interface" instance=ExtResource( 17 )]
+nodePath = NodePath("../../YSort/Player")
 item_id = "Coin"
 
 [node name="PotionCounter" parent="Interface" instance=ExtResource( 20 )]
+nodePath = NodePath("../../YSort/Player")
 item_id = "Health Potion"
 
 [node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
@@ -391,7 +394,6 @@ position = Vector2( 234.259, 156.134 )
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 2
 playing = true
 flip_h = true
 

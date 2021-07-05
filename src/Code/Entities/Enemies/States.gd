@@ -69,13 +69,15 @@ func _state_completed():
 	# TODO: add intelligence to the state choosing logic
 	if state.name == "Wait":
 		state = $Wander
-	elif state.name == "Wander" or state.name == "Attack":
+#	elif state.name == "Wander" or state.name == "Attack":
+	elif state.name == "Wander" or state.name == "GroundSlam":
 		if kb.target_nearest_enemy():
 			state = $Steering
 		else:
 			state = $Wait
 	elif state.name == "Steering":
-		state = $Attack
+#		state = $Attack
+		state = $GroundSlam
 	else:
 		assert(false, "wtf")
 		

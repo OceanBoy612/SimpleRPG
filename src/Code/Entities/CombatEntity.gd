@@ -28,6 +28,7 @@ var health: float = max_health
 #var mana: float = max_mana
 
 var target = null # : CombatEntity <- except cyclic issue
+var immortal = false # can take damage
 
 var last_attack_time: float = 999
 
@@ -69,6 +70,7 @@ func damage_entity(body: PhysicsBody2D):
 	var b = body as CombatEntity
 	if not b: return
 	if b.faction & hostile_factions == 0: return  # entity not hostile
+	if b.immortal: return # don't hurt immortal entities
 	
 	if body.has_method("knockback"):
 		body.knockback(self, knockback_amount)
