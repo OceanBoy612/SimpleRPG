@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Snick.mp3-2a06ec942da202001168c28b1a07d2a1.mp3str"
+
+[deps]
+
+source_file="res://Sound/Snick.mp3"
+dest_files=[ "res://.import/Snick.mp3-2a06ec942da202001168c28b1a07d2a1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
