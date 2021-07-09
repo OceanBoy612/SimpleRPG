@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Entities/Enemies/GroundSlam.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Code/Entities/Enemies/LootPair.gd" type="Script" id=10]
 [ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Entities/Attacks/FrimAttackExplosion.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Resource" id=1]
 resource_name = "loot 0"
@@ -34,7 +35,7 @@ loot = [ SubResource( 1 ), SubResource( 2 ) ]
 _add_loot = false
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 16.0
+radius = 8.5
 
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0234765, 0, 0, Vector2( 1, 1 ), 2.8841, 0.0, 0, 0 ]
@@ -50,7 +51,7 @@ _data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="Curve" id=8]
 _data = [ Vector2( 0, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=9]
 resource_name = "Air"
 length = 0.5
 tracks/0/type = "value"
@@ -130,65 +131,53 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("AttackArea/CollisionShape2D:shape:radius")
+tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.07 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 16.0, 24.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AttackArea/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.09, 0.22 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "Detonate" ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = false
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 5 ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("StateMachine/GroundSlam")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/GroundSlam")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -196,8 +185,22 @@ tracks/4/keys = {
 "method": "attack_done"
 } ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "spawn_attack"
+} ]
+}
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "Idle"
 length = 0.4
 loop = true
@@ -226,7 +229,7 @@ tracks/1/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=12]
 resource_name = "Leap"
 length = 0.6
 tracks/0/type = "value"
@@ -268,59 +271,60 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Air"
 
 [sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Attack"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Leap"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/Air/node = SubResource( 31 )
+[sub_resource type="AnimationNodeStateMachine" id=21]
+states/Air/node = SubResource( 13 )
 states/Air/position = Vector2( 609, 167 )
 states/Attack/node = SubResource( 14 )
-states/Attack/position = Vector2( 441, 64 )
-states/Idle/node = SubResource( 16 )
+states/Attack/position = Vector2( 461, 74 )
+states/Idle/node = SubResource( 15 )
 states/Idle/position = Vector2( 304, 167 )
-states/Leap/node = SubResource( 28 )
+states/Leap/node = SubResource( 16 )
 states/Leap/position = Vector2( 461, 167 )
-transitions = [ "Attack", "Idle", SubResource( 21 ), "Idle", "Leap", SubResource( 30 ), "Leap", "Air", SubResource( 32 ), "Air", "Attack", SubResource( 33 ) ]
+transitions = [ "Idle", "Leap", SubResource( 17 ), "Leap", "Air", SubResource( 18 ), "Air", "Attack", SubResource( 19 ), "Attack", "Idle", SubResource( 20 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -17, 16 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
 [node name="Frim" instance=ExtResource( 1 )]
 collision_layer = 4
 collision_mask = 7
+DEBUG = true
 type = "Frim"
 faction = 4
 hostile_factions = 1
-attack_cooldown = 10.0
 lootTable = SubResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 8 )
 animation = "Idle"
+frame = 2
 
 [node name="DetectionRadius" parent="." index="3"]
 DEBUG = true
@@ -328,7 +332,6 @@ radius = 97
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource( 4 )
-disabled = true
 
 [node name="StateMachine" type="Node2D" parent="." index="5"]
 script = ExtResource( 7 )
@@ -362,15 +365,18 @@ DEBUG = true
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
-anims/Air = SubResource( 13 )
-anims/Attack = SubResource( 9 )
-anims/Idle = SubResource( 12 )
-anims/Leap = SubResource( 26 )
+anims/Air = SubResource( 9 )
+anims/Attack = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/Leap = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="7"]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 21 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 25 )
+parameters/playback = SubResource( 22 )
+
+[node name="AttackPattern" parent="." index="8"]
+attack = ExtResource( 13 )
 
 [connection signal="tween_all_completed" from="StateMachine/Attack/Tween" to="StateMachine/Attack" method="_on_Tween_tween_all_completed"]

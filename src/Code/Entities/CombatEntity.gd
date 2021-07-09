@@ -3,7 +3,6 @@ extends Entity
 class_name CombatEntity
 
 
-signal died # when I die
 signal killed(what) # when i kill something else
 signal health_changed(new_health, max_health)
 #signal mana_changed(new_mana, max_mana)
@@ -28,7 +27,8 @@ var health: float = max_health
 #var mana: float = max_mana
 
 var target = null # : CombatEntity <- except cyclic issue
-var immortal = false # can take damage
+export var iframes = 0.0 # time spent immortal after taking damage
+export var immortal = false # can take damage
 
 var last_attack_time: float = 999
 
@@ -37,14 +37,9 @@ var knockback_percent = 0.2
 var knockback_dir: Vector2
 export(float) var knockback_amount = 1000
 
+#export(PackedScene) var SpawnAttack
 
 ### Overrides ###
-
-
-#func _ready():
-#	var area = get_node_or_null(attack_area_path)
-#	if area:
-#		area.connect("body_entered", self, "damage_entity")
 
 
 func on_physics_process(delta):
@@ -58,14 +53,14 @@ func on_physics_process(delta):
 
 func on_draw():
 	if is_instance_valid(target):
-		draw_line(Vector2(), target.global_position-global_position, Color("#ff0000"), 1.5)
+		draw_line(Vector2(), _vec_to_target(), Color("#ff0000"), 1.5)
 	
 
 ### Overrides ###
 ### Helpers ###
 
 
-func damage_entity(body: PhysicsBody2D):
+func damage_entity(body: PhysicsBody2D, damage_override: float=0, knockback_override:float=0):
 	# only damage hostile factions
 	var b = body as CombatEntity
 	if not b: return
@@ -73,12 +68,15 @@ func damage_entity(body: PhysicsBody2D):
 	if b.immortal: return # don't hurt immortal entities
 	
 	if body.has_method("knockback"):
-		body.knockback(self, knockback_amount)
+		if knockback_override:
+			body.knockback(self, knockback_override)
+		else:
+			body.knockback(self, knockback_amount)
 	if body.has_method("damage"):
-		var killed = body.damage(attack_damage)
+		var killed = body.damage(damage_override) if damage_override else body.damage(attack_damage)
+		
 		if killed:
 			_increment_killed(body)
-			emit_signal("killed", body)
 
 
 func heal(amt) -> bool:
@@ -95,12 +93,6 @@ func damage(amt) -> bool:
 	
 	if health <= 0:
 		emit_signal("died")
-		if lootTable:
-			(lootTable as LootTable).spawn_loot(self)
-		if name == "Player":
-			get_tree().reload_current_scene()
-		else:
-			queue_free()
 		return true
 	
 	return false
@@ -109,7 +101,7 @@ func damage(amt) -> bool:
 func knockback(source: Node2D, amt: float):
 	# push self away from source
 	knockback_amt = amt
-	knockback_dir = (global_position - source.global_position).normalized()
+	knockback_dir = _vec_to_target().normalized() * -1
 
 export(bool) var create_new_loot_table setget create_loottable
 export(Resource) var lootTable
@@ -150,30 +142,59 @@ func target_nearest_enemy():
 		return false
 
 
+func spawn_attack(_index:int=0):
+	$AttackPattern.spawn_attack()
+	pass
+#	var spawnAttack = SpawnAttack.instance()
+#	assert(spawnAttack.has_method("init_attack"), "Trying to attack with a non attack")
+#	spawnAttack.init_attack(self)
+#	print("Spawning Attack")
+#	$Attacks.add_child(spawnAttack)
+
+
 ### Helpers ###
 ### Subroutines ###
 
 
+func _vec_to_target() -> Vector2:
+	if not is_instance_valid(target):
+		return Vector2()
+	return target.global_position-global_position
+
+
 func _flash_white():
+	immortal = true
 	modulate = Color(10,10,10,10)
 	yield(get_tree().create_timer(0.1), "timeout")
 	modulate = Color(1,1,1,1)
+	# TODO: move this to animation player?
+	if iframes > 0:
+		yield(get_tree().create_timer(iframes), "timeout") 
+	immortal = false
 
 
 func _get_killed_id(what) -> String:
 	return "%s_killed" % what.type
+
 
 func _increment_killed(what) -> void:
 	var id = _get_killed_id(what)
 	if not has_meta(id):
 		set_meta(id, 0)
 	set_meta(id, get_meta(id) + 1)
+	emit_signal("killed", what)
 
 func _num_killed(what) -> int:
 	var id = _get_killed_id(what)
 	if not has_meta(id):
 		return 0
 	return get_meta(id)
+
+
+func on_death():
+	if lootTable:
+		(lootTable as LootTable).spawn_loot(self)
+	.on_death()
 
 ### Subroutines ###
 

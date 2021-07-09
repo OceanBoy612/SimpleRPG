@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Move.gd" type="Script" id=3]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/MoveTowardsTarget.gd" type="Script" id=4]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/FollowMouse.gd" type="Script" id=5]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=7]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/DieOnCollision.gd" type="Script" id=8]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+func _ready():
+	$CombatEntity.target = $MouseFollower
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Reasoner
+
+
+var state : ActionBase
+var ind = 0
+
+func _on_enable():
+	._on_enable()
+	state = get_child(ind)
+	state.enable()
+
+
+func _on_child_action_completed(c):
+#	yield(get_tree().create_timer(1), \"timeout\")
+	# This alternates between children in order
+	ind = (ind + 1) % get_child_count()
+	state = get_child(ind)
+	state.enable()
+	pass
+
+
+func _input(event):
+	if event.is_action_pressed(\"ui_accept\"):
+		state.emit_signal(\"completed\") # simulate an interrupt
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="CombatEntity" parent="." instance=ExtResource( 2 )]
+position = Vector2( 59.0433, 41.3657 )
+speed = 120.0
+
+[node name="Reasoner" type="Node2D" parent="CombatEntity"]
+script = SubResource( 2 )
+
+[node name="MissileMode" type="Node2D" parent="CombatEntity/Reasoner"]
+script = ExtResource( 7 )
+DEBUG = true
+
+[node name="MoveTowardsTarget" type="Node2D" parent="CombatEntity/Reasoner/MissileMode"]
+script = ExtResource( 4 )
+DEBUG = true
+max_turn_radius = 0.1
+
+[node name="DieOnCollision" type="Node2D" parent="CombatEntity/Reasoner/MissileMode"]
+script = ExtResource( 8 )
+DEBUG = true
+
+[node name="MoveRight" type="Node2D" parent="CombatEntity/Reasoner"]
+script = ExtResource( 3 )
+DEBUG = true
+
+[node name="MouseFollower" parent="." instance=ExtResource( 2 )]
+
+[node name="FollowMouse" type="Node2D" parent="MouseFollower"]
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 77.3976
+margin_top = 141.109
+margin_right = 246.398
+margin_bottom = 151.109
+text = "ui_accept to switch to move right state"
+__meta__ = {
+"_edit_use_anchors_": false
+}

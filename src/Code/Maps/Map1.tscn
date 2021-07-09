@@ -387,6 +387,7 @@ __meta__ = {
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 234.259, 156.134 )
+iframes = 0.4
 
 [node name="Interactables" type="YSort" parent="YSort"]
 
@@ -415,7 +416,7 @@ texture = ExtResource( 21 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Frim" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 73.8737, 71.7282 )
+position = Vector2( 225.837, 87.774 )
 
 [node name="Frim2" parent="YSort/Enemies" instance=ExtResource( 10 )]
 position = Vector2( 42.7258, 52.3788 )

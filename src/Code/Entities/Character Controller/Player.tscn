@@ -79,6 +79,7 @@ speed = 100.0
 _inventory = SubResource( 2 )
 faction = 1
 hostile_factions = 12
+iframes = 0.6
 
 [node name="shadow" parent="." index="0"]
 position = Vector2( 0, 4.09937 )

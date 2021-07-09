@@ -17,6 +17,7 @@ func on_enable():
 
 
 func attack_done():
+	kb.last_attack_time = 0
 	emit_signal("completed")
 
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Code/Entities/Enemies/AttackArea.gd" type="Script" id=1]
+[ext_resource path="res://Code/Entities/~EntityDependencies/AttackArea.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/Entity.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Code/Entities/CombatEntity.gd" type="Script" id=3]
+[ext_resource path="res://Code/Entities/~EntityDependencies/AttackPattern.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 97.0
@@ -20,3 +21,6 @@ script = ExtResource( 1 )
 entityPath = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+
+[node name="AttackPattern" type="Node" parent="." index="5"]
+script = ExtResource( 4 )

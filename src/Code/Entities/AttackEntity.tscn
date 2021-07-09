@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Code/Entities/AttackEntity.gd" type="Script" id=2]
+[ext_resource path="res://Code/Attacks/TimeLimit.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 97.0
+
+[node name="AttackEntity" instance=ExtResource( 1 )]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="shadow" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="1"]
+disabled = true
+
+[node name="CollisionShape2D" parent="DetectionRadius" index="0"]
+shape = SubResource( 1 )
+
+[node name="TimeLimit" type="Timer" parent="." index="6"]
+script = ExtResource( 3 )

@@ -2,6 +2,9 @@ extends KinematicBody2D
 class_name Entity
 
 
+signal died # when I die
+
+
 export(bool) var DEBUG = false
 export var speed: float = 50.0
 
@@ -12,12 +15,20 @@ onready var collision_shape = $CollisionShape2D as CollisionShape2D
 onready var sprite = $AnimatedSprite as AnimatedSprite
 onready var detection_radius = $DetectionRadius as Area2D
 
+
 var look_dir: Vector2 setget set_look
 var move_dir: Vector2 setget set_move
 var nearby: Array = []
 var speed_multiplier = 1
 
 ### Vars ###
+
+func _ready():
+	connect("died", self, "on_death")
+	on_ready()
+
+func on_ready():
+	pass
 
 func _physics_process(delta):
 	update()
@@ -45,6 +56,11 @@ func _draw():
 func on_draw():
 	pass
 
+func on_death():
+	if name == "Player":
+		get_tree().reload_current_scene()
+	else:
+		queue_free()
 
 ### Setters ###
 

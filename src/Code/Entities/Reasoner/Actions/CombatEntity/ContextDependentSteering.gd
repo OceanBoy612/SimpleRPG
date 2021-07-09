@@ -1,12 +1,10 @@
-extends CombatEntityState
-
+tool
+extends CombatEntityAction
+class_name ContextDependentSteering
 
 """
-uses the kb's 'nearby' array to determine context dependent steering
-can be used to create strafing, running, etc...
+Steers the combat entity based on the nearby entities 
 """
-
-export(float) var attack_range = 20
 
 export(Curve) var hostile_curve
 export(Curve) var ally_curve
@@ -15,37 +13,40 @@ export(Curve) var target_curve
 export(int, 0, 500, 5) var distance_min = 20
 export(int, 0, 500, 5) var distance_max = 100
 
+export var turn_speed = 0.2
+
 
 var move_vectors = []
-
 var noise = OpenSimplexNoise.new()
 var _place = 0
 
-func on_ready():
+
+func _on_ready():
+	._on_ready()
 	randomize()
 	noise.seed = randi()
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8
 
-#func on_enable():
-#	kb.target_nearest_enemy()
-
 
 func _physics_process(_delta):
-	var can_attack = kb.last_attack_time >= kb.attack_cooldown
-	
-	if not kb.target or not is_instance_valid(kb.target):
-		emit_signal("completed")
-		print("Bubbly")
+	if Engine.editor_hint:
 		return
-	
+#	var can_attack = entity.last_attack_time >= entity.attack_cooldown
+#
+#	if not entity.target or not is_instance_valid(entity.target):
+#		emit_signal("completed")
+#		print("Bubbly")
+#		return
 	
 	
 	move_vectors = []
 	
 	# for each nearby element
-	for ele in kb.nearby + [kb.target]:
+	for ele in entity.nearby + [entity.target]:
+		if ele == null or not is_instance_valid(ele):
+			continue
 		
 		# create a vector pointing at and away from the element
 		var between = ele.global_position - global_position
@@ -61,24 +62,30 @@ func _physics_process(_delta):
 		# add to arrays
 		move_vectors.append(attra)
 	
+	if move_vectors.size() == 0:
+		print("WARNING: nothing nearby for context based steering so doing nothing")
+		return
+	
 	# combine the vectors to one super vector
 	var super_vector = Helpers.reduce(move_vectors, funcref(Helpers, "sum"))
 	
 	# move along super vector with noise
-	var ang = noise.get_noise_1d(_place) # [-0.5, 0.5]
-	_place += 0.14
-#	kb.move_dir = super_vector.rotated(ang * 1.1).normalized()
+#	var ang = noise.get_noise_1d(_place) # [-0.5, 0.5]
+#	_place += 0.14
+	
+#	entity.move_dir = super_vector.rotated(ang * 1.1).normalized()
 	# to avoid jittering
-	kb.move_dir = kb.move_dir.linear_interpolate(super_vector.rotated(ang * 1.1).normalized(), 0.2)
-	kb.look_dir = kb._vec_to_target().normalized()
+	entity.move_dir = entity.move_dir.linear_interpolate(
+			super_vector.normalized(), turn_speed)
 	
 	# stop steering if in range for attack
-	var in_range = kb.global_position.distance_to(kb.target.global_position) < attack_range
-	if in_range and can_attack:
-		emit_signal("completed")
+#	var in_range = entity.global_position.distance_to(entity.target.global_position) < attack_range
+#	if in_range and can_attack:
+#		emit_signal("completed")
 	
 	## DEBUG
 	update()
+
 
 ### Helpers ###
 
@@ -93,11 +100,11 @@ func map(ele, attra: Vector2, type: String) -> Vector2:
 ###
 
 func get_type(ele) -> String:
-	if ele == kb.target:
+	if ele == entity.target:
 		return "target"
-	elif ele.faction & kb.hostile_factions:
-		return "enemy"
-	elif ele.faction & kb.faction:
+	elif ele.faction & entity.hostile_factions:
+		return "hostile"
+	elif ele.faction & entity.faction:
 		return "ally"
 	else:
 		return "neutral"
