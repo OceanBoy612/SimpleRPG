@@ -68,7 +68,7 @@ animations = [ {
 
 [sub_resource type="Curve2D" id=13]
 _data = {
-"points": PoolVector2Array( 4.04089, -1.77943, 0, 0, -43.8048, 3.04468, -2.11574, 1.49155, 2.11574, -1.49155, -37.7502, 1.27414, -2.25, 0.88955, 2.25, -0.88955, -35.4963, -6.22735, -2.25, -0.62598, 2.25, 0.62598, -27.9391, -5.29549, -0.665425, -3.39694, 0.665425, 3.39694, -25.641, 1.83325, 1.875, -1.18607, -1.875, 1.18607, -29.8836, 9.33475, 7.01631, 3.14903, -7.01631, -3.14903, -43.2745, 8.3097 )
+"points": PoolVector2Array( -8.3969, 0.883884, 8.3969, -0.883884, -41.8779, 2.01291, -5.91812, -0.966606, 5.91812, 0.966606, -31.3597, -3.06943, 3.86374, -1.93737, -3.86374, 1.93737, -32.5971, 8.9072, 4.37523, 3.75651, -4.37523, -3.75651, -44.1318, 7.44879 )
 }
 
 [node name="Player" instance=ExtResource( 9 )]
@@ -95,7 +95,8 @@ script = ExtResource( 4 )
 DEBUG = true
 
 [node name="AttackArea" parent="." index="4"]
-position = Vector2( 7.62553, -2.35923 )
+visible = false
+position = Vector2( 9.48168, -2.93376 )
 rotation = -0.165481
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
@@ -130,7 +131,7 @@ position = Vector2( 0.10511, 0.0413493 )
 curve = SubResource( 13 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D" index="0"]
-position = Vector2( -43.8048, 3.04468 )
+position = Vector2( -41.9486, 2.47015 )
 rotation = -0.165481
 loop = false
 

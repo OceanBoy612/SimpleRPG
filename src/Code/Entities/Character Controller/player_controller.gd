@@ -7,6 +7,8 @@ export var doubleTapTime = 3
 onready var kb = get_parent() as CombatEntity
 onready var Weapon = kb.get_node("Facing/Weapon")
 
+var last_attack_time: float = 999
+
 enum {
 	MOVE,
 	ROLL
@@ -56,6 +58,7 @@ func _input(event):
 #			inter.start_interaction(kb)
 
 func _physics_process(_delta):
+	last_attack_time += _delta
 	if not kb:
 		print("Character controller requires a KinematicBody2D as a parent")
 		return
@@ -63,8 +66,9 @@ func _physics_process(_delta):
 	var axis: Vector2 = _get_input_axis()
 	
 	var attack_pressed = Input.is_action_just_pressed("attack") # leftmousebutton
-	if attack_pressed and state == MOVE:
+	if attack_pressed and state == MOVE and last_attack_time > 0.4:
 		Weapon.run_attack()
+		last_attack_time = 0
 	
 	# Check for rolling
 	var roll_pressed = Input.is_action_just_pressed("dash")
