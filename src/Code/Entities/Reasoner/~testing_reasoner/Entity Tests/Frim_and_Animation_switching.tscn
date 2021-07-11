@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/Enemies/LootPair.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/Dash.gd" type="Script" id=12]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=13]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/SpawnAttack.gd" type="Script" id=14]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/WaitUntilAnimationFrame.gd" type="Script" id=15]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/SpriteMove.gd" type="Script" id=16]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=17]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/LookAtTarget.gd" type="Script" id=18]
@@ -49,7 +50,8 @@ max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 1, Vector2( 1, 4 ), 0.0, 0.0, 1, 0 ]
 
 [sub_resource type="Curve" id=6]
-_data = [ Vector2( 0, 0.318182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.672727 ), 0.0, 0.0, 0, 0 ]
+min_value = -0.1
+_data = [ Vector2( 0, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.0966443, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.150336, 0.41 ), 7.90151, 0.0, 0, 0, Vector2( 1, 0.672727 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Node2D" type="Node2D"]
 __meta__ = {
@@ -57,6 +59,7 @@ __meta__ = {
 }
 
 [node name="FrimTest" parent="." instance=ExtResource( 6 )]
+position = Vector2( 87.5519, 83.6233 )
 collision_layer = 4
 collision_mask = 7
 DEBUG = true
@@ -117,7 +120,13 @@ script = ExtResource( 17 )
 script = ExtResource( 20 )
 animation_name = "Detonate"
 
-[node name="SpawnAttack" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack"]
+[node name="ActionSequence" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack"]
+script = ExtResource( 13 )
+
+[node name="WaitUntilAnimationFrame" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack/ActionSequence"]
+script = ExtResource( 15 )
+
+[node name="SpawnAttack" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack/ActionSequence"]
 script = ExtResource( 14 )
 
 [node name="StrafeTowards" type="Node2D" parent="FrimTest/Reasoner"]
@@ -125,6 +134,7 @@ script = ExtResource( 17 )
 DEBUG = true
 
 [node name="ContextBasedSteering" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
+visible = false
 script = ExtResource( 10 )
 __meta__ = {
 "_editor_description_": "Usage:
@@ -134,12 +144,10 @@ __meta__ = {
 	"
 }
 target_curve = SubResource( 6 )
-turn_speed = 0.2
 
 [node name="IdleAnim" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
 script = ExtResource( 20 )
 animation_name = "Idle"
-loop_anim = true
 
 [node name="InterruptWhenCloseToTarget" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
 script = ExtResource( 19 )

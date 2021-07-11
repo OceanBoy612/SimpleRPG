@@ -31,11 +31,11 @@ func _on_disable():
 
 
 
-func _on_ready_child(c): pass
+func _on_ready_child(_c): pass
 #To be overrided!
-func _on_child_action_completed(c): pass
-func _on_child_action_disabled(c): pass
-func _on_child_action_enabled(c): pass
+func _on_child_action_completed(_c): pass
+func _on_child_action_disabled(_c): pass
+func _on_child_action_enabled(_c): pass
 
  
 func on_child_action_completed(err, c): 

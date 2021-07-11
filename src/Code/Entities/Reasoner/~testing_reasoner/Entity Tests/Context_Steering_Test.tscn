@@ -43,7 +43,6 @@ hostile_curve = SubResource( 1 )
 ally_curve = SubResource( 2 )
 target_curve = SubResource( 3 )
 spawn_curve = SubResource( 4 )
-turn_speed = 0.2
 
 [node name="ManualTargetSelect" type="Node2D" parent="CombatEntity"]
 script = ExtResource( 4 )

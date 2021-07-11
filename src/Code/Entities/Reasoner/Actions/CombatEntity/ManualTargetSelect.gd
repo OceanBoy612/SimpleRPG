@@ -14,7 +14,7 @@ export(bool) var oneshot = true
 #	entity.target = get_node(path)
 #	emit_signal("completed", OK)
 
-func _process(delta):
+func _process(_delta):
 	entity.target = get_node(path)
 	if oneshot:
 		emit_signal("completed", OK)

@@ -103,7 +103,8 @@ func damage(amt) -> bool:
 func knockback(source: Node2D, amt: float):
 	# push self away from source
 	knockback_amt = amt
-	knockback_dir = _vec_to_target().normalized() * -1
+	knockback_dir = (source.global_position-global_position).normalized() * -1
+#	_vec_to_target().normalized() * -1
 
 export(bool) var create_new_loot_table setget create_loottable
 export(Resource) var lootTable
@@ -159,6 +160,11 @@ func can_attack_target() -> bool:
 		return false
 	return last_attack_time > attack_cooldown \
 			and global_position.distance_to(target.global_position) < attack_range
+
+
+func is_hostile(other: CombatEntity): return other.faction & hostile_factions
+func is_ally(other: CombatEntity): return other.faction & faction 
+
 
 ### Helpers ###
 ### Subroutines ###

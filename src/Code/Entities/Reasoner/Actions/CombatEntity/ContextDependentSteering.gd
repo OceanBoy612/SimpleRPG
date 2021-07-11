@@ -1,4 +1,4 @@
-tool
+#tool
 extends CombatEntityAction
 class_name ContextDependentSteering
 
@@ -14,7 +14,7 @@ export(Curve) var spawn_curve
 #export(int, 0, 500, 5) var distance_min = 20
 #export(int, 0, 500, 5) var distance_max = 100
 
-export var turn_speed = 0.05
+export var turn_speed = 0.2
 
 
 var move_vectors = []
@@ -98,6 +98,9 @@ func _physics_process(_delta):
 	# to avoid jittering
 	entity.move_dir = entity.move_dir.linear_interpolate(
 			super_vector.normalized(), turn_speed)
+	
+	if entity.look_dir == Vector2():
+		entity.look_dir = entity.move_dir
 	
 	# stop steering if in range for attack
 #	var in_range = entity.global_position.distance_to(entity.target.global_position) < attack_range

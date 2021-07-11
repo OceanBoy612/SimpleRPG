@@ -3,7 +3,7 @@ class_name PlaySpriteAnimation
 
 
 export(String) var animation_name = ""
-export(bool) var loop_anim = false
+#export(bool) var loop_anim = false
 
 
 func _on_enable():
