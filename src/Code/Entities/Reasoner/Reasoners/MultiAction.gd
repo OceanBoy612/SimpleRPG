@@ -9,19 +9,9 @@ Completes when all children have been played
 
 
 func _on_ready_child(c):
-	connect("enabled", c, "enable") # enable children when self enables
-
-
-
+	connect("enabled", c, "enable", [], CONNECT_DEFERRED) # enable children when self enables
 
 
 func _on_child_action_disabled(c):
-	# if all children are disabled - emit completed
-	for c in get_children():
-		c = c as ActionBase
-		if not c: continue
-		if c.is_processing(): # one of the children is still running
-			return
-	
-	emit_signal("completed")
-	pass
+	if active_actions.size() == 0:
+		emit_signal("completed", OK)

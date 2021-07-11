@@ -16,4 +16,4 @@ func _process(delta):
 	
 	time_waiting += delta
 	if time_waiting > time_to_wait:
-		emit_signal("completed")
+		emit_signal("completed", OK)

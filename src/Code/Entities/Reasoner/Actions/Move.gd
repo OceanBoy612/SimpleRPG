@@ -18,4 +18,4 @@ func _process(delta):
 	get_base().position += dir * delta * speed
 	amount_moved += delta * speed
 	if amount_moved > amount_to_move:
-		emit_signal("completed")
+		emit_signal("completed", OK)

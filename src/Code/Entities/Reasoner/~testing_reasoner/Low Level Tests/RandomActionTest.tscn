@@ -12,6 +12,7 @@ texture = ExtResource( 2 )
 
 [node name="RandomAction" type="Node2D" parent="Sprite"]
 script = ExtResource( 1 )
+DEBUG = true
 
 [node name="MoveRight" type="Node2D" parent="Sprite/RandomAction"]
 script = ExtResource( 3 )

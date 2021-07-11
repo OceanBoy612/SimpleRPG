@@ -36,7 +36,9 @@ func spawn_attack():
 		
 		add_child(spawnAttack)
 		
-	print("Spawning Attack")
+	kb.last_attack_time = 0
+		
+#	print("Spawning Attack")
 	pass
 
 

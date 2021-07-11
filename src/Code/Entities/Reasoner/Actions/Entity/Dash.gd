@@ -19,10 +19,20 @@ func _on_enable():
 	assert(speed_curve)
 
 
+func _on_disable():
+	._on_disable()
+	if entity:
+		seek(1)
+
+
 func _process(delta):
 	current_time += delta
 	if current_time > duration:
-		emit_signal("completed")
+		emit_signal("completed", OK)
 		return 
 	
-	entity.speed_multiplier = speed_curve.interpolate(current_time / duration)
+	seek(current_time / duration)
+
+func seek(time):
+	entity.speed_multiplier = speed_curve.interpolate(time)
+	

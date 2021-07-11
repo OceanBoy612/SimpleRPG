@@ -39,7 +39,9 @@ func _on_child_action_completed(c):
 
 func _input(event):
 	if event.is_action_pressed(\"ui_accept\"):
-		state.emit_signal(\"completed\") # simulate an interrupt
+		print(\"\\nInterrupting\\n\")
+		state.emit_signal(\"completed\", name) # simulate an interrupt
+#		turn_off_and_on() # might be better in certain situations
 "
 
 [node name="Node2D" type="Node2D"]
@@ -51,6 +53,7 @@ speed = 120.0
 
 [node name="Reasoner" type="Node2D" parent="CombatEntity"]
 script = SubResource( 2 )
+DEBUG = true
 
 [node name="MissileMode" type="Node2D" parent="CombatEntity/Reasoner"]
 script = ExtResource( 7 )
@@ -73,6 +76,7 @@ DEBUG = true
 
 [node name="FollowMouse" type="Node2D" parent="MouseFollower"]
 script = ExtResource( 5 )
+DEBUG = true
 
 [node name="Label" type="Label" parent="."]
 margin_left = 77.3976

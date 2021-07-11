@@ -18,7 +18,7 @@ func _on_enable():
 
 func _on_child_action_completed(c):
 	if not goto_next_action():
-		emit_signal("completed")
+		emit_signal("completed", OK)
 
 
 func goto_next_action() -> bool:

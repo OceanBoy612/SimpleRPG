@@ -5,6 +5,7 @@ class_name CombatEntity
 
 signal killed(what) # when i kill something else
 signal health_changed(new_health, max_health)
+signal attacked
 #signal mana_changed(new_mana, max_mana)
 
 
@@ -16,7 +17,6 @@ onready var inventory: Inventory = _inventory as Inventory
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var faction
 export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var hostile_factions
 
-export(float) var attack_cooldown = 1.0
 export(float) var attack_damage = 1.0
 #export(NodePath) var attack_area_path
 var attack_area: AttackArea # set elsewhere
@@ -30,6 +30,8 @@ var target = null # : CombatEntity <- except cyclic issue
 export var iframes = 0.0 # time spent immortal after taking damage
 export var immortal = false # can take damage
 
+export(float) var attack_cooldown = 1.0
+export(float) var attack_range = 50
 var last_attack_time: float = 999
 
 var knockback_amt = 0
@@ -144,6 +146,7 @@ func target_nearest_enemy():
 
 func spawn_attack(_index:int=0):
 	$AttackPattern.spawn_attack()
+	emit_signal("attacked")
 	pass
 #	var spawnAttack = SpawnAttack.instance()
 #	assert(spawnAttack.has_method("init_attack"), "Trying to attack with a non attack")
@@ -151,6 +154,11 @@ func spawn_attack(_index:int=0):
 #	print("Spawning Attack")
 #	$Attacks.add_child(spawnAttack)
 
+func can_attack_target() -> bool:
+	if not is_instance_valid(target):
+		return false
+	return last_attack_time > attack_cooldown \
+			and global_position.distance_to(target.global_position) < attack_range
 
 ### Helpers ###
 ### Subroutines ###

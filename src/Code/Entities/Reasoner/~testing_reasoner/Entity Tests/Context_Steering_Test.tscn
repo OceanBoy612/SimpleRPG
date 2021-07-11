@@ -1,38 +1,58 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ContextDependentSteering.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/FollowMouse.gd" type="Script" id=3]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ManualTargetSelect.gd" type="Script" id=4]
 
 [sub_resource type="Curve" id=1]
 min_value = -1.0
-_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0909091 ), 0.0, 0.0, 0, 0 ]
+max_value = 0.0
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.209424, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.623037, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=2]
 min_value = -1.0
 _data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.330682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.694318 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+max_value = 0.25
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.502618, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0295455 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CombatEntity" parent="." instance=ExtResource( 2 )]
 position = Vector2( 147.716, 86.8363 )
+DEBUG = true
 faction = 1
 hostile_factions = 12
 
 [node name="ContextDependentSteering" type="Node2D" parent="CombatEntity"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Usage:
+	1 means go towards, -1 means go away. 
+	practically this means that this makes it try to move the entity
+	towards 0.
+	"
+}
 DEBUG = true
 hostile_curve = SubResource( 1 )
 ally_curve = SubResource( 2 )
 target_curve = SubResource( 3 )
-distance_min = 0
+spawn_curve = SubResource( 4 )
+turn_speed = 0.2
+
+[node name="ManualTargetSelect" type="Node2D" parent="CombatEntity"]
+script = ExtResource( 4 )
+path = NodePath("../../faction1/CombatEntity6")
 
 [node name="faction1" type="Node2D" parent="."]
 
 [node name="CombatEntity2" parent="faction1" instance=ExtResource( 2 )]
-position = Vector2( 196.877, 123.518 )
+position = Vector2( 158.822, 136.599 )
 collision_layer = 4
 collision_mask = 0
 faction = 4
@@ -50,7 +70,7 @@ collision_mask = 0
 faction = 4
 
 [node name="CombatEntity5" parent="faction1" instance=ExtResource( 2 )]
-position = Vector2( 139.693, 52.8569 )
+position = Vector2( 92.8647, 51.6664 )
 collision_layer = 4
 collision_mask = 0
 faction = 4
@@ -60,5 +80,8 @@ position = Vector2( 118.456, 121.76 )
 collision_layer = 4
 collision_mask = 0
 faction = 4
+
+[node name="FollowMouse" type="Node2D" parent="faction1/CombatEntity6"]
+script = ExtResource( 3 )
 
 [editable path="CombatEntity"]

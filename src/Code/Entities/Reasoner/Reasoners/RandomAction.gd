@@ -19,5 +19,5 @@ func _on_enable():
 
 
 func _on_child_action_completed(c):
-	emit_signal("completed")
+	emit_signal("completed", OK)
 

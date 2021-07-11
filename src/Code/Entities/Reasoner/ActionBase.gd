@@ -10,13 +10,20 @@ signal disabled
 export var DEBUG: bool = false setget set_DEBUG
 
 
+var is_enabled = true
+
+
 func _ready():
 	_on_ready()
-	if get_parent() as ActionBase:
-		disable()
-	else:
-		enable()
+	var manual_disable = not visible
+	disable()
 	connect("completed", self, "disable")
+	if manual_disable:
+		print("DEBUG: DISABLING %s BECAUSE IT IS NOT VISIBLE IN THE TREE. IF THIS IS NOT INTENDED MAKE SURE TO MAKE THE NODE VISIBLE ON STARTUP." % name)
+		return
+	if get_parent() as ActionBase == null:
+		get_base().connect("ready", self, "enable")
+#		enable()
 
 
 ## Override Functions ##
@@ -36,22 +43,33 @@ func get_base():
 
 
 func enable():
+	if is_enabled:
+		print("\t\tEnabling an action that was already enabled %s" % name)
+		return
 	if DEBUG: print("%s enabled" % name)
 	emit_signal("enabled")
 	set_process(true)
 	set_physics_process(true)
 	show()
+	is_enabled = true
 	_on_enable()
 #	yield(get_tree().create_timer(max_time), "timeout")
-#	emit_signal("completed")
+#	emit_signal("completed", OK)
 
 
-func disable():
-	if DEBUG: print("%s disabled" % name)
+func disable(err=OK):
+	if not is_enabled:
+		print("\t\tDisabling an action that wasn't enabled %s" % name)
+		return 
+	if DEBUG: 
+		
+		if not err: print("%s disabled" % name)
+		else: print("%s interrupted by %s!" % [name, err])
 	set_process(false)
 	set_physics_process(false)
 	hide()
 	_on_disable()
+	is_enabled = false
 	emit_signal("disabled")
 
 
@@ -60,3 +78,7 @@ func set_DEBUG(value): # for tool if you use it
 	DEBUG = value
 	update()
 
+
+func turn_off_and_on():
+	emit_signal("completed")
+	call_deferred("enable")

@@ -1,0 +1,155 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=1]
+[ext_resource path="res://Code/Entities/Enemies/LootPair.gd" type="Script" id=2]
+[ext_resource path="res://Art/SpriteFrame Resources/Frim_sprite_frames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Code/Entities/Attacks/FrimAttackExplosion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ManualTargetSelect.gd" type="Script" id=8]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/FollowMouse.gd" type="Script" id=9]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ContextDependentSteering.gd" type="Script" id=10]
+[ext_resource path="res://Code/Entities/Reasoner/~testing_reasoner/Entity Tests/Frim_Reasoner_Test.gd" type="Script" id=11]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/Dash.gd" type="Script" id=12]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=13]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/SpawnAttack.gd" type="Script" id=14]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/SpriteMove.gd" type="Script" id=16]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=17]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/LookAtTarget.gd" type="Script" id=18]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/InterruptWhenCloseToTarget.gd" type="Script" id=19]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=20]
+
+[sub_resource type="Resource" id=1]
+resource_name = "loot 0"
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+amount = 13
+chance = 1.0
+
+[sub_resource type="Resource" id=2]
+resource_name = "loot 1"
+script = ExtResource( 2 )
+scene = ExtResource( 4 )
+amount = 1
+chance = 0.25
+
+[sub_resource type="Resource" id=3]
+resource_name = "Loot Table"
+script = ExtResource( 1 )
+loot = [ SubResource( 1 ), SubResource( 2 ) ]
+_add_loot = false
+
+[sub_resource type="Curve" id=4]
+max_value = 40.0
+_data = [ Vector2( 0, 0 ), 0.0, 150.485, 0, 0, Vector2( 0.502618, 40 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -146.626, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=5]
+max_value = 4.0
+_data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 1, Vector2( 1, 4 ), 0.0, 0.0, 1, 0 ]
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.318182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.672727 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FrimTest" parent="." instance=ExtResource( 6 )]
+collision_layer = 4
+collision_mask = 7
+DEBUG = true
+type = "Frim"
+faction = 4
+hostile_factions = 1
+lootTable = SubResource( 3 )
+
+[node name="AnimatedSprite" parent="FrimTest" index="2"]
+frames = ExtResource( 3 )
+animation = "Idle"
+
+[node name="AttackPattern" parent="FrimTest" index="5"]
+attack = ExtResource( 5 )
+
+[node name="ManualTargetSelect" type="Node2D" parent="FrimTest"]
+script = ExtResource( 8 )
+path = NodePath("../../Mouser")
+
+[node name="Reasoner" type="Node2D" parent="FrimTest"]
+script = ExtResource( 11 )
+DEBUG = true
+
+[node name="Attack" type="Node2D" parent="FrimTest/Reasoner"]
+script = ExtResource( 13 )
+DEBUG = true
+
+[node name="LeapAnim" type="Node2D" parent="FrimTest/Reasoner/Attack"]
+script = ExtResource( 20 )
+animation_name = "Leap"
+
+[node name="Leap" type="Node2D" parent="FrimTest/Reasoner/Attack"]
+script = ExtResource( 17 )
+
+[node name="LookAtTarget" type="Node2D" parent="FrimTest/Reasoner/Attack/Leap"]
+script = ExtResource( 18 )
+reset_state = false
+set_move_direction = true
+
+[node name="Jump" type="Node2D" parent="FrimTest/Reasoner/Attack/Leap"]
+script = ExtResource( 16 )
+y_curve = SubResource( 4 )
+duration = 0.4
+
+[node name="Dash" type="Node2D" parent="FrimTest/Reasoner/Attack/Leap"]
+script = ExtResource( 12 )
+speed_curve = SubResource( 5 )
+duration = 0.4
+
+[node name="AirAnim" type="Node2D" parent="FrimTest/Reasoner/Attack/Leap"]
+script = ExtResource( 20 )
+animation_name = "Air"
+
+[node name="Attack" type="Node2D" parent="FrimTest/Reasoner/Attack"]
+script = ExtResource( 17 )
+
+[node name="DetonateAnim" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack"]
+script = ExtResource( 20 )
+animation_name = "Detonate"
+
+[node name="SpawnAttack" type="Node2D" parent="FrimTest/Reasoner/Attack/Attack"]
+script = ExtResource( 14 )
+
+[node name="StrafeTowards" type="Node2D" parent="FrimTest/Reasoner"]
+script = ExtResource( 17 )
+DEBUG = true
+
+[node name="ContextBasedSteering" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
+script = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": "Usage:
+	1 means go towards, -1 means go away. 
+	practically this means that this makes it try to move the entity
+	towards 0.
+	"
+}
+target_curve = SubResource( 6 )
+turn_speed = 0.2
+
+[node name="IdleAnim" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
+script = ExtResource( 20 )
+animation_name = "Idle"
+loop_anim = true
+
+[node name="InterruptWhenCloseToTarget" type="Node2D" parent="FrimTest/Reasoner/StrafeTowards"]
+script = ExtResource( 19 )
+
+[node name="Mouser" parent="." instance=ExtResource( 6 )]
+position = Vector2( 203.187, 82.5449 )
+faction = 1
+
+[node name="FollowMouse" type="Node2D" parent="Mouser"]
+visible = false
+script = ExtResource( 9 )
+
+[editable path="FrimTest"]
