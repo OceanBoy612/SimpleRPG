@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Code/GUI/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Code/Entities/Enemies/Scenes/Frim.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=11]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=12]
+[ext_resource path="res://Art/~Sprites/Wood Sword.png" type="Texture" id=13]
+[ext_resource path="res://Code/Interactables/interactions/WoodenSwordUpgrade.tres" type="Resource" id=14]
 [ext_resource path="res://Code/GUI/PlayerGUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/GUI/CoinCounter.tscn" type="PackedScene" id=17]
@@ -19,7 +21,7 @@
 [ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Code/GUI/PotionCounter.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Art/~Sprites/Broadsword.png" type="Texture" id=21]
-[ext_resource path="res://Code/Interactables/interactions/damage_upgrade.tres" type="Resource" id=22]
+[ext_resource path="res://Code/Interactables/interactions/BroadswordUpgrade.tres" type="Resource" id=22]
 [ext_resource path="res://Code/GUI/Dialogue/ConvTriggers.gd" type="Script" id=23]
 [ext_resource path="res://Code/GUI/Dialogue/Conversation.gd" type="Script" id=24]
 [ext_resource path="res://Code/GUI/Dialogue/Sentence.gd" type="Script" id=25]
@@ -274,20 +276,12 @@ conv_triggers = [ SubResource( 8 ), SubResource( 16 ), SubResource( 26 ), SubRes
 radius = 5.69061
 height = 5.17633
 
-[sub_resource type="CapsuleShape2D" id=34]
+[sub_resource type="RectangleShape2D" id=34]
+
+[sub_resource type="RectangleShape2D" id=35]
+
+[sub_resource type="CapsuleShape2D" id=36]
 height = 0.0
-
-[sub_resource type="Resource" id=35]
-resource_local_to_scene = true
-script = ExtResource( 18 )
-id = "Coin"
-amount = 1
-
-[sub_resource type="Resource" id=36]
-resource_local_to_scene = true
-script = ExtResource( 18 )
-id = "Coin"
-amount = 1
 
 [sub_resource type="Resource" id=37]
 resource_local_to_scene = true
@@ -310,16 +304,28 @@ amount = 1
 [sub_resource type="Resource" id=40]
 resource_local_to_scene = true
 script = ExtResource( 18 )
-id = "Health Potion"
+id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=41]
 resource_local_to_scene = true
 script = ExtResource( 18 )
-id = "Health Potion"
+id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=42]
+resource_local_to_scene = true
+script = ExtResource( 18 )
+id = "Health Potion"
+amount = 1
+
+[sub_resource type="Resource" id=43]
+resource_local_to_scene = true
+script = ExtResource( 18 )
+id = "Health Potion"
+amount = 1
+
+[sub_resource type="Resource" id=44]
 resource_local_to_scene = true
 script = ExtResource( 18 )
 id = "Health Potion"
@@ -403,14 +409,27 @@ multi_conv = SubResource( 32 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/librarian/InteractableV2"]
 shape = SubResource( 33 )
 
-[node name="Interactable" parent="YSort/Interactables" instance=ExtResource( 3 )]
+[node name="BroadSwordUpgrade" parent="YSort/Interactables" instance=ExtResource( 3 )]
 position = Vector2( 233.085, 229.306 )
 vanish_on_interaction = true
 interactions = [ ExtResource( 22 ) ]
 
-[node name="Sprite" type="Sprite" parent="YSort/Interactables/Interactable"]
-position = Vector2( 0, -16.379 )
+[node name="Sprite" type="Sprite" parent="YSort/Interactables/BroadSwordUpgrade"]
 texture = ExtResource( 21 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/BroadSwordUpgrade"]
+shape = SubResource( 34 )
+
+[node name="WoodSwordUpgrade" parent="YSort/Interactables" instance=ExtResource( 3 )]
+position = Vector2( 264.233, 229.306 )
+vanish_on_interaction = true
+interactions = [ ExtResource( 14 ) ]
+
+[node name="Sprite" type="Sprite" parent="YSort/Interactables/WoodSwordUpgrade"]
+texture = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/WoodSwordUpgrade"]
+shape = SubResource( 35 )
 
 [node name="bookworm" parent="YSort/Interactables" instance=ExtResource( 9 )]
 position = Vector2( 285.533, 117.153 )
@@ -435,7 +454,7 @@ animation_name = "Idle2"
 [node name="InteractableV2" parent="YSort/Interactables/bookworm" instance=ExtResource( 27 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/bookworm/InteractableV2"]
-shape = SubResource( 34 )
+shape = SubResource( 36 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
@@ -458,35 +477,35 @@ position = Vector2( 53.5804, 16.0396 )
 
 [node name="Coin" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 153, 208 )
-_item = SubResource( 35 )
+_item = SubResource( 37 )
 
 [node name="Coin2" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 138, 170.5 )
-_item = SubResource( 36 )
+_item = SubResource( 38 )
 
 [node name="Coin3" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 118, 224 )
-_item = SubResource( 37 )
+_item = SubResource( 39 )
 
 [node name="Coin4" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 145.5, 250 )
-_item = SubResource( 38 )
+_item = SubResource( 40 )
 
 [node name="Coin5" parent="YSort/Coins" instance=ExtResource( 16 )]
 position = Vector2( 96.5, 174 )
-_item = SubResource( 39 )
+_item = SubResource( 41 )
 
 [node name="HealthPotion3" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 297.613, 76.3154 )
 speed = 0.0
-_item = SubResource( 40 )
+_item = SubResource( 42 )
 
 [node name="HealthPotion" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 288.088, 56.076 )
 speed = 0.0
-_item = SubResource( 41 )
+_item = SubResource( 43 )
 
 [node name="HealthPotion2" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 261.896, 45.3611 )
 speed = 0.0
-_item = SubResource( 42 )
+_item = SubResource( 44 )

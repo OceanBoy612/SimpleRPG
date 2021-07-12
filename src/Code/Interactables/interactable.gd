@@ -86,7 +86,7 @@ func start_interaction(obj: Entity) -> void:
 	# Interactable processes even when the game is paused
 	dialogue_balloon.hide()
 	get_tree().paused = true
-	assert(interactions.size() > 0)
+#	assert(interactions.size() > 0)
 	for interaction in interactions:
 		(interaction as Interaction).set_target(obj)
 		(interaction as Interaction).interact(local_map)

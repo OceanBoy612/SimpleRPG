@@ -1,18 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Code/Interactables/interactable.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/animated_E_sprite_frames.tres" type="SpriteFrames" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 27.671, 28.6238 )
 
 [node name="Interactable" type="Area2D"]
 pause_mode = 2
 script = ExtResource( 1 )
 interactions = [ null ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
 
 [node name="Balloon" type="AnimatedSprite" parent="."]
 visible = false

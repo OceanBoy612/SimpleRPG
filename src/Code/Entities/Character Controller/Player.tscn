@@ -95,7 +95,6 @@ animation = "Walk Down"
 script = ExtResource( 4 )
 
 [node name="AttackArea" parent="." index="4"]
-visible = false
 position = Vector2( 8.90536, -3.27105 )
 rotation = -0.285493
 scale = Vector2( 1, 1 )
@@ -123,7 +122,8 @@ script = ExtResource( 5 )
 position = Vector2( 52, 0 )
 script = ExtResource( 1 )
 delay_time = 0.0
-attack_time = 0.24
+attack_time = 0.33
+attack_buffer_time = 0.15
 
 [node name="Tween" type="Tween" parent="Facing/Weapon" index="0"]
 playback_speed = 1.2
@@ -142,7 +142,7 @@ loop = false
 position = Vector2( 0.231417, -5.48203 )
 rotation = -0.785398
 frames = ExtResource( 7 )
-animation = "Wooden Sword"
+animation = "None"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite" index="0"]
 rotation = 0.785398

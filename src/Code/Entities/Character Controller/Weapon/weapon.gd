@@ -10,6 +10,7 @@ signal attack_finished
 #export(String) var input_name = "ui_accept"
 export(float) var delay_time = 0.1
 export(float) var attack_time = 0.1
+export(float) var attack_buffer_time = 0.1 # time we can try and attack and the attack will loop
 #export(float) var damage_amt = 1
 
 
@@ -17,9 +18,11 @@ onready var path = $Path2D/PathFollow2D
 onready var shape# = $Path2D/PathFollow2D/WeaponSprite/AttackArea/CollisionShape2D
 onready var sprite = $Path2D/PathFollow2D/WeaponSprite as AnimatedSprite
 
+
 var start_pt = 0
 var end_pt = 0.99 # glitches at 1.0
 var attacking = false
+var attack_buffering = false
 
 
 func _ready():
@@ -31,23 +34,35 @@ func _ready():
 
 
 func run_attack():
-	attacking = true
-	yield(get_tree().create_timer(delay_time), "timeout")
-	shape.disabled = false
+	if sprite.animation == "None":
+		return
 	
-	$Tween.interpolate_property(path, "unit_offset",
-			start_pt, end_pt, attack_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$Tween.start()
-	
-	var temp = start_pt
-	start_pt = end_pt
-	end_pt = temp
+	# we are already attacking so check if we buffer
+	if attacking: 
+		# we buffer if we attacked within the attack buffer window
+		if $Tween.tell() + attack_buffer_time >= $Tween.get_runtime():
+			attack_buffering = true
+	else:
+		attacking = true
+		yield(get_tree().create_timer(delay_time), "timeout")
+		shape.disabled = false
+		
+		$Tween.interpolate_property(path, "unit_offset",
+				start_pt, end_pt, attack_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$Tween.start()
+		
+		var temp = start_pt
+		start_pt = end_pt
+		end_pt = temp
 
 
 func tween_finished():
 	emit_signal("attack_finished")
 	attacking = false
 	shape.disabled = true
+	if attack_buffering:
+		attack_buffering = false
+		run_attack()
 #	path.offset = 0
 
 func reset_sword():

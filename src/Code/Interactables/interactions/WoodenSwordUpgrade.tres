@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource( 1 )
-damage_amt = 3.0
-sword_name = "Broadsword"
+damage_amt = 1.0
+sword_name = "Wooden Sword"
