@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Code/GUI/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://Code/Entities/Character Controller/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Camera2D/CameraFollow/CameraFollow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/Tileset Resources/Tileset1.tres" type="TileSet" id=6]
-[ext_resource path="res://Art/SpriteFrame Resources/old_man_sprite_frames.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://Art/SpriteFrame Resources/NPCs/old_man_sprite_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Code/Camera2D/CameraShake/CameraShake.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Code/Entities/Entity.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Entities/Enemies/Scenes/Frim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=11]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=12]
 [ext_resource path="res://Code/GUI/PlayerGUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/GUI/CoinCounter.tscn" type="PackedScene" id=17]
@@ -271,6 +274,9 @@ conv_triggers = [ SubResource( 8 ), SubResource( 16 ), SubResource( 26 ), SubRes
 radius = 5.69061
 height = 5.17633
 
+[sub_resource type="CapsuleShape2D" id=42]
+height = 0.0
+
 [sub_resource type="Resource" id=34]
 resource_local_to_scene = true
 resource_name = "Coin x1"
@@ -412,6 +418,31 @@ interactions = [ ExtResource( 22 ) ]
 [node name="Sprite" type="Sprite" parent="YSort/Interactables/Interactable"]
 position = Vector2( 0, -16.379 )
 texture = ExtResource( 21 )
+
+[node name="bookworm" parent="YSort/Interactables" instance=ExtResource( 9 )]
+position = Vector2( 285.533, 117.153 )
+
+[node name="ActionSequence" type="Node2D" parent="YSort/Interactables/bookworm"]
+script = ExtResource( 12 )
+
+[node name="Idle" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
+script = ExtResource( 11 )
+reset_state = false
+animation_name = "Idle"
+
+[node name="Wind up" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
+script = ExtResource( 11 )
+animation_name = "Wind up"
+
+[node name="Idle2" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
+script = ExtResource( 11 )
+reset_state = false
+animation_name = "Idle2"
+
+[node name="InteractableV2" parent="YSort/Interactables/bookworm" instance=ExtResource( 27 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Interactables/bookworm/InteractableV2"]
+shape = SubResource( 42 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 

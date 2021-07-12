@@ -1,7 +1,47 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Code/Interactables/Interactable_v2.gd" type="Script" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/animated_E_sprite_frames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Code/GUI/Dialogue/MultiConversation.gd" type="Script" id=3]
+[ext_resource path="res://Code/GUI/Dialogue/ConvTriggers.gd" type="Script" id=4]
+[ext_resource path="res://Code/GUI/Dialogue/Conversation.gd" type="Script" id=5]
+[ext_resource path="res://Code/GUI/Dialogue/Sentence.gd" type="Script" id=6]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Sentence"
+script = ExtResource( 6 )
+name = "OldMan"
+side = "right"
+expression = "neutral"
+text = "I'm a bookworm, dur de dur"
+
+[sub_resource type="Resource" id=2]
+resource_name = "Sentence"
+script = ExtResource( 6 )
+name = "Player"
+side = "left"
+expression = "neutral"
+text = "That's what a bookworm would say!"
+
+[sub_resource type="Resource" id=3]
+resource_name = "Conversation"
+script = ExtResource( 5 )
+add_new_line = false
+sentences = [ SubResource( 1 ), SubResource( 2 ) ]
+
+[sub_resource type="Resource" id=4]
+resource_name = "0"
+script = ExtResource( 4 )
+trigger = "on-ready"
+_create_conversation = false
+_create_quest = false
+conversation = SubResource( 3 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "MultiConversation"
+script = ExtResource( 3 )
+create_trigger = false
+conv_triggers = [ SubResource( 4 ) ]
 
 [node name="InteractableV2" type="Area2D"]
 pause_mode = 2
@@ -9,6 +49,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+multi_conv = SubResource( 5 )
 
 [node name="Balloon" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -4.77295 )
