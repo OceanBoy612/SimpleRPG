@@ -12,8 +12,8 @@ export(Curve) var y_scale : Curve
 export(Curve) var rot_curve : Curve
 
 export(float) var duration = 1.0
-var reset_on_end = true # This has to be true because this class is currently not safe for interrupts
-#export(bool) var reset_on_end = true
+#var reset_on_end = true # This has to be true because this class is currently not safe for interrupts
+export(bool) var reset_on_end = true
 
 
 var current_time = 0

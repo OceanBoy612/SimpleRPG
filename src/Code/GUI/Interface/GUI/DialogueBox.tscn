@@ -35,7 +35,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = -51.0
+margin_top = -52.0
 margin_right = -20.0
 margin_bottom = -5.0
 texture = ExtResource( 1 )
@@ -53,18 +53,18 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Rows" type="VBoxContainer" parent="Panel/MC"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 275.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 274.0
 margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
@@ -73,13 +73,13 @@ custom_constants/separation = 0
 visible = false
 self_modulate = Color( 0, 0, 0, 1 )
 margin_right = 270.0
-margin_bottom = 10.0
+margin_bottom = 9.0
 size_flags_vertical = 5
 text = "Name"
 
 [node name="Columns" type="HBoxContainer" parent="Panel/MC/Rows"]
-margin_right = 270.0
-margin_bottom = 36.0
+margin_right = 268.0
+margin_bottom = 35.0
 rect_pivot_offset = Vector2( -74.5, 22.5 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -90,7 +90,7 @@ __meta__ = {
 
 [node name="PortraitLeft" type="TextureRect" parent="Panel/MC/Rows/Columns"]
 margin_right = 40.0
-margin_bottom = 36.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 texture = ExtResource( 4 )
@@ -102,12 +102,11 @@ __meta__ = {
 [node name="Text" type="Label" parent="Panel/MC/Rows/Columns"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 48.0
-margin_right = 222.0
-margin_bottom = 36.0
+margin_right = 220.0
+margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Dialogue Text"
-align = 1
 valign = 1
 autowrap = true
 clip_text = true
@@ -127,13 +126,13 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Panel/MC/Rows/Columns/Text/ClickNext"]
 frames = SubResource( 3 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="PortraitRight" type="TextureRect" parent="Panel/MC/Rows/Columns"]
-margin_left = 230.0
-margin_right = 270.0
-margin_bottom = 36.0
+margin_left = 228.0
+margin_right = 268.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 texture = ExtResource( 4 )

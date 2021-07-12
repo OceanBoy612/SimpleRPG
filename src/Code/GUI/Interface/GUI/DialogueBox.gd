@@ -52,12 +52,17 @@ func update_content() -> void:
 	)
 	portrait_l.texture = tex
 	portrait_r.texture = tex
+	print(dialogue_player.side, dialogue_player.side == "left", dialogue_player.side == "right")
 	if dialogue_player.side == "left":
 		portrait_l.show()
 		portrait_r.hide()
-	else:
+	elif dialogue_player.side == "right":
 		portrait_r.show()
 		portrait_l.hide()
+	else:
+		portrait_r.hide()
+		portrait_l.hide()
+		
 
 
 func start_type_write():

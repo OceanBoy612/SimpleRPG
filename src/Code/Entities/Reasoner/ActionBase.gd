@@ -19,7 +19,7 @@ func _ready():
 	disable()
 	connect("completed", self, "disable")
 	if manual_disable:
-		print("DEBUG: DISABLING %s BECAUSE IT IS NOT VISIBLE IN THE TREE. IF THIS IS NOT INTENDED MAKE SURE TO MAKE THE NODE VISIBLE ON STARTUP." % name)
+		if DEBUG: print("DEBUG: DISABLING %s BECAUSE IT IS NOT VISIBLE IN THE TREE. IF THIS IS NOT INTENDED MAKE SURE TO MAKE THE NODE VISIBLE ON STARTUP." % name)
 		return
 	if get_parent() as ActionBase == null:
 		get_base().connect("ready", self, "enable")

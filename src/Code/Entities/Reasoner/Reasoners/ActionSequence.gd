@@ -6,6 +6,8 @@ Plays child actions in sequence.
 Completes when all children have been played
 """
 
+export var loop = false
+
 
 var ind = 0
 
@@ -18,7 +20,11 @@ func _on_enable():
 
 func _on_child_action_completed(c):
 	if not goto_next_action():
-		emit_signal("completed", OK)
+		if loop:
+			ind = -1
+			goto_next_action()
+		else:
+			emit_signal("completed", OK)
 
 
 func goto_next_action() -> bool:

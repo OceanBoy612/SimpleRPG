@@ -93,12 +93,12 @@ shape = SubResource( 3 )
 frames = ExtResource( 6 )
 animation = "Walk Down"
 script = ExtResource( 4 )
-DEBUG = true
 
 [node name="AttackArea" parent="." index="4"]
 visible = false
-position = Vector2( 9.48168, -2.93376 )
-rotation = -0.165481
+position = Vector2( 8.90536, -3.27105 )
+rotation = -0.285493
+scale = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource( 4 )
@@ -113,8 +113,10 @@ script = ExtResource( 2 )
 speed = 100
 
 [node name="Facing" type="RayCast2D" parent="." index="7"]
+enabled = true
 cast_to = Vector2( 50, 0 )
 collision_mask = 33
+collide_with_areas = true
 script = ExtResource( 5 )
 
 [node name="Weapon" type="Node2D" parent="Facing" index="0"]
@@ -132,8 +134,8 @@ position = Vector2( 0.10511, 0.0413493 )
 curve = SubResource( 13 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Facing/Weapon/Path2D" index="0"]
-position = Vector2( -41.9486, 2.47015 )
-rotation = -0.165481
+position = Vector2( -41.8779, 2.01291 )
+rotation = -0.285493
 loop = false
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="Facing/Weapon/Path2D/PathFollow2D" index="0"]

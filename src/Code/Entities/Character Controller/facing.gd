@@ -13,10 +13,10 @@ onready var weapon = $Weapon
 onready var path = $Weapon/Path2D/PathFollow2D
 var talkin = false
 
-func _ready():
-	enabled = true
-	collide_with_areas = true
-	collide_with_bodies = false # ????
+#func _ready():
+#	enabled = true
+#	collide_with_areas = true
+#	collide_with_bodies = false # ????
 
 
 func _process(_delta):

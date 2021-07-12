@@ -10,10 +10,10 @@ export var speed: float = 50.0
 
 
 onready var spawn_point: Vector2 = global_position
-onready var shadow = $shadow as AnimatedSprite
-onready var collision_shape = $CollisionShape2D as CollisionShape2D
-onready var sprite = $AnimatedSprite as AnimatedSprite
-onready var detection_radius = $DetectionRadius as Area2D
+onready var shadow: AnimatedSprite = $shadow as AnimatedSprite
+onready var collision_shape: CollisionShape2D = $CollisionShape2D as CollisionShape2D
+onready var sprite: AnimatedSprite = $AnimatedSprite as AnimatedSprite
+onready var detection_radius: Area2D = $DetectionRadius as Area2D
 
 
 var look_dir: Vector2 setget set_look
@@ -25,7 +25,7 @@ var speed_multiplier = 1
 
 func _ready():
 	connect("died", self, "on_death")
-	on_ready()
+	call_deferred("on_ready")
 
 func on_ready():
 	pass
