@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Code/GUI/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -28,6 +28,8 @@
 [ext_resource path="res://Code/Interactables/Quests/QuestInteraction.gd" type="Script" id=26]
 [ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Code/GUI/Dialogue/MultiConversation.gd" type="Script" id=28]
+[ext_resource path="res://icon.png" type="Texture" id=29]
+[ext_resource path="res://Code/GUI/MainMenu.gd" type="Script" id=30]
 
 [sub_resource type="Resource" id=1]
 resource_name = "Sentence"
@@ -285,48 +287,56 @@ height = 0.0
 
 [sub_resource type="Resource" id=37]
 resource_local_to_scene = true
+resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=38]
 resource_local_to_scene = true
+resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=39]
 resource_local_to_scene = true
+resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=40]
 resource_local_to_scene = true
+resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=41]
 resource_local_to_scene = true
+resource_name = "Coin x1"
 script = ExtResource( 18 )
 id = "Coin"
 amount = 1
 
 [sub_resource type="Resource" id=42]
 resource_local_to_scene = true
+resource_name = "Health Potion x1"
 script = ExtResource( 18 )
 id = "Health Potion"
 amount = 1
 
 [sub_resource type="Resource" id=43]
 resource_local_to_scene = true
+resource_name = "Health Potion x1"
 script = ExtResource( 18 )
 id = "Health Potion"
 amount = 1
 
 [sub_resource type="Resource" id=44]
 resource_local_to_scene = true
+resource_name = "Health Potion x1"
 script = ExtResource( 18 )
 id = "Health Potion"
 amount = 1
@@ -343,6 +353,7 @@ __meta__ = {
 }
 
 [node name="Follow" parent="Camera2D" instance=ExtResource( 5 )]
+pause_mode = 2
 target = NodePath("../../YSort/Player")
 
 [node name="Shake" parent="Camera2D" instance=ExtResource( 8 )]
@@ -366,6 +377,42 @@ item_id = "Health Potion"
 
 [node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
 visible = false
+
+[node name="MainMenu" type="Control" parent="Interface"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="Interface/MainMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 29 )
+expand = true
+
+[node name="Play" type="TextureButton" parent="Interface/MainMenu"]
+margin_left = 25.0
+margin_top = 123.0
+margin_right = 126.0
+margin_bottom = 147.0
+texture_normal = ExtResource( 29 )
+texture_pressed = ExtResource( 29 )
+texture_hover = ExtResource( 29 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Interface/MainMenu/Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Play"
+align = 1
+valign = 1
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource( 6 )
@@ -399,7 +446,6 @@ iframes = 0.4
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 2
 playing = true
 flip_h = true
 
@@ -509,3 +555,5 @@ _item = SubResource( 43 )
 position = Vector2( 261.896, 45.3611 )
 speed = 0.0
 _item = SubResource( 44 )
+
+[connection signal="pressed" from="Interface/MainMenu/Play" to="Interface/MainMenu" method="_on_Play_pressed"]
