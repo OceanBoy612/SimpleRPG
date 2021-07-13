@@ -446,6 +446,7 @@ iframes = 0.4
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
+frame = 1
 playing = true
 flip_h = true
 
