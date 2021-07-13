@@ -1,5 +1,5 @@
 extends Interaction
-class_name DialogueAction
+#class_name DialogueAction
 
 
 signal dialogue_loaded(data)
@@ -9,7 +9,7 @@ export (String, FILE, "*.json") var dialogue_file_path: String
 #export(Array, String, MULTILINE) var speech
 
 
-func interact(local_map: LocalMap) -> void:
+func interact(local_map) -> void: # : LocalMap
 	var dialogue: Dictionary
 	if dialogue_file_path:
 		dialogue = load_dialogue(dialogue_file_path)

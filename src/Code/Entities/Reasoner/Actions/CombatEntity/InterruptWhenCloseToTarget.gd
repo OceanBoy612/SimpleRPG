@@ -1,5 +1,5 @@
 extends CombatEntityAction
-class_name InterruptWhenCloseToTarget # when can attack this needs to change
+#class_name InterruptWhenCloseToTarget # when can attack this needs to change
 
 #export(NodePath) var action_path
 var action_path = ".." # always interrupt parent

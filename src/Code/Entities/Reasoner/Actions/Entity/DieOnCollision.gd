@@ -1,5 +1,5 @@
 extends EntityAction
-class_name DieOnCollision
+#class_name DieOnCollision
 
 
 func _physics_process(delta):

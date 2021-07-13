@@ -1,5 +1,5 @@
 extends CombatEntityAction
-class_name MoveTowardsTarget
+#class_name MoveTowardsTarget
 
 """
 Requires a CombatEntity parent

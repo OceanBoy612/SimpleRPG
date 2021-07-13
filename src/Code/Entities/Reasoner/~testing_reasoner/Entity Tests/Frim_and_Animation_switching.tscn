@@ -71,6 +71,7 @@ lootTable = SubResource( 3 )
 [node name="AnimatedSprite" parent="FrimTest" index="2"]
 frames = ExtResource( 3 )
 animation = "Idle"
+frame = 2
 
 [node name="AttackPattern" parent="FrimTest" index="5"]
 attack = ExtResource( 5 )

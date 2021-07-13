@@ -1,5 +1,5 @@
 extends ActionBase
-class_name SimulateTimedInterrupt
+#class_name SimulateTimedInterrupt
 
 
 export(NodePath) var path

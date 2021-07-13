@@ -1,5 +1,5 @@
 extends ActionBase
-class_name Wait
+#class_name Wait
 
 export(bool) var indefinite = false
 export var time_to_wait = 1.0

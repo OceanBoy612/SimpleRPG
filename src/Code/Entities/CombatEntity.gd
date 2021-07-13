@@ -19,7 +19,7 @@ export(int, FLAGS, "Player", "Neutral", "Faction1", "Faction2") var hostile_fact
 
 export(float) var attack_damage = 1.0
 #export(NodePath) var attack_area_path
-var attack_area: AttackArea # set elsewhere
+var attack_area: Area2D # set elsewhere
 
 export var max_health: float = 10
 var health: float = max_health

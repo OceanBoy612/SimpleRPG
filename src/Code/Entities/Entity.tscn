@@ -3,7 +3,7 @@
 [ext_resource path="res://Code/Entities/Entity.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/~EntityDependencies/detection_radius.gd" type="Script" id=2]
 [ext_resource path="res://Art/~Sprites/shadow.png" type="Texture" id=3]
-[ext_resource path="res://Art/SpriteFrame Resources/NPCs/bookworm_sprite_frames.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://Art/SpriteFrame Resources/placeholder_sprite_frames.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.90314
@@ -25,8 +25,6 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 4 )
-animation = "Idle"
-frame = 1
 playing = true
 __meta__ = {
 "_editor_description_": ""

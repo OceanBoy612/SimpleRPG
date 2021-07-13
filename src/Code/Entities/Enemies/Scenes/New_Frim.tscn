@@ -1,12 +1,12 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Frim_sprite_frames.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=4]
 [ext_resource path="res://Code/Entities/Attacks/FrimAttackExplosion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Code/Entities/Enemies/LootPair.gd" type="Script" id=6]
-[ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=7]
+[ext_resource path="res://Code/Entities/Items/Items/HealthPotion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/LookAtTarget.gd" type="Script" id=8]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=9]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ContextDependentSteering.gd" type="Script" id=10]
@@ -18,60 +18,59 @@
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/WaitUntilAnimationFrame.gd" type="Script" id=16]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=17]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/SpriteMove.gd" type="Script" id=18]
-[ext_resource path="res://icon_smol.png" type="Texture" id=19]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/DisableCollision.gd" type="Script" id=20]
 
 [sub_resource type="Resource" id=1]
 resource_name = "loot 0"
 script = ExtResource( 6 )
-scene = ExtResource( 4 )
-amount = 13
+scene = ExtResource( 3 )
+amount = 15
+chance = 1.0
+
+[sub_resource type="Resource" id=11]
+resource_name = "loot 1"
+script = ExtResource( 6 )
+scene = ExtResource( 7 )
+amount = 2
 chance = 1.0
 
 [sub_resource type="Resource" id=2]
-resource_name = "loot 1"
-script = ExtResource( 6 )
-scene = ExtResource( 3 )
-amount = 1
-chance = 0.25
-
-[sub_resource type="Resource" id=3]
 resource_name = "Loot Table"
-script = ExtResource( 7 )
-loot = [ SubResource( 1 ), SubResource( 2 ) ]
+script = ExtResource( 4 )
+loot = [ SubResource( 1 ), SubResource( 11 ) ]
 _add_loot = false
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 150.0
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=4]
 radius = 8.5
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=5]
 min_value = -0.5
 max_value = 0.0
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.157778, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.644444, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.042488, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=6]
 min_value = -0.5
 max_value = 0.5
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.117778, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.748889, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Curve" id=7]
 min_value = -0.1
 max_value = 0.6
 _data = [ Vector2( 0, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.0966443, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.151111, 0.326364 ), 7.90151, 0.0, 0, 0, Vector2( 1, 0.6 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=8]
 min_value = -0.01
 max_value = 0.03
 _data = [ Vector2( 0, -0.01 ), 0.0, 0.0, 0, 0, Vector2( 0.044293, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.502618, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.03 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=13]
+[sub_resource type="Curve" id=9]
 max_value = 30.0
 _data = [ Vector2( 0, 0 ), 0.0, 123.636, 0, 0, Vector2( 0.496324, 30 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -111.273, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 1, Vector2( 1, 1 ), 0.0, 0.0, 1, 0 ]
 
 [node name="Frim" instance=ExtResource( 1 )]
@@ -80,21 +79,20 @@ collision_mask = 7
 type = "Frim"
 faction = 4
 hostile_factions = 1
-lootTable = SubResource( 3 )
+lootTable = SubResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 2 )
-animation = "Idle"
 frame = 2
 
 [node name="DetectionRadius" parent="." index="3"]
 radius = 150
 
 [node name="CollisionShape2D" parent="DetectionRadius" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="AttackPattern" parent="." index="5"]
 attack = ExtResource( 5 )
@@ -107,10 +105,10 @@ script = ExtResource( 9 )
 
 [node name="ContextDependentSteering" type="Node2D" parent="Reasoner/Steering" index="0"]
 script = ExtResource( 10 )
-hostile_curve = SubResource( 9 )
-ally_curve = SubResource( 10 )
-target_curve = SubResource( 11 )
-spawn_curve = SubResource( 12 )
+hostile_curve = SubResource( 5 )
+ally_curve = SubResource( 6 )
+target_curve = SubResource( 7 )
+spawn_curve = SubResource( 8 )
 
 [node name="PlaySpriteAnimation" type="Node2D" parent="Reasoner/Steering" index="1"]
 script = ExtResource( 12 )
@@ -148,12 +146,12 @@ animation_name = "Air"
 
 [node name="Jump" type="Node2D" parent="Reasoner/Attack/Leap" index="2"]
 script = ExtResource( 18 )
-y_curve = SubResource( 13 )
+y_curve = SubResource( 9 )
 duration = 0.4
 
 [node name="Dash" type="Node2D" parent="Reasoner/Attack/Leap" index="3"]
 script = ExtResource( 15 )
-speed_curve = SubResource( 14 )
+speed_curve = SubResource( 10 )
 duration = 0.4
 relative_to_target = true
 max_distance = 50.0
@@ -181,8 +179,3 @@ anim_frame = 1
 
 [node name="SpawnAttack" type="Node2D" parent="Reasoner/Attack/Explosion/ActionSequence" index="1"]
 script = ExtResource( 14 )
-
-[node name="icon_smol" type="Sprite" parent="." index="7"]
-visible = false
-position = Vector2( 0.135681, -14.6774 )
-texture = ExtResource( 19 )

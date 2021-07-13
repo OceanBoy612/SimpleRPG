@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ContextDependentSteering.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/FollowMouse.gd" type="Script" id=3]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ManualTargetSelect.gd" type="Script" id=4]
+[ext_resource path="res://Art/SpriteFrame Resources/NPCs/bookworm_sprite_frames.tres" type="SpriteFrames" id=5]
 
 [sub_resource type="Curve" id=1]
 min_value = -1.0
@@ -28,6 +29,11 @@ position = Vector2( 147.716, 86.8363 )
 DEBUG = true
 faction = 1
 hostile_factions = 12
+
+[node name="AnimatedSprite" parent="CombatEntity" index="2"]
+frames = ExtResource( 5 )
+animation = "Idle"
+frame = 1
 
 [node name="ContextDependentSteering" type="Node2D" parent="CombatEntity"]
 script = ExtResource( 1 )
@@ -56,11 +62,21 @@ collision_layer = 4
 collision_mask = 0
 faction = 4
 
+[node name="AnimatedSprite" parent="faction1/CombatEntity2" index="2"]
+frames = ExtResource( 5 )
+animation = "Idle"
+frame = 1
+
 [node name="CombatEntity3" parent="faction1" instance=ExtResource( 2 )]
 position = Vector2( 117.512, 81.645 )
 collision_layer = 4
 collision_mask = 0
 faction = 4
+
+[node name="AnimatedSprite" parent="faction1/CombatEntity3" index="2"]
+frames = ExtResource( 5 )
+animation = "Idle"
+frame = 1
 
 [node name="CombatEntity4" parent="faction1" instance=ExtResource( 2 )]
 position = Vector2( 203.546, 81.4906 )
@@ -84,3 +100,5 @@ faction = 4
 script = ExtResource( 3 )
 
 [editable path="CombatEntity"]
+[editable path="faction1/CombatEntity2"]
+[editable path="faction1/CombatEntity3"]

@@ -1,5 +1,5 @@
 extends Area2D
-class_name Attack
+#class_name Attack
 
 
 export var dot = false

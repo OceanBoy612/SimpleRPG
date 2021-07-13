@@ -1,5 +1,5 @@
 extends AnimatedSprite
-class_name SmartSprite
+#class_name SmartSprite
 """
 Animation handler for an AnimatedSprite as a child of a KinematicBody2D 
 that has a controller that sets the direction

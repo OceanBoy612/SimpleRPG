@@ -15,6 +15,7 @@ position = Vector2( 171.736, 85.8682 )
 [node name="AnimatedSprite" parent="CombatEntity" index="2"]
 frames = ExtResource( 3 )
 animation = "Idle"
+frame = 1
 
 [node name="ActionSequence" type="Node2D" parent="CombatEntity"]
 script = ExtResource( 2 )

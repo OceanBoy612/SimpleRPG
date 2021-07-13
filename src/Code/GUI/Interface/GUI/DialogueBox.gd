@@ -1,5 +1,5 @@
 extends Control
-class_name DialogueBox
+#class_name DialogueBox
 
 signal dialogue_ended
 

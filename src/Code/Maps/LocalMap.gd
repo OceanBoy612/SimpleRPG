@@ -1,5 +1,5 @@
 extends Node
-class_name LocalMap
+#class_name LocalMap
 
 signal dialogue_finished
 

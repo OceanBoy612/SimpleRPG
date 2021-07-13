@@ -1,5 +1,5 @@
 extends EntityAction
-class_name Dash
+#class_name Dash
 
 """
 Makes the entity dash in the direction that it is looking at

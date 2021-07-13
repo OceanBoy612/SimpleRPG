@@ -119,6 +119,7 @@ path = NodePath("../../MouseFollower")
 
 [node name="FollowMouse" type="Node2D" parent="MouseFollower"]
 script = ExtResource( 5 )
+DEBUG = true
 
 [node name="Label" type="Label" parent="."]
 margin_left = 77.0

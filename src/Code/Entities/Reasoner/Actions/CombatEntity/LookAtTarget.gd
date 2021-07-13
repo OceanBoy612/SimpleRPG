@@ -1,5 +1,5 @@
 extends CombatEntityAction
-class_name LookAtTarget
+#class_name LookAtTarget
 
 
 export(bool) var oneshot = true

@@ -1,6 +1,6 @@
 tool
 extends Area2D
-class_name InteractableV2
+#class_name InteractableV2
 
 
 signal interaction_finished

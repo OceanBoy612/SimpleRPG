@@ -1,5 +1,5 @@
 extends CombatEntityAction
-class_name SpawnAttack
+#class_name SpawnAttack
 
 
 export(int) var which = 0

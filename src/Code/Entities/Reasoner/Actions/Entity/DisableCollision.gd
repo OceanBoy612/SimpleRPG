@@ -1,5 +1,5 @@
 extends EntityAction
-class_name DisableCollision
+#class_name DisableCollision
 
 
 export(bool) var enable = false

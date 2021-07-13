@@ -1,6 +1,6 @@
 #tool
 extends CombatEntityAction
-class_name ContextDependentSteering
+#class_name ContextDependentSteering
 
 """
 Steers the combat entity based on the nearby entities 

@@ -1,5 +1,5 @@
 extends ActionBase
-class_name FollowMouse
+#class_name FollowMouse
 
 
 func _process(_delta):

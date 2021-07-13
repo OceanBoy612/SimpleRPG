@@ -1,5 +1,5 @@
 extends EntityAction
-class_name WaitUntilAnimationFrame
+#class_name WaitUntilAnimationFrame
 
 
 export(int) var anim_frame = 0

@@ -1,8 +1,9 @@
 extends MultiAction
-class_name InteractableAction
+class_name InteractableAction, "res://Code/Entities/Reasoner/Reasoners/interactable_action.png"
 
 
 export(String) var name_filter = ""
+export var oneshot : bool = false
 
 
 func _on_ready():
@@ -20,4 +21,8 @@ func _on_interaction(who: Entity):
 		enable()
 	else:
 		if DEBUG:
-			print("name_filter didn't match the entity that tried to interact with us. So doing nothing")
+			print("name_filter didn't match the entity (%s vs %s) that tried to interact with us. So doing nothing" % [who.name, name_filter])
+	
+	if oneshot:
+		if get_base().is_connected("interacted_with", self, "_on_interaction"):
+			get_base().disconnect("interacted_with", self, "_on_interaction")

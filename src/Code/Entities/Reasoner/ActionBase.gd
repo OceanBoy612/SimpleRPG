@@ -1,4 +1,4 @@
-extends Node2D
+extends Node2D # This is technically a CanvasItem if we want to retain debug capabilities.
 class_name ActionBase, "res://Code/Entities/Reasoner/action_base.png"
 
 
@@ -35,7 +35,7 @@ func _on_disable(): pass
 ## Override Functions ##
 
 
-func get_base():
+func get_base() -> Node:
 	if get_parent() as ActionBase:
 		return get_parent().get_base()
 	else:

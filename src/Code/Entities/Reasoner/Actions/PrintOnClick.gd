@@ -1,5 +1,5 @@
 extends ActionBase
-class_name PrintOnSpace
+#class_name PrintOnSpace
 
 
 func _process(delta):

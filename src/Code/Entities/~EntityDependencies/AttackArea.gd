@@ -1,5 +1,5 @@
 extends Area2D
-class_name AttackArea
+#class_name AttackArea
 
 
 export(NodePath) var entityPath = ""

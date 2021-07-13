@@ -1,5 +1,5 @@
 extends EntityAction
-class_name LookAtMouse
+#class_name LookAtMouse
 
 """
 Makes the entity look at the mouse

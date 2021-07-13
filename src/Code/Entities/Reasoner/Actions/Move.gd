@@ -1,5 +1,5 @@
 extends ActionBase
-class_name Move
+#class_name Move
 
 
 export var amount_to_move = 100

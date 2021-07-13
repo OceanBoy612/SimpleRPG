@@ -9,7 +9,7 @@
 [ext_resource path="res://Art/SpriteFrame Resources/NPCs/old_man_sprite_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Code/Camera2D/CameraShake/CameraShake.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Code/Entities/Entity.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Code/Entities/Enemies/Scenes/Frim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/New_Frim.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=11]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=12]
 [ext_resource path="res://Art/~Sprites/Wood Sword.png" type="Texture" id=13]
@@ -506,19 +506,18 @@ shape = SubResource( 36 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Frim" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 225.837, 87.774 )
 
 [node name="Frim2" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 42.7258, 52.3788 )
+position = Vector2( -20, 23.5 )
 
 [node name="Frim3" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( -7.77147, 67.9527 )
+position = Vector2( 27.5, 32.5 )
 
 [node name="Frim4" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( -0.692398, 33.0294 )
+position = Vector2( 41.5, -12.5 )
 
 [node name="Frim5" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 53.5804, 16.0396 )
+position = Vector2( 7.5, -35 )
 
 [node name="Coins" type="YSort" parent="YSort"]
 
@@ -544,17 +543,14 @@ _item = SubResource( 41 )
 
 [node name="HealthPotion3" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 297.613, 76.3154 )
-speed = 0.0
 _item = SubResource( 42 )
 
 [node name="HealthPotion" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 288.088, 56.076 )
-speed = 0.0
 _item = SubResource( 43 )
 
 [node name="HealthPotion2" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 261.896, 45.3611 )
-speed = 0.0
 _item = SubResource( 44 )
 
 [connection signal="pressed" from="Interface/MainMenu/Play" to="Interface/MainMenu" method="_on_Play_pressed"]

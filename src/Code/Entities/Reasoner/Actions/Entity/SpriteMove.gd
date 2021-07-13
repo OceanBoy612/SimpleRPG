@@ -1,5 +1,5 @@
 extends EntityAction
-class_name SpriteMove
+#class_name SpriteMove
 
 """
 This causes the entity's sprite to move along two curves

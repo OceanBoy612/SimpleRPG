@@ -1,5 +1,5 @@
 extends Timer
-class_name TimeLimit
+#class_name TimeLimit
 
 
 func _ready():

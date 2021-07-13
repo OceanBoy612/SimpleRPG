@@ -1,5 +1,5 @@
 extends EntityAction
-class_name InteractWith
+#class_name InteractWith
 
 
 """
@@ -32,6 +32,7 @@ func _on_enable():
 		for c in node.get_children():
 			if c is InteractableEntity:
 				do_the_thing(c)
+	emit_signal("completed", OK)
 	
 
 func do_the_thing(node: InteractableEntity):

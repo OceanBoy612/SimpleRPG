@@ -1,5 +1,5 @@
 extends CombatEntityAction
-class_name ManualTargetSelect
+#class_name ManualTargetSelect
 
 """
 Manually sets the target to the nodepath

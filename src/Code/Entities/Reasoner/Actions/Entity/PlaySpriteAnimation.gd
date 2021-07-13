@@ -1,5 +1,5 @@
 extends EntityAction
-class_name PlaySpriteAnimation
+#class_name PlaySpriteAnimation
 
 
 export(String) var animation_name = ""
