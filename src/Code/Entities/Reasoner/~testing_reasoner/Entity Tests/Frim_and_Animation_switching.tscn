@@ -19,7 +19,8 @@
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=17]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/LookAtTarget.gd" type="Script" id=18]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/InterruptWhenCloseToTarget.gd" type="Script" id=19]
-[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=20]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/PlaySpriteAnimation.gd" type="Script" id=20]
+
 
 [sub_resource type="Resource" id=1]
 resource_name = "loot 0"

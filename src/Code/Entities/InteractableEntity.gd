@@ -22,7 +22,7 @@ func on_ready():
 
 func start_interaction(obj: Entity) -> void:
 	if not disable_interactions:
-		if DEBUG: ("%s interacting with %s!" % [obj.name, name])
+		if DEBUG: print("%s interacting with %s!" % [obj.name, name])
 		emit_signal("interacted_with", obj)
 	pass
 

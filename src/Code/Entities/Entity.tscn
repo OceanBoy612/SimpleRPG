@@ -9,7 +9,7 @@
 radius = 6.90314
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 61.0
+radius = 140.0
 
 [node name="Entity" type="KinematicBody2D"]
 script = ExtResource( 1 )

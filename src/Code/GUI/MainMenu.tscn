@@ -1,0 +1,96 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Art/Main Menu/Settings/Settings-hover.png" type="Texture" id=1]
+[ext_resource path="res://Art/Main Menu/Settings/Settings-down.png" type="Texture" id=2]
+[ext_resource path="res://Art/Main Menu/Credits/Credits-down.png" type="Texture" id=3]
+[ext_resource path="res://Art/Main Menu/Settings/Settings-greyedout.png" type="Texture" id=4]
+[ext_resource path="res://Art/Main Menu/Play/Play-down.png" type="Texture" id=5]
+[ext_resource path="res://Art/Main Menu/Play/Play-hover.png" type="Texture" id=6]
+[ext_resource path="res://Art/Main Menu/Quit/Quit-up.png" type="Texture" id=7]
+[ext_resource path="res://Art/Main Menu/Quit/Quit-hover.png" type="Texture" id=8]
+[ext_resource path="res://Art/Main Menu/Quit/Quit-down.png" type="Texture" id=9]
+[ext_resource path="res://Art/Main Menu/Settings/Settings-up.png" type="Texture" id=10]
+[ext_resource path="res://Art/Main Menu/Play/Play-up.png" type="Texture" id=11]
+[ext_resource path="res://Art/Main Menu/Credits/Credits-greyedout.png" type="Texture" id=12]
+[ext_resource path="res://Art/Main Menu/Credits/Credits-up.png" type="Texture" id=13]
+[ext_resource path="res://Art/Main Menu/Main Menu.png" type="Texture" id=14]
+[ext_resource path="res://Art/Main Menu/Credits/Credits-hover.png" type="Texture" id=15]
+[ext_resource path="res://Code/GUI/MainMenu.gd" type="Script" id=16]
+
+[node name="MainMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="Play" type="TextureButton" parent="."]
+margin_left = 221.0
+margin_top = 91.0
+margin_right = 269.0
+margin_bottom = 105.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="TextureButton" parent="."]
+margin_left = 221.0
+margin_top = 109.064
+margin_right = 269.0
+margin_bottom = 123.064
+disabled = true
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 1 )
+texture_disabled = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="TextureButton" parent="."]
+margin_left = 221.0
+margin_top = 126.0
+margin_right = 269.0
+margin_bottom = 141.0
+disabled = true
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 15 )
+texture_disabled = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="."]
+margin_left = 221.0
+margin_top = 144.0
+margin_right = 269.0
+margin_bottom = 159.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Code/Entities/WorldObjects/Lever/Lever.gd" type="Script" id=1]
+[ext_resource path="res://Art/SpriteFrame Resources/Lever_sprite_frames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Art/SpriteFrame Resources/animated_E_sprite_frames.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 8 )
+
+[node name="Lever" type="StaticBody2D"]
+position = Vector2( 55.3607, 25.5969 )
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "Off"
+
+[node name="balloon" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -12.6992 )
+frames = ExtResource( 3 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )

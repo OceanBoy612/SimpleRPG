@@ -79,11 +79,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/helpers.gd"
 }, {
-"base": "MultiAction",
-"class": "InteractableAction",
-"language": "GDScript",
-"path": "res://Code/Entities/Reasoner/Reasoners/InteractableAction.gd"
-}, {
 "base": "Entity",
 "class": "InteractableEntity",
 "language": "GDScript",
@@ -123,6 +118,11 @@ _global_script_classes=[ {
 "class": "MultiConversation",
 "language": "GDScript",
 "path": "res://Code/GUI/Dialogue/MultiConversation.gd"
+}, {
+"base": "MultiAction",
+"class": "OnSignal",
+"language": "GDScript",
+"path": "res://Code/Entities/Reasoner/Reasoners/OnSignal.gd"
 }, {
 "base": "Interaction",
 "class": "QuestInteraction",
@@ -164,7 +164,6 @@ _global_script_class_icons={
 "EntityAction": "res://Code/Entities/Reasoner/Actions/Entity/entity_action.png",
 "EntityActionBase": "",
 "Helpers": "",
-"InteractableAction": "res://Code/Entities/Reasoner/Reasoners/interactable_action.png",
 "InteractableEntity": "",
 "Interaction": "",
 "Inventory": "",
@@ -173,6 +172,7 @@ _global_script_class_icons={
 "LootTable": "",
 "MultiAction": "res://Code/Entities/Reasoner/Reasoners/multi_action.png",
 "MultiConversation": "",
+"OnSignal": "res://Code/Entities/Reasoner/Reasoners/interactable_action.png",
 "QuestInteraction": "",
 "RandomAction": "res://Code/Entities/Reasoner/Reasoners/random_action.png",
 "Reasoner": "res://Code/Entities/Reasoner/Reasoners/reasoner.png",

@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Code/Entities/InteractableEntity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Code/Entities/Character Controller/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/DisableCollision.gd" type="Script" id=3]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/SpriteMove.gd" type="Script" id=4]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/OnSignal.gd" type="Script" id=5]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/EmitSignal.gd" type="Script" id=6]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=7]
+[ext_resource path="res://PackedScenes/Pillar.tscn" type="PackedScene" id=8]
+[ext_resource path="res://PackedScenes/Lever.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Curve" id=1]
+max_value = 5.0
+_data = [ Vector2( 0, 0 ), 0.0, 10.0556, 0, 1, Vector2( 0.497238, 5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -9.94506, 0.0, 1, 0 ]
+
+[sub_resource type="Curve" id=2]
+min_value = -8.0
+max_value = 0.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, -8 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 165.736, 65.4886 )
+
+[node name="Lever_1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 146.216, 66.4912 )
+DEBUG = true
+
+[node name="InteractableAction" type="Node2D" parent="Lever_1"]
+script = ExtResource( 5 )
+oneshot = true
+
+[node name="SpriteMove" type="Node2D" parent="Lever_1/InteractableAction"]
+script = ExtResource( 4 )
+y_curve = SubResource( 1 )
+duration = 0.4
+
+[node name="InteractWith" type="Node2D" parent="Lever_1/InteractableAction"]
+script = ExtResource( 6 )
+target_node = NodePath("../../../Doors")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource( 1 )]
+position = Vector2( 196.889, 88.4331 )
+disable_interactions = true
+
+[node name="InteractableAction" type="Node2D" parent="Doors/Door"]
+script = ExtResource( 5 )
+
+[node name="ActionSequence" type="Node2D" parent="Doors/Door/InteractableAction"]
+script = ExtResource( 7 )
+
+[node name="SpriteMove" type="Node2D" parent="Doors/Door/InteractableAction/ActionSequence"]
+script = ExtResource( 4 )
+y_curve = SubResource( 2 )
+y_scale = SubResource( 3 )
+reset_on_end = false
+
+[node name="DisableCollision" type="Node2D" parent="Doors/Door/InteractableAction/ActionSequence"]
+script = ExtResource( 3 )
+layer = 1
+
+[node name="Door2" parent="Doors" instance=ExtResource( 1 )]
+position = Vector2( 181.315, 88.4331 )
+disable_interactions = true
+
+[node name="InteractableAction" type="Node2D" parent="Doors/Door2"]
+script = ExtResource( 5 )
+
+[node name="ActionSequence" type="Node2D" parent="Doors/Door2/InteractableAction"]
+script = ExtResource( 7 )
+
+[node name="SpriteMove" type="Node2D" parent="Doors/Door2/InteractableAction/ActionSequence"]
+script = ExtResource( 4 )
+y_curve = SubResource( 2 )
+y_scale = SubResource( 3 )
+reset_on_end = false
+
+[node name="DisableCollision" type="Node2D" parent="Doors/Door2/InteractableAction/ActionSequence"]
+script = ExtResource( 3 )
+layer = 1
+
+[node name="Door3" parent="Doors" instance=ExtResource( 1 )]
+position = Vector2( 165.269, 88.4331 )
+disable_interactions = true
+
+[node name="InteractableAction" type="Node2D" parent="Doors/Door3"]
+script = ExtResource( 5 )
+
+[node name="ActionSequence" type="Node2D" parent="Doors/Door3/InteractableAction"]
+script = ExtResource( 7 )
+
+[node name="SpriteMove" type="Node2D" parent="Doors/Door3/InteractableAction/ActionSequence"]
+script = ExtResource( 4 )
+y_curve = SubResource( 2 )
+y_scale = SubResource( 3 )
+reset_on_end = false
+
+[node name="DisableCollision" type="Node2D" parent="Doors/Door3/InteractableAction/ActionSequence"]
+script = ExtResource( 3 )
+layer = 1
+
+[node name="Pillar" parent="." instance=ExtResource( 8 )]
+
+[node name="Lever" parent="." instance=ExtResource( 9 )]
+
+[editable path="Doors/Door"]
+[editable path="Doors/Door2"]
+[editable path="Doors/Door3"]

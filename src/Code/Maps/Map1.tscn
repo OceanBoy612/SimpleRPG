@@ -9,8 +9,8 @@
 [ext_resource path="res://Art/SpriteFrame Resources/NPCs/old_man_sprite_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Code/Camera2D/CameraShake/CameraShake.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Code/Entities/Entity.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Code/Entities/Enemies/Scenes/New_Frim.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/PlaySpriteAnimation.gd" type="Script" id=11]
+[ext_resource path="res://PackedScenes/New_Frim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/PlaySpriteAnimation.gd" type="Script" id=11]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=12]
 [ext_resource path="res://Art/~Sprites/Wood Sword.png" type="Texture" id=13]
 [ext_resource path="res://Code/Interactables/interactions/WoodenSwordUpgrade.tres" type="Resource" id=14]
@@ -28,8 +28,8 @@
 [ext_resource path="res://Code/Interactables/Quests/QuestInteraction.gd" type="Script" id=26]
 [ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Code/GUI/Dialogue/MultiConversation.gd" type="Script" id=28]
-[ext_resource path="res://icon.png" type="Texture" id=29]
-[ext_resource path="res://Code/GUI/MainMenu.gd" type="Script" id=30]
+[ext_resource path="res://Code/GUI/MainMenu.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Art/SpriteFrame Resources/NPCs/bookworm_sprite_frames.tres" type="SpriteFrames" id=31]
 
 [sub_resource type="Resource" id=1]
 resource_name = "Sentence"
@@ -378,41 +378,7 @@ item_id = "Health Potion"
 [node name="DialogueBox" parent="Interface" instance=ExtResource( 1 )]
 visible = false
 
-[node name="MainMenu" type="Control" parent="Interface"]
-pause_mode = 2
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 30 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="TextureRect" parent="Interface/MainMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 29 )
-expand = true
-
-[node name="Play" type="TextureButton" parent="Interface/MainMenu"]
-margin_left = 25.0
-margin_top = 123.0
-margin_right = 126.0
-margin_bottom = 147.0
-texture_normal = ExtResource( 29 )
-texture_pressed = ExtResource( 29 )
-texture_hover = ExtResource( 29 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Interface/MainMenu/Play"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "Play"
-align = 1
-valign = 1
+[node name="MainMenu" parent="Interface" instance=ExtResource( 29 )]
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource( 6 )
@@ -481,12 +447,16 @@ shape = SubResource( 35 )
 [node name="bookworm" parent="YSort/Interactables" instance=ExtResource( 9 )]
 position = Vector2( 285.533, 117.153 )
 
+[node name="AnimatedSprite" parent="YSort/Interactables/bookworm" index="2"]
+frames = ExtResource( 31 )
+animation = "Idle"
+frame = 1
+
 [node name="ActionSequence" type="Node2D" parent="YSort/Interactables/bookworm"]
 script = ExtResource( 12 )
 
 [node name="Idle" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
 script = ExtResource( 11 )
-reset_state = false
 animation_name = "Idle"
 
 [node name="Wind up" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
@@ -495,7 +465,6 @@ animation_name = "Wind up"
 
 [node name="Idle2" type="Node2D" parent="YSort/Interactables/bookworm/ActionSequence"]
 script = ExtResource( 11 )
-reset_state = false
 animation_name = "Idle2"
 
 [node name="InteractableV2" parent="YSort/Interactables/bookworm" instance=ExtResource( 27 )]
@@ -553,4 +522,4 @@ _item = SubResource( 43 )
 position = Vector2( 261.896, 45.3611 )
 _item = SubResource( 44 )
 
-[connection signal="pressed" from="Interface/MainMenu/Play" to="Interface/MainMenu" method="_on_Play_pressed"]
+[editable path="YSort/Interactables/bookworm"]
