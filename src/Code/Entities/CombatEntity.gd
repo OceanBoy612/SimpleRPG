@@ -64,10 +64,15 @@ func on_draw():
 
 func damage_entity(body: PhysicsBody2D, damage_override: float=0, knockback_override:float=0):
 	# only damage hostile factions
-	var b = body as CombatEntity
-	if not b: return
-	if b.faction & hostile_factions == 0: return  # entity not hostile
-	if b.immortal: return # don't hurt immortal entities
+#	var b = body as CombatEntity
+#	if not b: return
+#	if b.faction & hostile_factions == 0: return  # entity not hostile
+#	if b.immortal: return # don't hurt immortal entities
+	
+	if "faction" in body and body.faction & hostile_factions == 0: 
+		return # entity not hostile
+	if "immortal" in body and body.immortal: 
+		return # don't hurt immortal entities
 	
 	if body.has_method("knockback"):
 		if knockback_override:

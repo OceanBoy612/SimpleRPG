@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Art/SpriteFrame Resources/Dummy_sprite_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Code/Entities/WorldObjects/Dummy/Dummy.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.22951
+
+[node name="Dummy" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1.17984 )
+frames = ExtResource( 1 )
+animation = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2.2417 )
+shape = SubResource( 1 )

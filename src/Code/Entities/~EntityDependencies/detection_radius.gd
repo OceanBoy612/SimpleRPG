@@ -21,7 +21,7 @@ func _ready():
 
 func _on_DetectionRadius_body_entered(body):
 	if not body is Entity: # TODO: Should have a collision mask for entities...
-		assert(false, "WARNING! your collision masks are set up wrong")
+#		assert(false, "WARNING! your collision masks are set up wrong")
 		return
 	if body == kb:
 		return
@@ -31,7 +31,7 @@ func _on_DetectionRadius_body_entered(body):
 
 func _on_DetectionRadius_body_exited(body):
 	if not body is Entity: # TODO: Should have a collision mask for entities...
-		assert(false, "WARNING! your collision masks are set up wrong")
+#		assert(false, "WARNING! your collision masks are set up wrong")
 		return
 	if body == kb:
 		return

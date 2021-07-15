@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Code/Entities/WorldObjects/Dummy/FloatingText.gd" type="Script" id=1]
+
+[node name="FloatingText" type="Node2D"]
+position = Vector2( -2.00452, -6.01357 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color( 0.862745, 0.368627, 0.368627, 1 )
+anchor_left = 0.398
+anchor_top = 0.447
+anchor_right = 0.398
+anchor_bottom = 0.447
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
