@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Art/SpriteFrame Resources/Spike_sprite_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/Spike.gd" type="Script" id=2]
+[ext_resource path="res://Code/Entities/AttackEntity.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 4.03749
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.52137
+
+[node name="Spike" instance=ExtResource( 3 )]
+z_index = -8
+collision_layer = 129
+script = ExtResource( 2 )
+hostile_factions = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+position = Vector2( 0, -2.04737 )
+shape = SubResource( 2 )
+disabled = false
+
+[node name="AnimatedSprite" parent="." index="2"]
+position = Vector2( 0, -4.64596 )
+frames = ExtResource( 1 )
+animation = "Running"
+
+[node name="AttackArea" parent="." index="4"]
+continous = true
+
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+visible = false
+position = Vector2( 0, -4.09474 )
+shape = SubResource( 1 )
+
+[node name="TimeLimit" parent="." index="6"]
+autostart = false

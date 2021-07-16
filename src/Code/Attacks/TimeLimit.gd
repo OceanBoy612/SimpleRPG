@@ -4,9 +4,9 @@ extends Timer
 
 func _ready():
 	connect("timeout", self, "kill_parent")
-	one_shot = false
-	autostart = true
-	start() # redundant... but safe :P
+#	one_shot = false
+#	autostart = true
+#	start() # redundant... but safe :P
 
 
 func kill_parent():

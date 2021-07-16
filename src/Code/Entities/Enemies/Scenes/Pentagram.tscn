@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Art/SpriteFrame Resources/Pentagram_sprite_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Code/Entities/AttackEntity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/Pentagram.gd" type="Script" id=3]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/Spike.tscn" type="PackedScene" id=4]
+
+[node name="Pentagram" instance=ExtResource( 2 )]
+z_index = -9
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" parent="." index="2"]
+rotation = 4.71238
+frames = ExtResource( 1 )
+animation = "Running"
+playing = false
+
+[node name="AttackPattern" parent="." index="5"]
+attack = ExtResource( 4 )
+position_overrides = NodePath("../spawn_points")
+
+[node name="TimeLimit" parent="." index="6"]
+wait_time = 10.0
+autostart = false
+
+[node name="spawn_points" type="Node2D" parent="." index="7"]
+rotation = 4.71238
+
+[node name="p1" type="Position2D" parent="spawn_points" index="0"]
+position = Vector2( 27.3642, 13.1815 )
+
+[node name="p2" type="Position2D" parent="spawn_points" index="1"]
+position = Vector2( 13.849, -27.5311 )
+
+[node name="p3" type="Position2D" parent="spawn_points" index="2"]
+position = Vector2( -13.849, -27.3642 )
+
+[node name="p4" type="Position2D" parent="spawn_points" index="3"]
+position = Vector2( -27.5311, 13.3484 )
+
+[node name="p5" type="Position2D" parent="spawn_points" index="4"]
+position = Vector2( -13.6821, 27.1974 )
+
+[node name="p6" type="Position2D" parent="spawn_points" index="5"]
+position = Vector2( 14.1827, 27.0305 )
+
+[node name="Timer" type="Timer" parent="." index="8"]
+wait_time = 10.0
+autostart = true

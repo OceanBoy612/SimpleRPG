@@ -16,4 +16,5 @@ func init_attack(c):
 
 
 func _increment_killed(what) -> void:
-	creator._increment_killed(what)
+	if creator:
+		creator._increment_killed(what)

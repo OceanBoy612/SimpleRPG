@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Code/GUI/Interface/GUI/DialogueBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Code/Maps/LocalMap.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Code/Interactables/Interactable_v2.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Code/GUI/Dialogue/MultiConversation.gd" type="Script" id=28]
 [ext_resource path="res://Code/GUI/MainMenu.tscn" type="PackedScene" id=29]
+[ext_resource path="res://PackedScenes/Twiggy.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Art/SpriteFrame Resources/NPCs/bookworm_sprite_frames.tres" type="SpriteFrames" id=31]
 
 [sub_resource type="Resource" id=1]
@@ -382,6 +383,7 @@ visible = false
 visible = false
 
 [node name="Background" type="TileMap" parent="."]
+z_index = -10
 tile_set = ExtResource( 6 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
@@ -394,6 +396,7 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Foreground" type="TileMap" parent="YSort"]
+z_index = -10
 tile_set = ExtResource( 6 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
@@ -413,7 +416,6 @@ iframes = 0.4
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
-frame = 1
 playing = true
 flip_h = true
 
@@ -522,5 +524,8 @@ _item = SubResource( 43 )
 [node name="HealthPotion2" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 261.896, 45.3611 )
 _item = SubResource( 44 )
+
+[node name="Twiggy" parent="." instance=ExtResource( 30 )]
+position = Vector2( 173.964, 170.304 )
 
 [editable path="YSort/Interactables/bookworm"]

@@ -12,9 +12,6 @@ collision_layer = 128
 collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="shadow" parent="." index="0"]
-visible = false
-
 [node name="CollisionShape2D" parent="." index="1"]
 disabled = true
 
@@ -22,4 +19,5 @@ disabled = true
 shape = SubResource( 1 )
 
 [node name="TimeLimit" type="Timer" parent="." index="6"]
+autostart = true
 script = ExtResource( 3 )

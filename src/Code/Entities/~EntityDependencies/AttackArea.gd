@@ -3,13 +3,23 @@ extends Area2D
 
 
 export(NodePath) var entityPath = ""
+export var continous = false
+
+
+var entity: CombatEntity
 
 
 func _ready():
-	var a = get_node_or_null(entityPath)
-	assert(a, "AttackArea has no entity")
-	a.attack_area = self
-	connect("body_entered", a, "damage_entity")
+	entity = get_node_or_null(entityPath)
+	assert(entity, "AttackArea has no entity")
+	entity.attack_area = self
+	connect("body_entered", entity, "damage_entity")
+
+
+func _physics_process(delta):
+	if continous:
+		for body in get_overlapping_bodies():
+			entity.damage_entity(body)
 
 
 func disable():

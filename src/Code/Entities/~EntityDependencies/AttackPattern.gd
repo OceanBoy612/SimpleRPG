@@ -3,6 +3,8 @@ extends Node
 
 export(PackedScene) var attack
 
+export(NodePath) var position_overrides
+
 export(int) var number = 1
 export(String, "self", "target") var source = "self"
 
@@ -17,6 +19,19 @@ onready var kb = get_parent() as CombatEntity
 
 
 func spawn_attack():
+	kb.last_attack_time = 0
+	
+	if position_overrides:
+		for p in position_overrides.get_children():
+			var spawnAttack: AttackEntity = attack.instance()
+			assert(kb, "kb must exist")
+			spawnAttack.init_attack(kb)
+			spawnAttack.global_position = p.global_position
+			print(kb.look_dir)
+			spawnAttack.rotation = kb.look_dir.angle()
+			add_child(spawnAttack)
+		return
+	
 	var degrees = get_degrees()
 	for i in range(number):
 		
@@ -30,13 +45,14 @@ func spawn_attack():
 		var _rot_spread = deg2rad( rand_range(-rot_spread/2, rot_spread/2) )
 		
 		spawnAttack.global_position = relative.global_position
-		spawnAttack.rotation = relative.look_dir.angle() + degrees[i] + _rot_spread
+		print(kb.look_dir.angle())
+		spawnAttack.rotation = kb.look_dir.angle() + degrees[i] + _rot_spread
+#		spawnAttack.rotation = relative.look_dir.angle() + degrees[i] + _rot_spread
 		
 		spawnAttack.position += (offset + _offset_spread).rotated(spawnAttack.rotation)
 		
 		add_child(spawnAttack)
 		
-	kb.last_attack_time = 0
 		
 #	print("Spawning Attack")
 	pass

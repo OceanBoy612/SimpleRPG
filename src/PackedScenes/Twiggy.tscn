@@ -1,0 +1,125 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Art/SpriteFrame Resources/Twiggy_sprite_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Entities/Enemies/Scenes/Pentagram.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=4]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/SpawnAttack.gd" type="Script" id=5]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/ContextDependentSteering.gd" type="Script" id=9]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/InterruptWhenCloseToTarget.gd" type="Script" id=10]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/CombatEntity/LookAtTarget.gd" type="Script" id=11]
+[ext_resource path="res://Code/Entities/Reasoner/Actions/PlaySpriteAnimation.gd" type="Script" id=12]
+[ext_resource path="res://Code/Entities/Enemies/Reasoners/FrimReasoner.gd" type="Script" id=13]
+[ext_resource path="res://Code/Entities/Reasoner/Reasoners/MultiAction.gd" type="Script" id=14]
+[ext_resource path="res://Code/Entities/Enemies/LootPair.gd" type="Script" id=15]
+[ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=16]
+[ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=17]
+
+[sub_resource type="Resource" id=8]
+resource_name = "loot 0"
+script = ExtResource( 15 )
+scene = ExtResource( 17 )
+amount = 50
+chance = 1.0
+
+[sub_resource type="Resource" id=9]
+resource_name = "Loot Table"
+script = ExtResource( 16 )
+loot = [ SubResource( 8 ) ]
+_add_loot = false
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.53495
+
+[sub_resource type="Curve" id=2]
+min_value = -0.5
+max_value = 0.0
+_data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.157778, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.644444, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.042488, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+min_value = -0.5
+max_value = 0.5
+_data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.117778, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.748889, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+min_value = -0.5
+max_value = 0.6
+_data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.447761, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.666667, 0 ), -0.041261, 0.0, 0, 0, Vector2( 1, 0.6 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=5]
+min_value = -0.01
+max_value = 0.03
+_data = [ Vector2( 0, -0.01 ), 0.0, 0.0, 0, 0, Vector2( 0.044293, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.502618, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.03 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Twiggy" instance=ExtResource( 2 )]
+collision_layer = 4
+collision_mask = 0
+type = "Twiggy"
+faction = 4
+hostile_factions = 1
+max_health = 5.0
+attack_cooldown = 4.0
+attack_range = 100.0
+lootTable = SubResource( 9 )
+
+[node name="shadow" parent="." index="0"]
+visible = true
+position = Vector2( 1.33635, 2.89542 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+position = Vector2( 1.33634, 5.79085 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="." index="2"]
+frames = ExtResource( 1 )
+animation = "Idle"
+frame = 5
+
+[node name="AttackPattern" parent="." index="5"]
+attack = ExtResource( 3 )
+source = "target"
+
+[node name="Reasoner" type="Node2D" parent="." index="6"]
+script = ExtResource( 13 )
+
+[node name="Steering" type="Node2D" parent="Reasoner" index="0"]
+script = ExtResource( 14 )
+
+[node name="ContextDependentSteering" type="Node2D" parent="Reasoner/Steering" index="0"]
+script = ExtResource( 9 )
+hostile_curve = SubResource( 2 )
+ally_curve = SubResource( 3 )
+target_curve = SubResource( 4 )
+spawn_curve = SubResource( 5 )
+
+[node name="PlaySpriteAnimation" type="Node2D" parent="Reasoner/Steering" index="1"]
+script = ExtResource( 12 )
+animation_name = "Idle"
+
+[node name="InterruptWhenCloseToTarget" type="Node2D" parent="Reasoner/Steering" index="2"]
+script = ExtResource( 10 )
+dist_to_target = 100
+
+[node name="Attack" type="Node2D" parent="Reasoner" index="1"]
+script = ExtResource( 4 )
+
+[node name="WindUp" type="Node2D" parent="Reasoner/Attack" index="0"]
+script = ExtResource( 12 )
+animation_name = "Wind up"
+
+[node name="Summoning" type="Node2D" parent="Reasoner/Attack" index="1"]
+script = ExtResource( 12 )
+animation_name = "Summoning"
+
+[node name="LookAtTarget" type="Node2D" parent="Reasoner/Attack" index="2"]
+script = ExtResource( 11 )
+reset_state = false
+time_ahead = 0.0
+
+[node name="SpawnAttack" type="Node2D" parent="Reasoner/Attack" index="3"]
+script = ExtResource( 5 )
+
+[node name="WindDown" type="Node2D" parent="Reasoner/Attack" index="4"]
+script = ExtResource( 12 )
+animation_name = "Wind down"
