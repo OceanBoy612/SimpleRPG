@@ -1,6 +1,9 @@
 extends AttackEntity
 
 
+signal spawned
+
+
 onready var col1 = $CollisionShape2D
 onready var col2 = $AttackArea/CollisionShape2D
 
@@ -12,6 +15,7 @@ func _ready():
 	
 	$AnimatedSprite.play("Summon")
 	yield($AnimatedSprite, "animation_finished")
+	emit_signal("spawned")
 	$AnimatedSprite.play("Running")
 	
 	col1.set_deferred("disabled", false)

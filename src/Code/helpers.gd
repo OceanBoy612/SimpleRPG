@@ -11,7 +11,7 @@ static func read_json_file(json_file_path : String) -> Dictionary:
 
 """
 Usage:
-Helpers.reduce(array, funcref(Helpers, "larger"))
+Helpers.reduce([1,2,3], funcref(Helpers, "larger"))
 """
 
 static func reduce(input: Array, function: FuncRef, base=null):
@@ -43,10 +43,19 @@ static func filter(input: Array, function: FuncRef) -> Array:
 
 ### Helpers for the Python Lambda functions ###
 
-static func sum(a, b):
-	return a + b
-
-static func larger(n1, n2):
-	return n1 if n1 > n2 else n2
+static func sum(a, b): return a + b
+static func diff(a, b): return a - b
+static func larger(n1, n2): return n1 if n1 > n2 else n2
+static func smaller(n1, n2): return n1 if n1 < n2 else n2
 
 ### Helpers for the Python Lambda functions ###
+
+### Input Helpers ###
+
+static func get_input_axis() -> Vector2:
+	return Vector2(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	).normalized()
+
+### Input Helpers ###

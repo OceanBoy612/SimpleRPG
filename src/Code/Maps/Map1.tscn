@@ -416,6 +416,7 @@ iframes = 0.4
 position = Vector2( 292.035, 152.028 )
 frames = ExtResource( 7 )
 animation = "Idle Right"
+frame = 2
 playing = true
 flip_h = true
 
@@ -491,6 +492,9 @@ position = Vector2( 41.5, -12.5 )
 [node name="Frim5" parent="YSort/Enemies" instance=ExtResource( 10 )]
 position = Vector2( 7.5, -35 )
 
+[node name="Twiggy" parent="YSort/Enemies" instance=ExtResource( 30 )]
+position = Vector2( 173.964, 170.304 )
+
 [node name="Coins" type="YSort" parent="YSort"]
 
 [node name="Coin" parent="YSort/Coins" instance=ExtResource( 16 )]
@@ -524,8 +528,5 @@ _item = SubResource( 43 )
 [node name="HealthPotion2" parent="YSort/Coins" instance=ExtResource( 19 )]
 position = Vector2( 261.896, 45.3611 )
 _item = SubResource( 44 )
-
-[node name="Twiggy" parent="." instance=ExtResource( 30 )]
-position = Vector2( 173.964, 170.304 )
 
 [editable path="YSort/Interactables/bookworm"]

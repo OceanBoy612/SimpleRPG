@@ -10,6 +10,10 @@ onready var spawn_points = $spawn_points
 func _ready():
 	$Timer.connect("timeout", self, "kill_spikes")
 	
+	$AnimatedSprite.play("Summon")
+	yield($AnimatedSprite, "animation_finished")
+	$AnimatedSprite.play("Running")
+	
 	var first = true
 	
 	for p in spawn_points.get_children():
@@ -18,6 +22,7 @@ func _ready():
 		$AttackPattern.add_child(spike)
 		if first:
 			spike.connect("died", self, "die")
+			spike.connect("spawned", self, "hide")
 			first = false
 	
 	pass

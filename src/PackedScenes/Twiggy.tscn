@@ -15,38 +15,38 @@
 [ext_resource path="res://Code/Entities/Enemies/LootTable.gd" type="Script" id=16]
 [ext_resource path="res://Code/Entities/Items/Items/Coin.tscn" type="PackedScene" id=17]
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=1]
 resource_name = "loot 0"
 script = ExtResource( 15 )
 scene = ExtResource( 17 )
 amount = 50
 chance = 1.0
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=2]
 resource_name = "Loot Table"
 script = ExtResource( 16 )
-loot = [ SubResource( 8 ) ]
+loot = [ SubResource( 1 ) ]
 _add_loot = false
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=3]
 radius = 7.53495
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=4]
 min_value = -0.5
 max_value = 0.0
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.157778, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.644444, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.042488, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=5]
 min_value = -0.5
 max_value = 0.5
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.117778, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.748889, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=6]
 min_value = -0.5
 max_value = 0.6
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.447761, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.666667, 0 ), -0.041261, 0.0, 0, 0, Vector2( 1, 0.6 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=7]
 min_value = -0.01
 max_value = 0.03
 _data = [ Vector2( 0, -0.01 ), 0.0, 0.0, 0, 0, Vector2( 0.044293, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.502618, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.03 ), 0.0, 0.0, 0, 0 ]
@@ -60,7 +60,7 @@ hostile_factions = 1
 max_health = 5.0
 attack_cooldown = 4.0
 attack_range = 100.0
-lootTable = SubResource( 9 )
+lootTable = SubResource( 2 )
 
 [node name="shadow" parent="." index="0"]
 visible = true
@@ -69,7 +69,7 @@ position = Vector2( 1.33635, 2.89542 )
 [node name="CollisionShape2D" parent="." index="1"]
 visible = true
 position = Vector2( 1.33634, 5.79085 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 1 )
@@ -88,14 +88,14 @@ script = ExtResource( 14 )
 
 [node name="ContextDependentSteering" type="Node2D" parent="Reasoner/Steering" index="0"]
 script = ExtResource( 9 )
-hostile_curve = SubResource( 2 )
-ally_curve = SubResource( 3 )
-target_curve = SubResource( 4 )
-spawn_curve = SubResource( 5 )
+hostile_curve = SubResource( 4 )
+ally_curve = SubResource( 5 )
+target_curve = SubResource( 6 )
+spawn_curve = SubResource( 7 )
 
-[node name="PlaySpriteAnimation" type="Node2D" parent="Reasoner/Steering" index="1"]
+[node name="Walk" type="Node2D" parent="Reasoner/Steering" index="1"]
 script = ExtResource( 12 )
-animation_name = "Idle"
+animation_name = "Walk"
 
 [node name="InterruptWhenCloseToTarget" type="Node2D" parent="Reasoner/Steering" index="2"]
 script = ExtResource( 10 )
