@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PlayerDash.mp3-5ce19679a24702f6b62b1a279ffa0f0c.mp3str"
+
+[deps]
+
+source_file="res://Sound/PlayerDash.mp3"
+dest_files=[ "res://.import/PlayerDash.mp3-5ce19679a24702f6b62b1a279ffa0f0c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
