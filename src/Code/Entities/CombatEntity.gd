@@ -38,7 +38,8 @@ var knockback_amt = 0
 var knockback_percent = 0.2
 var knockback_dir: Vector2
 export(float) var knockback_amount = 1000
-
+onready var attackSound = $AttackSound
+onready var damageSound = $DamageSound
 #export(PackedScene) var SpawnAttack
 
 ### Overrides ###
@@ -93,6 +94,9 @@ func heal(amt) -> bool:
 func damage(amt) -> bool:
 	health -= amt
 	health = clamp(health, 0, max_health)
+	
+	damageSound.play()
+	
 	emit_signal("health_changed", health, max_health)
 	
 	if health > 0 and amt > 0:
@@ -152,6 +156,7 @@ func target_nearest_enemy():
 
 func spawn_attack(_index:int=0):
 	$AttackPattern.spawn_attack()
+	attackSound.play()
 	emit_signal("attacked")
 	pass
 #	var spawnAttack = SpawnAttack.instance()

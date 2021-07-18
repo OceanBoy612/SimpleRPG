@@ -6,7 +6,7 @@
 [ext_resource path="res://Code/Entities/~EntityDependencies/AttackPattern.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 97.0
+radius = 150.0
 
 [node name="CombatEntity" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -24,3 +24,7 @@ entityPath = NodePath("..")
 
 [node name="AttackPattern" type="Node" parent="." index="5"]
 script = ExtResource( 4 )
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="." index="6"]
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="." index="7"]

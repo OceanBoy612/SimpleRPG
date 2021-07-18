@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Code/Entities/Character Controller/Weapon/weapon.gd" type="Script" id=1]
 [ext_resource path="res://Code/Entities/Character Controller/player_controller.gd" type="Script" id=2]
+[ext_resource path="res://Sound/PlayerInjure.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Code/Entities/Character Controller/smart_sprite.gd" type="Script" id=4]
 [ext_resource path="res://Code/Entities/Character Controller/facing.gd" type="Script" id=5]
 [ext_resource path="res://Art/SpriteFrame Resources/Player_sprite_frames.tres" type="SpriteFrames" id=6]
@@ -10,6 +11,9 @@
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Entities/Items/Inventory.gd" type="Script" id=10]
 [ext_resource path="res://Code/Entities/Items/Item.gd" type="Script" id=11]
+[ext_resource path="res://Sound/Footstep.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Sound/PlayerDash.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Sound/Slash.mp3" type="AudioStream" id=14]
 
 [sub_resource type="Resource" id=1]
 resource_name = "Health Potion x1"
@@ -92,6 +96,7 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 6 )
 animation = "Walk Down"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="AttackArea" parent="." index="4"]
@@ -147,3 +152,15 @@ animation = "None"
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Facing/Weapon/Path2D/PathFollow2D/WeaponSprite" index="0"]
 rotation = 0.785398
 remote_path = NodePath("../../../../../../AttackArea")
+
+[node name="AttackSound" parent="." index="9"]
+stream = ExtResource( 14 )
+
+[node name="DamageSound" parent="." index="10"]
+stream = ExtResource( 3 )
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 12 )
+
+[node name="DashSound" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource( 13 )

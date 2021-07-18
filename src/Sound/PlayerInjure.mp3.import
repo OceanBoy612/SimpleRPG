@@ -11,5 +11,5 @@ dest_files=[ "res://.import/PlayerInjure.mp3-ed956bbd89a1e3731cb45476aae37613.mp
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

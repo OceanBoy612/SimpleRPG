@@ -6,6 +6,9 @@ export var doubleTapTime = 3
 
 onready var kb = get_parent() as CombatEntity
 onready var Weapon = kb.get_node("Facing/Weapon")
+onready var moveSound = kb.get_node("MoveSound")
+onready var dashSound = kb.get_node("DashSound")
+onready var attackSound = kb.get_node("AttackSound")
 
 var last_attack_time: float = 999
 
@@ -66,6 +69,7 @@ func _physics_process(_delta):
 	
 	var attack_pressed = Input.is_action_just_pressed("attack") # leftmousebutton
 	if attack_pressed and state == MOVE:
+		attackSound.play()
 		Weapon.run_attack()
 	
 	# Check for rolling
@@ -116,6 +120,7 @@ func handle_movement(axis):
 
 func handle_rolling():
 	if startRolling:
+		dashSound.play()
 		kb.sprite.run_roll(dash_dir)
 		startRolling = false
 	elif kb.sprite.rolling == false:

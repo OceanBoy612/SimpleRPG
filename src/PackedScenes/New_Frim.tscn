@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Code/Entities/CombatEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/SpriteFrame Resources/Frim_sprite_frames.tres" type="SpriteFrames" id=2]
@@ -18,58 +18,60 @@
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/WaitUntilAnimationFrame.gd" type="Script" id=16]
 [ext_resource path="res://Code/Entities/Reasoner/Reasoners/ActionSequence.gd" type="Script" id=17]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/SpriteMove.gd" type="Script" id=18]
+[ext_resource path="res://Sound/FrimJump.mp3" type="AudioStream" id=19]
 [ext_resource path="res://Code/Entities/Reasoner/Actions/Entity/DisableCollision.gd" type="Script" id=20]
+[ext_resource path="res://Sound/Frim injure.mp3" type="AudioStream" id=21]
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=1]
 resource_name = "loot 0"
 script = ExtResource( 6 )
 scene = ExtResource( 3 )
 amount = 15
 chance = 1.0
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=2]
 resource_name = "loot 1"
 script = ExtResource( 6 )
 scene = ExtResource( 7 )
 amount = 2
 chance = 1.0
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=3]
 script = ExtResource( 4 )
-loot = [ SubResource( 8 ), SubResource( 9 ) ]
+loot = [ SubResource( 1 ), SubResource( 2 ) ]
 _add_loot = false
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=4]
 radius = 150.0
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=5]
 radius = 8.5
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=6]
 min_value = -0.5
 max_value = 0.0
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.157778, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.644444, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.042488, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=7]
 min_value = -0.5
 max_value = 0.5
 _data = [ Vector2( 0, -0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.117778, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.748889, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=8]
 min_value = -0.1
 max_value = 0.6
 _data = [ Vector2( 0, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.0966443, -0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.151111, 0.326364 ), 7.90151, 0.0, 0, 0, Vector2( 1, 0.6 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=9]
 min_value = -0.01
 max_value = 0.03
 _data = [ Vector2( 0, -0.01 ), 0.0, 0.0, 0, 0, Vector2( 0.044293, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.502618, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.03 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=10]
 max_value = 30.0
 _data = [ Vector2( 0, 0 ), 0.0, 123.636, 0, 0, Vector2( 0.496324, 30 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -111.273, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 1, Vector2( 1, 1 ), 0.0, 0.0, 1, 0 ]
 
 [node name="Frim" instance=ExtResource( 1 )]
@@ -78,21 +80,21 @@ collision_mask = 7
 type = "Frim"
 faction = 4
 hostile_factions = 1
-lootTable = SubResource( 10 )
+lootTable = SubResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="2"]
 frames = ExtResource( 2 )
 animation = "Idle"
-frame = 2
+frame = 3
 
 [node name="DetectionRadius" parent="." index="3"]
 radius = 150
 
 [node name="CollisionShape2D" parent="DetectionRadius" index="0"]
-shape = SubResource( 11 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 5 )
 
 [node name="AttackPattern" parent="." index="5"]
 attack = ExtResource( 5 )
@@ -105,10 +107,10 @@ script = ExtResource( 9 )
 
 [node name="ContextDependentSteering" type="Node2D" parent="Reasoner/Steering" index="0"]
 script = ExtResource( 10 )
-hostile_curve = SubResource( 2 )
-ally_curve = SubResource( 3 )
-target_curve = SubResource( 4 )
-spawn_curve = SubResource( 5 )
+hostile_curve = SubResource( 6 )
+ally_curve = SubResource( 7 )
+target_curve = SubResource( 8 )
+spawn_curve = SubResource( 9 )
 
 [node name="PlaySpriteAnimation" type="Node2D" parent="Reasoner/Steering" index="1"]
 script = ExtResource( 12 )
@@ -145,12 +147,12 @@ animation_name = "Air"
 
 [node name="Jump" type="Node2D" parent="Reasoner/Attack/Leap" index="2"]
 script = ExtResource( 18 )
-y_curve = SubResource( 6 )
+y_curve = SubResource( 10 )
 duration = 0.4
 
 [node name="Dash" type="Node2D" parent="Reasoner/Attack/Leap" index="3"]
 script = ExtResource( 15 )
-speed_curve = SubResource( 7 )
+speed_curve = SubResource( 11 )
 duration = 0.4
 relative_to_target = true
 max_distance = 50.0
@@ -178,3 +180,9 @@ anim_frame = 1
 
 [node name="SpawnAttack" type="Node2D" parent="Reasoner/Attack/Explosion/ActionSequence" index="1"]
 script = ExtResource( 14 )
+
+[node name="AttackSound" parent="." index="7"]
+stream = ExtResource( 19 )
+
+[node name="DamageSound" parent="." index="8"]
+stream = ExtResource( 21 )

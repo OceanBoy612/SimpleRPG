@@ -3,6 +3,7 @@ extends Reasoner
 
 var state : ActionBase
 var frim : CombatEntity
+onready var attack_sound = $AttackSound
 
 
 func _on_enable():
@@ -33,7 +34,10 @@ func _on_child_action_completed(c):
 
 func choose_next_action():
 	if frim.can_attack_target():
+		if attack_sound:
+			attack_sound.play()
 		state = get_node("Attack")
+		
 		state.enable()
 	else:
 		state = get_node("Steering")

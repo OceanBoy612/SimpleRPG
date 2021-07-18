@@ -13,6 +13,7 @@ var target: Entity
 #	if _item == null:
 #		_item = Item.new()
 #	pass
+
 func _ready():
 	$DetectionRadius.connect("entity_entered", self, "ent_entered")
 	$DetectionRadius.connect("entity_exited", self, "ent_exited")
@@ -39,7 +40,11 @@ func on_physics_process(_delta):
 	
 	var dist = (target.global_position - global_position)
 	if dist.length() < min_dist:
+		$Sound.play()
 		target.inventory.add_item(item)
+		hide()
+		set_physics_process(false)
+		yield($Sound, "finished")
 		queue_free()
 	move_dir = move_dir.linear_interpolate(dist.normalized(), 0.2).normalized()
 	speed += 7
